@@ -1,0 +1,95 @@
+<div class="page-title">
+    <div class="title-icon me-4">
+        <i class="fa-solid fa-user-graduate me-2"></i>
+    </div>
+    <div class="title">
+        <h1>Student Profile</h1>
+        <span>Manage Student Profile</span>
+    </div>
+    
+</div>
+<div class="content-section">
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Student Account Information</span>
+        </div>
+        <div class="card-body">
+            <div class="horizontal-container">
+                <div class="vertical-tab-pager">
+                    <div class="profile-photo">
+                        <img src="img/student-icon.webp" alt="Richmindale - Student Profile Photo">
+                    </div>
+                    <span>{{prof.StudentCode}}</span>
+                </div>
+                <div class="tab-container">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="form-group" [ngClass]="{'col-lg-4 col-sm-12': prof.Gender == 1, 'col-lg-3 col-sm-12' : prof.Gender == 2}">
+                                <label class="form-label">Given Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="prof.GivenName">
+                            </div>
+                            <div class="form-group" [ngClass]="{'col-lg-4 col-sm-12': prof.Gender == 1, 'col-lg-3 col-sm-12' : prof.Gender == 2}">
+                                <label class="form-label">Middle Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="prof.MiddleName">
+                            </div>
+                            <div class="form-group" [ngClass]="{'col-lg-4 col-sm-12': prof.Gender == 1, 'col-lg-3 col-sm-12' : prof.Gender == 2}">
+                                <label class="form-label">Lastname</label>
+                                <input type="text" class="form-control" [(ngModel)]="prof.Lastname">
+                            </div>
+                            <div class="form-group" [hidden]="prof.Gender == 1" [ngClass]="{'col-lg-4 col-sm-12': prof.Gender == 1, 'col-lg-3 col-sm-12' : prof.Gender == 2}">
+                                <label class="form-label">Maiden Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="prof.MaidenName">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-3 col-sm-12 form-group">
+                                <label class="form-label">Date of Birth :</label>
+                                <input type="date" class="form-control" [(ngModel)]="prof.BirthDate">
+                            </div>
+                            <div class="col-lg-3 col-sm-12 form-group">
+                                <label class="form-label">Gender :</label>
+                                <select class="form-control" [(ngModel)]="prof.Gender">
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-sm-12 form-group">
+                                <label class="form-label">Nationality :</label>
+                                <select class="form-control" [(ngModel)]="prof.NationalityId">
+                                    <option *ngFor="let n of nationalities" [value]="n.value">{{n.text}}</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-sm-12 form-group">
+                                <label class="form-label">Marital Status :</label>
+                                <select class="form-control" [(ngModel)]="prof.MaritalStatus">
+                                    <option *ngFor="let m of marital" [value]="m.value">{{m.text}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 form-group">
+                                <button class="btn btn-primary float-start" [hidden]="updatePass" (click)="UpdatePass()">Change Password</button>
+                                <button class="btn btn-primary float-start" [hidden]="!updatePass && (!prof.NewPassword && !prof.ConfirmPassword)" (click)="SavePass()">Save Password</button>
+                                <button class="btn btn-danger float-start" [hidden]="!updatePass" (click)="CancelUpdatePass()">Cancel</button>
+                            </div>
+                        </div>
+                        <div class="row mt-3" [hidden]="!updatePass">
+                            <div class="col-lg-4 col-sm-12 form-group">
+                                <label class="form-label">Old Password</label>
+                                <input type="password" [(ngModel)]="prof.Password" class="form-control">
+                            </div>
+                            <div class="col-lg-4 col-sm-12 form-group">
+                                <label class="form-label">New Password</label>
+                                <input type="password" [(ngModel)]="prof.NewPassword" class="form-control">
+                            </div>
+                            <div class="col-lg-4 col-sm-12 form-group">
+                                <label class="form-label">Retype New Password</label>
+                                <input type="password" [(ngModel)]="prof.ConfirmPassword" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

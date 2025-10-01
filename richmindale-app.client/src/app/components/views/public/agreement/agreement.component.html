@@ -1,0 +1,31 @@
+<div class="agreement-wrapper">
+    <div class="page-banners">
+        <div class="page-title-container">
+            <h1 class="page-title">{{title}} Enrollment Agreement</h1>
+        </div>
+        
+    </div>
+    <div class="sitemap-placeholder">
+        <a href="/" class="me-2">Home</a><i class="fa-solid fa-chevron-right ms-2 me-2"></i><a href="/admissions">Admissions</a><i class="fa-solid fa-chevron-right ms-2 me-2"></i><a href="/agreement">{{title}} Agreement</a>
+    </div>
+
+    <div class="page-content-container">
+        <div class="full-width-container">
+            <pdf-viewer
+                [src]="src"
+                [rotation]="0"
+                [original-size]="false"
+                [show-all]="true"
+                [fit-to-page]="false"
+                [zoom]="1"
+                [zoom-scale]="'page-width'"
+                [stick-to-page]="false"
+                [render-text]="true"
+                [external-link-target]="'blank'"
+                [autoresize]="true"
+                [show-borders]="false"
+                style="width: 100%; height: 100vh;"
+            ></pdf-viewer>
+        </div>
+    </div>
+</div>

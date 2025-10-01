@@ -1,0 +1,41 @@
+<div class="enrollment-wrapper">
+    <div class="form-container">
+        <h1>Enrollment</h1>
+        <div class="step-option mt-3" [hidden]="IsVerified || IsLoggedIn">
+            <label class="form-label">For verification purpose, please enter Email Address</label>
+            <input type="email" [(ngModel)]="enroll.EmailAddress" class="form-control" placeholder="Email Address">
+            <button class="btn btn-primary form-control mt-3" [disabled]="!enroll.EmailAddress" (click)="VerifyEmail()">Verify</button>
+        </div>
+        <div class="step-option mt-3" [hidden]="!IsVerified || IsValidated || IsLoggedIn">
+            <label class="form-label">{{msg}}</label>
+            <label class="form-label">Enter Passkey:</label>
+            <input type="password" [(ngModel)]="Passkey" class="form-control">
+            <button class="btn btn-primary form-control mt-3" [disabled]="!Passkey" (click)="ValidatePasskey()">Validate</button>
+        </div>
+        <div class="step-option mt-3" [hidden]="!IsValidated || LocationSelected">
+            <label class="form-label">Select Country</label>
+            <select class="form-control" [(ngModel)]="enroll.CountryId" (change)="countryChanged()">
+                <option *ngFor="let c of countries" [value]="c.value">{{c.text}}</option>
+            </select>
+            <label class="form-label mt-3">Select Campus</label>
+            <select class="form-control" [(ngModel)]="enroll.CampusId">
+                <option *ngFor="let c of campuses" [value]="c.value">{{c.text}}</option>
+            </select>
+            <label class="form-label mt-3">Learning Method</label>
+            <select class="form-control" [(ngModel)]="enroll.LearningMethodId" (change)="MethodChanged()">
+                <option *ngFor="let m of methods" [value]="m.value">{{m.text}}</option>
+            </select>
+        </div>
+        <div class="step-option mt-3" [hidden]="!LocationSelected">
+            <label class="form-label mt-3">Select Category</label>
+            <select class="form-control" [(ngModel)]="enroll.ProgramCategoryId" (change)="categoryChanged()">
+                <option *ngFor="let c of categories" [value]="c.value">{{c.text}}</option>
+            </select>
+            <label class="form-label mt-3">Select Program</label>
+            <select class="form-control" (change)="ProgramChanged()" [(ngModel)]="enroll.ProgramId" [disabled]="!enroll.ProgramCategoryId">
+                <option *ngFor="let p of programs" [value]="p.value">{{p.text}}</option>
+            </select>
+            <button class="btn btn-primary form-control mt-3" (click)="ProceedClicked()" [disabled]="!ProgramSelected">Proceed</button>
+        </div>
+    </div>
+</div>

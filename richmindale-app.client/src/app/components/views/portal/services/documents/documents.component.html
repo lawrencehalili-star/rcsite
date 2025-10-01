@@ -1,0 +1,82 @@
+<div class="page-title">
+    <div class="title-icon me-4">
+        <i class="fa-solid fa-file-lines me-2"></i>
+    </div>
+    <div class="title">
+        <h1>Document Requests</h1>
+        <span>Academic Document Requests</span> 
+    </div>
+    
+</div>
+<div class="content-section">
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Requested Documents</span>
+            <div class="card-action">
+                <button class="btn btn-primary" (click)="showModal(modalRequest, 0)">New Request</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-placeholder">
+                <table datatable  class="table table-hover table-borderless table-stripe table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Request #</th>
+                            <th>Request Date</th>
+                            <th>Document Type</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let r of reqs">
+                            <td>{{ r.RequestNumber }}</td>
+                            <td>{{ r.RequestDate }}</td>
+                            <td>{{ r.DocumentType }}</td>
+                            <td>{{ r.Amount }}</td>
+                            <td>{{ r.StatusName }}</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modalRequest [backdrop]="static">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Document Request Form</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 col-sm-12 form-group">
+                    <label class="form-label">Document Type</label>
+                    <select class="form-control" [(ngModel)]="req.DocumentTypeId" (change)="GetDocumentAmount()">
+                        <option *ngFor="let d of doctypes" [value]="d.value">{{d.text}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 col-sm-12 form-group">
+                    <label class="form-label">Amount</label>
+                    <input type="number" [(ngModel)]="req.Amount" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 form-group">
+                    <label class="form-label">Purpose</label>
+                    <textarea rows="3" [(ngModel)]="req.Purpose" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" [disabled]="!req.DocumentTypeId" (click)="SubmitRequest()">Submit</button>
+        <button class="btn btn-danger" (click)="modalRef?.hide()">Cancel</button>
+    </div>
+</ng-template>
+

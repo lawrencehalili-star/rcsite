@@ -1,0 +1,132 @@
+<div class="academics-wrapper">
+    <div class="page-banners">
+        <div class="page-title-container">
+            <h1 class="page-title">Online {{program.ProgramCode}} Degree</h1>
+        </div>
+        
+    </div>
+    <div class="sitemap-placeholder">
+        <a href="/" class="me-2">Home</a><i class="fa-solid fa-chevron-right me-2"></i><a href="/academics" class="me-2">Academics</a><i class="fa-solid fa-chevron-right me-2"></i><a href="/academics/programs">Programs</a><i class="fa-solid fa-chevron-right ms-2 me-2"></i><a href="/academics/programs/{{program.ProgramId}}">Details</a>
+    </div>
+
+    <div class="page-content-container">
+
+        <div class="full-width-container mb-4">
+            <span class="form-title">{{program.ProgramTitle}}</span>
+            <span class="form-subtitle mb-3">{{program.ProgramCode}} Degree, rev. {{program.Revision}}.0 </span>
+            <hr>
+            <span class="form-title mb-2">Program Description</span>
+            <p [innerHTML]="program.ProgramDescription">
+                
+            </p>
+        </div>
+
+        <div class="card-3x mb-4">
+            <table class="table table-responsive">
+                <tbody>
+                    <tr>
+                        <td>Estimated Total Cost</td>
+                        <td class="text-end"><strong>${{program.EstimatedCost}}.00</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Total Credit Hours</td>
+                        <td class="text-end"><strong>{{program.TotalCredits}}.00</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Total No. of Courses</td>
+                        <td class="text-end"><strong>{{program.NoOfCourses}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Total Duration, semesters</td>
+                        <td class="text-end"><strong>{{program.Semesters}}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <a href="/catalog">View Catalog</a>
+        </div>
+        <div class="card-3x mb-4">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th colspan="2"><strong>COST ELEMENTS</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Admission Fee per Application</td>
+                        <td class="text-end"><strong>${{program.AdmissionApplicationFee}}.00</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Tuition Fee per Credit Unit</td>
+                        <td class="text-end"><strong>${{program.TuitionPerUnit}}.00</strong></td>
+                    </tr><tr>
+                        <td>Misc. Fee per Application</td>
+                        <td class="text-end"><strong>${{program.MiscellaneousPerUnit}}.00</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <a href="">View Cost Calculation</a>
+        </div>
+
+        <div class="card-3x mb-4">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th colspan="2"><strong>OTHER FEES (If applicable)</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Credit Transfer Evaluation Fee</td>
+                        <td class="text-end"><strong>${{program.CreditTransferFee}}.00</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Document Request Fee</td>
+                        <td class="text-end"><strong>${{program.DocumentRequestFee}}.00</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Expedite Document Service Fee</td>
+                        <td class="text-end"><strong>${{program.ExpediteFee}}.00</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <a href="/academics/courses">View Tuition and Fees</a>
+        </div>
+
+        <div class="full-width-container">
+            <span class="form-title">Program Courses</span>
+            <hr>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Code, Revision</th>
+                        <th>Course Title</th>
+                        <th>Prerequisites</th>
+                        <th class="text-end">Credits</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let s of courses; let index = index">
+                    <tr *ngIf="!courses[index-1] || s.Semester !== courses[index-1].Semester">
+                        <td class="td-field" colspan="4"><strong>Semester {{s.Semester}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>{{s.CourseCode}}, rev. {{s.Revision}}.00</td>
+                        <td><strong>{{s.CourseTitle}}</strong></td>
+                        <td>{{s.PreRequisites}}</td>
+                        <td class="text-end"><strong>{{s.Credits}}.00</strong></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"><strong>Total Credit Hours</strong></td>
+                        <td class="text-end"><strong>{{program.TotalCredits}}.00</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    
+</div>

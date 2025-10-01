@@ -1,0 +1,233 @@
+<div class="main-wrapper">
+    <div class="header-wrapper">
+        <div class="header-logo" [ngClass]="{'expand': isExpand}">
+            <img src="img/richmindale100px.webp" alt="Richmindale - Home of the Rich Minds">
+        </div>
+        <div class="profile-header pr-3" >
+            <div class="searchbar me-4 mt-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-text ms-2"><i class="fa fa-search"></i></span>
+                        <input type="search" class="form-control">
+                        <span class="input-group-text me-2"><i class="fa-regular fa-paper-plane"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile mt-3">
+                <ul class="nav">
+                    <li class="me-1">
+                        <a href="/rims/accounts/profile" class="nav-link" ><i class="fa fa-user-graduate me-2"></i>{{name}}</a>
+                    </li>
+                    <li class="me-1">
+                        <a href="" class="nav-link" ><i class="fa fa-bell"></i></a>
+                    </li>
+                    <li class="me-1">
+                        <a href="" class="nav-link" (click)="DoLogOut()"><i class="fa fa-arrow-right-from-bracket"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <aside class="sidebar" [ngClass]="{'expand': isExpand}" id="sidebar">
+        <div class="d-flex">
+            <button class="toggle-btn" (click)="toggleSideBar()" type="button">
+                <i class="fa-solid" [ngClass]="{'fa-chevron-right': !isExpand, 'fa-chevron-left': isExpand }"></i>
+            </button>
+        </div>
+        <ul class="sidebar-nav">
+            <li class="sidebar-item">
+                <a href="/rims/dashboard" class="sidebar-link">
+                    <i class="fa-solid fa-chart-simple me-2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <!-- Academics -->
+            <li class="sidebar-item">
+                <a href="" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#academics" aria-expanded="false" aria-controls="academics">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>Academics</span>
+                </a>
+                <ul id="academics" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                   
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/grading" class="sidebar-link">
+                            <i class="fa fa-chalkboard"></i>
+                            <span>Performance</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="rims/academics/dishonesty" class="sidebar-link">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <span>Dishonesty</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/sap" class="sidebar-link">
+                            <i class="fa-solid fa-medal"></i>
+                            <span>SAP</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/academics/enrollments" class="sidebar-link">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span>Enrollment History</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- Classes -->
+            <li class="sidebar-item">
+                <a href="" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#classes" aria-expanded="false" aria-controls="classes">
+                    <i class="fa-solid fa-person-chalkboard"></i>
+                    <span>Classes</span>
+                </a>
+                <ul id="classes" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/classes/attendance" class="sidebar-link">
+                            <i class="fa fa-calendar-days"></i>
+                            <span>Attendance</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/classes/loa" class="sidebar-link">
+                            <i class="fa-solid fa-user-injured"></i>
+                            <span>Leave of Absence</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/classes/quizzes" class="sidebar-link">
+                            <i class="fa-solid fa-list-ul"></i>
+                            <span>Quizzes</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/classes/exams" class="sidebar-link">
+                            <i class="fa-solid fa-list"></i>
+                            <span>Exams</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/registrar/reportcard" class="sidebar-link">
+                            <i class="fa-solid fa-clone"></i>
+                            <span>Report Cards</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/classes/incomplete" class="sidebar-link">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <span>Incomplete</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/registrar/transcript" class="sidebar-link">
+                            <i class="fa-solid fa-file-signature"></i>
+                            <span>Transcript</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- Financial -->
+            <li class="sidebar-item">
+                <a href="" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#financial" aria-expanded="false" aria-controls="financial">
+                    <i class="fa-solid fa-money-check-dollar"></i>
+                    <span>Financials</span>
+                </a>
+                <ul id="financial" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/financials/ledger" class="sidebar-link">
+                            <i class="fa-solid fa-money-check-dollar"></i>
+                            <span>Ledger</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/financials/payments" class="sidebar-link">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/financials/balances" class="sidebar-link">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                            <span>Balances</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- Services -->
+            <li class="sidebar-item">
+                <a href="" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#services" aria-expanded="false" aria-controls="services">
+                    <i class="fa-solid fa-hand-holding-hand"></i>
+                    <span>Services</span>
+                </a>
+                <ul id="services" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/services/documents" class="sidebar-link">
+                            <i class="fa-solid fa-file-lines"></i>
+                            <span>Documents</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/services/graduation" class="sidebar-link">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Graduation</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/services/transcript" class="sidebar-link">
+                            <i class="fa-solid fa-file-signature"></i>
+                            <span>Transcript</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/services/permits" class="sidebar-link">
+                            <i class="fa-solid fa-stamp"></i>
+                            <span>Exam Permits</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/services/studentid" class="sidebar-link">
+                            <i class="fa-solid fa-id-card-clip"></i>
+                            <span>Student ID</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/services/success" class="sidebar-link">
+                            <i class="fa-solid fa-comments"></i>
+                            <span>Success</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/services/student-library" class="sidebar-link">
+                            <i class="fa-solid fa-swatchbook"></i>
+                            <span>Library</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- Accounts -->
+            <li class="sidebar-item" data-toggle="tooltip" data-placement="right" title="Accounts">
+                <a href="" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#accounts" aria-expanded="false" aria-controls="accounts">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span>Accounts</span>
+                </a>
+                <ul id="accounts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/accounts/profile" class="sidebar-link">
+                            <i class="fa-solid fa-user-graduate"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/rims/accounts/profile/ferpa" class="sidebar-link">
+                            <i class="fa-solid fa-user-shield"></i>
+                            <span>FERPA</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <div class="content-wrapper" [ngClass]="{'expand': isExpand}">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="events-wrapper">
+    <div class="page-banners">
+        <div class="page-title-container">
+            <h1 class="page-title">Media &amp; Events</h1>
+        </div>
+        
+    </div>
+    <div class="sitemap-placeholder">
+        <a href="/" class="me-2">Home</a><i class="fa-solid fa-chevron-right me-2"></i><a href="/media" class="me-2">Media</a>
+    </div>
+    <div class="page-content-container">
+        <div class="full-width-container">
+            <span class="form-title">Media &amp; Events</span>
+            <hr>
+            <ngb-carousel [interval]="2000">
+                <ng-template ngbSlide *ngFor="let i of images">
+                    <div class="carousel-wrapper">
+                        <img src="img/events/{{i.name}}" [alt]="i.caption">
+                        <div class="caption">{{i.caption}}</div>
+                    </div>
+                </ng-template>
+                
+            </ngb-carousel>
+        </div>
+    </div>
+</div>

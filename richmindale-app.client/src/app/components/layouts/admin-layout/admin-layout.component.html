@@ -1,0 +1,227 @@
+<div class="main-wrapper">
+    <div class="header-wrapper">
+        <div class="header-logo" [ngClass]="{'expand': isExpand}">
+            <img src="img/richmindale100px.webp" alt="Richmindale - Home of the Rich Minds">
+        </div>
+        <div class="profile-header pr-3" >
+            <div class="searchbar me-4 mt-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-text ms-2"><i class="fa fa-search"></i></span>
+                        <input type="search" class="form-control">
+                        <span class="input-group-text me-2"><i class="fa-regular fa-paper-plane"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile mt-3">
+                <ul class="nav">
+                    <li class="me-1">
+                        <a href="/admin/accounts/profile" class="nav-link" ><i class="fa fa-user-tie me-2"></i>{{name}}</a>
+                    </li>
+                    <li class="me-1">
+                        <a href="" class="nav-link" ><i class="fa fa-bell"></i></a>
+                    </li>
+                    <li class="me-1">
+                        <a href=""  class="nav-link"  (click)="DoLogOut()"><i class="fa fa-arrow-right-from-bracket"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <aside class="sidebar" [ngClass]="{'expand': isExpand}" id="sidebar">
+        <div class="d-flex">
+            <button class="toggle-btn" (click)="toggleSideBar()" type="button">
+                <i class="fa-solid" [ngClass]="{'fa-chevron-right': !isExpand, 'fa-chevron-left': isExpand }"></i>
+            </button>
+        </div>
+        <ul class="sidebar-nav">
+            <li class="sidebar-item">
+                <a href="/admin/dashboard" class="sidebar-link">
+                    <i class="fa-solid fa-chart-simple me-2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <!-- School Admin -->
+            <li class="sidebar-item">
+                <a href="" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#school-adm" aria-expanded="false" aria-controls="school-adm">
+                    <i class="fa fa-user-tie"></i>
+                    <span>School Admin</span>
+                </a>
+                <ul id="school-adm" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/masterlist" class="sidebar-link">
+                            <i class="fa-solid fa-people-line"></i>
+                            <span>Masterlist</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/admissions" class="sidebar-link">
+                            <i class="fa fa-ticket"></i>
+                            <span>Admissions</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/faculty" class="sidebar-link">
+                            <i class="fa-solid fa-users-rays"></i>
+                            <span>Faculty</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/grievances" class="sidebar-link">
+                            <i class="fa-solid fa-person-harassing"></i>
+                            <span>Grievances</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/inquiries" class="sidebar-link">
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                            <span>Inquiries</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/document-editor" class="sidebar-link">
+                            <i class="fa-solid fa-file-pen"></i>
+                            <span>Document Editor</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- Registrar -->
+            <li class="sidebar-item">
+                <a href="" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#registrar" aria-expanded="false" aria-controls="registrar">
+                    <i class="fa-solid fa-address-card"></i>
+                    <span>Registrar</span>
+                </a>
+                <ul id="registrar" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/masterlist" class="sidebar-link">
+                            <i class="fa-solid fa-people-group"></i>
+                            <span>Masterlist</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/admissions" class="sidebar-link">
+                            <i class="fa fa-ticket"></i>
+                            <span>Admissions</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/document-requests" class="sidebar-link">
+                            <i class="fa-solid fa-certificate"></i>
+                            <span>Document Requests</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/transcript" class="sidebar-link">
+                            <i class="fa-solid fa-file-signature"></i>
+                            <span>Transcript of Records</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/report-cards" class="sidebar-link">
+                            <i class="fa-solid fa-clone"></i>
+                            <span>Report Cards</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/inquiries" class="sidebar-link">
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                            <span>Inquiries</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/document-editor" class="sidebar-link">
+                            <i class="fa-solid fa-file-pen"></i>
+                            <span>Document Editor</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Finance -->
+            <li class="sidebar-item">
+                <a href="" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#finance" aria-expanded="false" aria-controls="finance">
+                    <i class="fa-solid fa-coins"></i>
+                    <span>Finance</span>
+                </a>
+                <ul id="finance" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/finance/paypal-transactions" class="sidebar-link">
+                            <i class="fa-brands fa-paypal"></i>
+                            <span>Paypal Payments</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
+
+            <!-- System -->
+            <li class="sidebar-item">
+                <a href="" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#system" aria-expanded="false" aria-controls="system">
+                    <i class="fa-solid fa-gears"></i>
+                    <span>System Setup</span>
+                </a>
+                <ul id="system" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/system/organizations" class="sidebar-link">
+                            <i class="fa-solid fa-city"></i>
+                            <span>Organizations</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/system/campuses" class="sidebar-link">
+                            <i class="fa-solid fa-building-flag"></i>
+                            <span>Campuses</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/system/learning-methods" class="sidebar-link">
+                            <i class="fa-solid fa-chalkboard"></i>
+                            <span>Learning Methods</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/system/users" class="sidebar-link">
+                            <i class="fa-solid fa-users-gear"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/system/students" class="sidebar-link">
+                            <i class="fa-solid fa-users-gear"></i>
+                            <span>Student Accounts</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/system/roles" class="sidebar-link">
+                            <i class="fa-solid fa-user-tag"></i>
+                            <span>Roles</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/system/categories" class="sidebar-link">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span>Categories</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/system/statuses" class="sidebar-link">
+                            <i class="fa-solid fa-stamp"></i>
+                            <span>Statuses</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" [ngClass]="{'ms-3': isExpand}">
+                        <a href="/admin/system/workflows" class="sidebar-link">
+                            <i class="fa-solid fa-diagram-project"></i>
+                            <span>Workflows</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+        </ul>
+    </aside>
+    <div class="content-wrapper" [ngClass]="{'expand': isExpand}">
+        <router-outlet></router-outlet>
+    </div>
+</div>

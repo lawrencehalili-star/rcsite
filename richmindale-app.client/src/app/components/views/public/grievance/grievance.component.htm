@@ -1,0 +1,59 @@
+<div class="page-wrapper">
+    <h2>GRIEVANCE</h2>
+    <div class="full-page">
+        <div class="grievance-wrapper">
+            <form novalidate class="grievance-form">
+                <label class="form-label">Email *</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa fa-envelope-open-text"></i></span>
+                    <input type="email" class="form-control" placeholder="Email" [(ngModel)]="grievance.EmailAddress">
+                </div>
+                <label class="form-label">Complainant Name *</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" placeholder="Complainant" [(ngModel)]="grievance.Complainant">
+                </div>
+                <div class="form-group">
+                    <div class="form-check form-switch">
+                        <input type="checkbox" (change)="RevealChanged()" [checked]="grievance.HideComplainant" [(ngModel)]="grievance.HideComplainant" role="switch" class="form-check-input">
+                        <label class="form-check-label">Reveal my identity</label>
+                    </div>
+                </div>
+                <label class="form-label mt-3 text-danger" [hidden]="!reveal">** I agree to include my identity in resolution</label>
+                <label class="form-label">Person Involve *</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-person-circle-exclamation"></i></span>
+                    <input type="text" class="form-control" placeholder="Respondent" [(ngModel)]="grievance.Respondent">
+                </div>
+                <label class="form-label">Type *</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa fa-circle-info"></i></span>
+                    <select class="form-control" [(ngModel)]="grievance.CategoryId">
+                        <option *ngFor="let g of grievances" [value]="g.value">{{g.text}}</option>
+                    </select>
+                </div>
+                <label class="form-label">Message *</label>
+                <div class="input-group">
+                    <textarea rows="4" class="form-control" [(ngModel)]="grievance.Message"></textarea>
+                </div>
+                <re-captcha id="recaptcha" name="recaptcha" siteKey="6Lee44YqAAAAAK_lpsA6eGEKkAJ6wKIYXwM8Nurw"></re-captcha>
+                <button class="btn btn-primary form-control" (click)="SubmitGrievance()">Submit</button>
+            </form>
+            <div class="grievance-instruction">
+                <span class="mt-3 mb-2">IMPORTANT - GRIEVANCE RESOLUTION</span>
+                <p>If the student complaint cannot be resolved after exhausting the Institution’s grievance procedure,
+                    the student may file a complaint with the Arizona State Board for Private Postsecondary Education.
+                    The student must contact the State Board for further details.</p>
+                <br />
+                <br />
+                <p>The State Board address is:</p>
+                <p>
+                    1740 W. Adams Street, #3008<br />
+                    Phoenix, AZ 85007<br />
+                    Phone: 602-542-5709<br />
+                    Website: ppse.az.gov
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

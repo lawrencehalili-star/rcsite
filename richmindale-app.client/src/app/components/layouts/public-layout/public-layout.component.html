@@ -1,0 +1,187 @@
+<div class="public-wrapper">
+  <div class="header-wrapper">
+    <div class="header-container">
+      <div class="main-header">
+        <div class="logo-container">
+          <img src="img/richmindale100px.webp" alt="" class="logo">
+        </div>
+        <span class="org-name">Richmindale College</span>
+        <div class="top-icons">
+          <!-- <a href="/">
+              <i class="fa-solid fa-house"></i>
+          </a>
+          <a href="/faq">
+              <i class="fa-regular fa-circle-question"></i>
+          </a> -->
+          <a href="/rims/login">
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
+
+      </div>
+      <div class="top-nav flex-end">
+        <ul class="nav">
+          <li><a href="/rims/login"><i class="fa-solid fa-user me-2"></i>Student Login</a></li>
+          <li><a href="/anouncement.htm"><i class="fa-solid fa-bullhorn me-2"></i>Anouncements</a></li>
+          <li><a href="/payment"><i class="fa-solid fa-credit-card me-2"></i>Payments</a></li>
+          <li><a href="/enrollment"><i class="fa-solid fa-square-check me-2"></i>Verify</a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="nav-container" [ngClass]="{'show': showNav}">
+      <div class="toggle-btn mb-3" (click)="toggleNav()"><i class="fa-solid fa-xmark"></i></div>
+      <ul class="nav">
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/admissions/index.htm">Admissions</a></li>
+        <li><a href="/academics/index.htm">Academics</a></li>
+        <!--<li><a href="/admissions/catalog.htm">Catalog</a></li>-->
+        <li><a href="/policies/index.htm">Policies</a></li>
+        <li><a href="/services/index.htm">Services</a></li>
+        <li><a href="/media/index.htm">Media &amp; Events</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+        <li><a href="/alumni/index.htm">Alumni</a></li>
+        <li><a href="/jobsearch">Job Search</a></li>
+        <li><a href="/faq.htm">FAQ</a></li>
+      </ul>
+    </nav>
+    <nav class="nav-container mobile" [ngClass]="{'hide': showNav}">
+      <ul class="nav">
+        <li><a href="/admissions.htm"><i class="fa fa-cogs me-2"></i>Admissions</a></li>
+        <li><a href="/services.htm"><i class="fa fa-cogs me-2"></i>Services</a></li>
+        <li><a href="/payment"><i class="fa-solid fa-credit-card me-2"></i>Payment</a></li>
+        <li><a (click)="toggleNav()"><i class="fa-solid fa-ellipsis-vertical"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="content-wrapper">
+    <router-outlet></router-outlet>
+
+  </div>
+
+
+  
+  <!-- FOOTER -->
+  <div class="footer-wrapper bg-dark text-white py-5">
+    <div class="container">
+
+      <!-- First Row: Company Info, Quick Access, Common Services -->
+      <div class="row text-center text-md-start justify-content-md-center">
+        <div class="col-md-8"> 
+          <div class="row">
+            <!-- Column 1: Company Info -->
+            <div class="col-md-5 mb-4">
+              <div class="company-details">
+                <h5 class="fw-bold footer-title link-title">RICHMINDALE COLLEGE LLC</h5>
+                <p><i class="fa-solid fa-location-dot me-2"></i>185 N. Apache Trail, Suite 1, Apache Junction, <br /> Arizona 85120, United States of America</p>
+                <p><i class="fa-solid fa-envelope me-2"></i>info&#64;richmindale.com</p>
+                <p><i class="fa-solid fa-phone me-2"></i><a href="tel:+19284993936"> +1 (928) 499-3936 </a> / <a href="tel:+16028814176"> +1 (602) 881-4176 </a> </p>
+                <p class="mt-3 mb-0">Richmindale&reg;</p>
+                <p class="mb-0">Home of the rich minds.</p>
+                <p>Richmindale College LLC. &copy; All rights reserved.</p>
+
+              </div>
+            </div>
+
+            <!-- Column Social Media -->
+            <div class="col-md-1 mb-2">
+              <div class="soc-med social-links mt-2">
+                <a href="https://www.facebook.com/richmindale.us" class="text-white me-2"><i class="fa-brands fa-facebook fa-lg"></i></a>
+              </div>
+            </div>
+
+            <!-- Column 2: Quick Access Links -->
+            <div class="col-md-3 mb-2">
+              <div class="row">
+
+                <div class="col-md-12 pb-5">
+                  <h6 class="fw-bold footer-title link-title">QUICK ACCESS LINKS</h6>
+                  <ul class="list-unstyled">
+                    <li><a href="/academics/programs.htm" class="text-white">View Degree Programs</a></li>
+                    <li><a href="/academics/courses.htm" class="text-white">View Courses</a></li>
+                    <li><a href="/catalog.htm" class="text-white">View Catalog</a></li>
+                    <li><a href="/admissions.htm" class="text-white">Apply for Admission</a></li>
+                    <li><a href="/rims/login" class="text-white">Enroll in Courses</a></li>
+                    <li><a href="https://moodle.richmindale.com" class="text-white">Participate in Classes</a></li>
+                    <li><a href="/policies/registrar/cancellation.htm" class="text-white">Cancel & Refund</a></li>
+                  </ul>
+                </div>
+                </div>
+                <div class="row">
+                  <!-- Column 4: Explore Richmindale -->
+                  <div class="col-md-12">
+                    <h6 class="fw-bold footer-title link-title">EXPLORE RICHMINDALE</h6>
+                    <ul class="list-unstyled">
+                      <li><a href="/" class="text-white">Home</a></li>
+                      <li><a href="/admissions.htm" class="text-white">Admissions</a></li>
+                      <li><a href="/enrollment" class="text-white">Enrollment</a></li>
+                      <li><a href="/admissions/index.htm" class="text-white">Academics</a></li>
+                      <li><a href="/admissions/catalog.htm" class="text-white">Catalog</a></li>
+                      <li><a href="/media/index.htm" class="text-white">Media & Events</a></li>
+                      <li><a href="/about.htm" class="text-white">About Us</a></li>
+                      <li><a href="/contact" class="text-white">Contact Us</a></li>
+                      <li><a href="/faq.htm" class="text-white">FAQ</a></li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Column 3: Common Services -->
+            <div class="col-md-3 mb-2">
+              <div class="row">
+                <div class="col-md-12 pb-5">
+                  <h6 class="fw-bold footer-title link-title">COMMON SERVICES</h6>
+                  <ul class="list-unstyled">
+                    <li><a href="/policies/admissions/onboarding.htm" class="text-white">View Orientation Materials</a></li>
+                    <li><a href="/rims/services/graduation" class="text-white">Apply for Graduation</a></li>
+                    <li><a href="/rims/services/transcript" class="text-white">Request for Transcripts</a></li>
+                    <li><a href="/rims/services/documents" class="text-white">Request for Documents</a></li>
+                    <li><a href="/rims/login" class="text-white">Request for Bank Details</a></li>
+                    <li><a href="/rims/login" class="text-white">Transfer Credits</a></li>
+                    <li><a href="/policies/academics/grievance.htm" class="text-white">Raise Complaints/Grievance</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+
+                  <!-- Column 5: Join Richmindale -->
+                    <h6 class="fw-bold footer-title link-title">JOIN RICHMINDALE</h6>
+                    <ul class="list-unstyled">
+                      <li><a href="/announcement.htm" class="text-white">Announcements</a></li>
+                      <li><a href="/rims/login" class="text-white">Student Login</a></li>
+                      <li><a href="/rims/login" class="text-white">Library</a></li>
+                      <li><a href="/payment" class="text-white">Payments</a></li>
+                      <li><a href="/services/index.htm" class="text-white">Services</a></li>
+                      <li><a href="/rims/login" class="text-white">Research</a></li>
+                      <li><a href="/policies/index.htm" class="text-white">Policies</a></li>
+                      <li><a href="/alumni.htm" class="text-white">Alumni Events</a></li>
+                      <li><a href="https://www.richmindale.com/jobsearch.htm" class="text-white">Job Search</a></li>
+                    </ul>
+
+                </div>
+                </div>
+                </div>
+              </div>
+
+            </div>
+          </div> <!-- /End Second Row -->
+
+        </div> <!-- /End container -->
+      </div> <!-- /End footer-wrapper -->
+
+
+  <div class="sticky-foot">
+    <div class="links">
+      <a href="/terms"><i class="fa-solid fa-file-lines me-3"></i>Terms of Use</a>&nbsp;|
+      <a href="/terms"><i class="fa-solid fa-file-lines ms-2 me-2"></i>Privacy Policy</a>
+    </div>
+    <span class="mt-2">
+      Copyright &copy; 2025 Richmindale College LLC
+    </span>
+
+  </div>
+
+</div>

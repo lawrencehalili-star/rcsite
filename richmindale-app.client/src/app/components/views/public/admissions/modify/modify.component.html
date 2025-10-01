@@ -1,0 +1,964 @@
+<div class="page-wrapper">
+    <h2>Admission Application Form</h2>
+    <div class="full-page">
+        <div class="wizard-wrapper">
+            <div class="wizard-header">
+                <ul id="form-tabs" role="tablist" class="nav justify-content-center">
+                    <li class="nav-item" role="presentation" *ngFor="let s of steps" (click)="PagerClick(s.idx)">
+                        <a href="" class="nav-link pager" [ngClass]="{'active': activeTabIndex == s.idx, 'complete': s.isComplete }" data-bs-toggle="tab" role="tab" [attr.data-target]="'#' + s.page">
+                            <span>{{s.label}}</span>
+                        </a>
+                        <span class="nav-desc">{{s.title}}</span>
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="wizard-body">
+                <div class="tab-content">
+                    <!-- Program Details -->
+                    <div id="page-01" class="tab-pane fade" [ngClass]="{'active show': activeTabIndex == 0}" role="tabpanel">
+                        <div class="pager-content">
+                            <span class="pager-title">Program Details</span>
+                            <div class="page-container">
+                                <div class="left-content">
+                                    <qr-code [value]="adm.ApplicationRefNo"></qr-code>
+                                    <span>{{adm.ApplicationRefNo}}</span>
+                                </div>
+                                <div class="right-content">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label mandatory">Program Category</label>
+                                                <select class="form-control" [(ngModel)]="adm.ProgramCategoryId" (change)="CategoryChange()">
+                                                    <option value="0">Select Category</option>
+                                                    <option *ngFor="let c of categories" [value]="c.value" selected>{{c.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label mandatory">Program</label>
+                                                <select class="form-control" [(ngModel)]="adm.ProgramId">
+                                                    <option value="0">Select Program</option>
+                                                    <option *ngFor="let p of programs" [value]="p.value">{{p.text}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label mandatory">Preferred Country</label>
+                                                <select class="form-control" [(ngModel)]="adm.CountryId" (change)="CountriesChange('main')" >
+                                                    <option value="0">Select Country</option>
+                                                    <option *ngFor="let c of campusCountries" [value]="c.value" selected>{{c.text}} {{c.code}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label mandatory">Campus</label>
+                                                <select class="form-control" [(ngModel)]="adm.LrnCampusId">
+                                                    <option value="0">Select Campus</option>
+                                                    <option *ngFor="let c of campuses" [value]="c.value" selected>{{c.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label mandatory">Learning Method</label>
+                                                <select class="form-control" [(ngModel)]="adm.LearningMethodsId" >
+                                                    <option value="0">Select Learning Method</option>
+                                                    <option *ngFor="let m of methods" [value]="m.value" selected>{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label mandatory">Term</label>
+                                                <select [(ngModel)]="adm.TermId" class="form-control">
+                                                    <option value="0">Select Term</option>
+                                                    <option *ngFor="let t of terms" [value]="t.value">{{t.text}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-4 col-sm-12 form-group" [ngClass]="{'col-lg-6': !adm.ApplyDiscount}">
+                                                <div class="form-check form-switch mt-4">
+                                                    <input type="checkbox" [(ngModel)]="adm.CreditTransfer" role="switch" class="form-check-input">
+                                                    <label class="form-check-label">Apply for Credit Transfer</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-sm-12 form-group" [ngClass]="{'col-lg-6': !adm.ApplyDiscount}">
+                                                <div class="form-check form-switch mt-4">
+                                                    <input type="checkbox" [(ngModel)]="adm.ApplyDiscount" role="switch" class="form-check-input">
+                                                    <label class="form-check-label">Apply for Discount</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-sm-12 form-group" [hidden]="!adm.ApplyDiscount">
+                                                <label class="form-label mandatory">Discount Code:</label>
+                                                <input type="text" [(ngModel)]="adm.DiscountCode" class="form-control" placeholder="Discount Code">
+                                            </div>
+                                        </div>
+                                        <!--                                  
+                                        <div class="row mt-3">
+                                            <div class="col-lg-6 col-sm-12 form-group" [hidden]="!adm.ApplyDiscount">
+                                                <label class="form-label">Discount Type:</label>
+                                                <select class="form-control" [(ngModel)]="adm.DiscountTypeId">
+                                                    <option value="0">Select Discount</option>
+                                                    <option *ngFor="let d of discounts" [value]="d.value">{{d.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group" [hidden]="adm.DiscountTypeId != 113">
+                                                <label class="form-label">Discount Code:</label>
+                                                <input type="text" [(ngModel)]="adm.DiscountCode" class="form-control" placeholder="Discount Code">
+                                            </div>
+                                        </div>
+                                        -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Student Details -->
+                    <div id="page-02" class="tab-pane fade" [ngClass]="{'active show': activeTabIndex == 1}" role="tabpanel">
+                        <div class="pager-content">
+                            <span class="pager-title">Student Information</span>
+                            <div class="pager-container">
+                                <div class="full-pager">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-12 form-group" [ngClass]="{'col-lg-3': adm.StudentMaritalStatus != 1 && adm.StudentGender == 2}">
+                                                <label class="form-label mandatory">Given Name</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.StudentGivenName" placeholder="Student Given Name">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-12 form-group" [ngClass]="{'col-lg-3': adm.StudentMaritalStatus != 1 && adm.StudentGender == 2}">
+                                                <label class="form-label">Middle Name</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.StudentMiddleName" placeholder="Student Middle Name">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-12 form-group" [ngClass]="{'col-lg-3': adm.StudentMaritalStatus != 1 && adm.StudentGender == 2}">
+                                                <label class="form-label mandatory">Lastname</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.StudentLastname" placeholder="Student Lastame">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group mt-3" [hidden]="adm.StudentMaritalStatus == 1 || adm.StudentGender == 1">
+                                                <label class="form-label">Maiden Name</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.StudentMaidenName" placeholder="Student Maiden Name">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label mandatory">Date of Birth</label>
+                                                <input type="date" class="form-control" [(ngModel)]="adm.StudentBirthDate" placeholder="Student Date of Birth">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label mandatory">Gender</label>
+                                                <select class="form-control" [(ngModel)]="adm.StudentGender">
+                                                    <option value="0">Select Gender</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Marital Status</label>
+                                                <select class="form-control" [(ngModel)]="adm.StudentMaritalStatus">
+                                                    <option value="0">Select Marital Status</option>
+                                                    <option *ngFor="let m of marital" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Religion</label>
+                                                <select class="form-control" [(ngModel)]="adm.StudentReligion">
+                                                    <option value="0">Select Religion</option>
+                                                    <option *ngFor="let m of religions" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label mandatory">Nationality</label>
+                                                <select class="form-control" [(ngModel)]="adm.StudentNationality">
+                                                    <option value="0">Select Nationality</option>
+                                                    <option *ngFor="let m of nationalities" [value]="m.value">{{m.text}} {{m.code}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group"> 
+                                                <label class="form-label mandatory">Country</label>
+                                                <select class="form-control" [(ngModel)]="adm.StudentCountry" (change)="CountriesChange('student')">
+                                                    <option value="0">Select Country</option>
+                                                    <option *ngFor="let m of countries" [value]="m.value">{{m.text}} {{m.code}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label mandatory">State</label>
+                                                <select class="form-control" [(ngModel)]="adm.StudentState" (change)="StatesChange('student')">
+                                                    <option value="0">Select State</option>
+                                                    <option *ngFor="let m of sStates" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label mandatory">City</label>
+                                                <select class="form-control" [(ngModel)]="adm.StudentCity">
+                                                    <option value="0">Select City</option>
+                                                    <option *ngFor="let m of sCities" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12 form-group">
+                                                <label class="form-label mandatory">Address</label>
+                                                <textarea class="form-control" [(ngModel)]="adm.StudentAddress"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label mandatory">Primary Email</label>
+                                                <input type="email" [(ngModel)]="adm.StudentEmail1" class="form-control">
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label mandatory">Primary Phone</label>
+                                                <div class="input-group">
+                                                    <select [(ngModel)]="adm.StudentPhoneCode1">
+                                                        <option *ngFor="let p of phoneCodes" [value]="p.value">{{p.text}} {{p.code}}</option>
+                                                    </select>
+                                                    <input type="text" class="form-control" [(ngModel)]="adm.StudentPhone1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Secondary Email</label>
+                                                <input type="email" [(ngModel)]="adm.StudentEmail2" class="form-control">
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Primary Phone</label>
+                                                <div class="input-group">
+                                                    <select [(ngModel)]="adm.StudentPhoneCode2">
+                                                        <option *ngFor="let p of phoneCodes" [value]="p.value">{{p.text}} {{p.code}}</option>
+                                                    </select>
+                                                    <input type="text" class="form-control" [(ngModel)]="adm.StudentPhone2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Previous School -->
+                    <div id="page-03" class="tab-pane fade" [ngClass]="{'active show': activeTabIndex == 2}" role="tabpanel">
+                        <div class="pager-content">
+                            <span class="pager-title">Previous School</span>
+                            <div class="pager-container">
+                                <div class="full-pager">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-12 form-group">
+                                                <label class="form-label mandatory">School Name</label>
+                                                <input type="text" [(ngModel)]="adm.SchoolName" class="form-control" placeholder="School Name">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-3 col-sm-12 form-group" [ngClass]="{'col-lg-6': adm.SchoolProgram != 25}">
+                                                <label class="form-label mandatory">Qualifications</label>
+                                                <select [(ngModel)]="adm.Qualifications" class="form-control">
+                                                    <option *ngFor="let q of qualifications" [value]="q.value">{{q.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group" [ngClass]="{'col-lg-6': adm.SchoolProgram != 25}">
+                                                <label class="form-label mandatory">Previous Program</label>
+                                                <select [(ngModel)]="adm.SchoolProgram" class="form-control">
+                                                    <option *ngFor="let q of prevPrograms" [value]="q.value">{{q.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group" [hidden]="adm.SchoolProgram != 25">
+                                                <label class="form-label">Other Program</label>
+                                                <input type="text" [(ngModel)]="adm.SchoolOtherProgram" class="form-control" placeholder="Other Program">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Email</label>
+                                                <input type="email" [(ngModel)]="adm.SchoolEmail" class="form-control" placeholder="School Email">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Country</label>
+                                                <select [(ngModel)]="adm.SchoolCountry" class="form-control">
+                                                    <option *ngFor="let c of countries" [value]="c.value">{{c.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Address</label>
+                                                <input type="text" [(ngModel)]="adm.SchoolAddress" class="form-control" placeholder="School Address">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Contact Person</label>
+                                                <input type="text" [(ngModel)]="adm.SchoolContact" class="form-control" placeholder="Contact Person">
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Contact's Designation</label>
+                                                <input type="text" [(ngModel)]="adm.SchoolContactDesignation" class="form-control" placeholder="Designation">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Contact's Email</label>
+                                                <input type="email" [(ngModel)]="adm.SchoolContactEmail" class="form-control" placeholder="Contact's Email">
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Contact Number</label>
+                                                <div class="input-group">
+                                                    <select [(ngModel)]="adm.SchoolPhoneCode">
+                                                        <option *ngFor="let c of phoneCodes" [value]="c.value">{{c.text}}</option>
+                                                    </select>
+                                                    <input type="text" [(ngModel)]="adm.SchoolContactNumber" class="form-control" placeholder="Contact Number">
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Father's Information -->
+                    <div id="page-04" class="tab-pane fade" [ngClass]="{'active show': activeTabIndex == 3}" role="tabpanel">
+                        <div class="pager-content">
+                            <span class="pager-title">Father's Information</span>
+                            <div class="pager-container">
+                                <div class="full-pager">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-12 form-group">
+                                                <div class="form-check form-switch">
+                                                    <input type="checkbox" [(ngModel)]="adm.SkipFather" role="switch" class="form-check-input">
+                                                    <label class="form-check-label">Skip</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipFather">
+                                            <div class="col-lg-4 col-sm-12 form-group">
+                                                <label class="form-label">Given Name</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.FatherGivenName" placeholder="Father Given Name">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-12 form-group">
+                                                <label class="form-label">Middle Name</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.FatherMiddleName" placeholder="Father Middle Name">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-12 form-group">
+                                                <label class="form-label">Lastname</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.FatherLastname" placeholder="Father Lastame">
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipFather">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Date of Birth</label>
+                                                <input type="date" class="form-control" [(ngModel)]="adm.FatherBirthDate" placeholder="Father Date of Birth">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Gender</label>
+                                                <select class="form-control" [(ngModel)]="adm.FatherGender">
+                                                    <option value="0">Select Gender</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Marital Status</label>
+                                                <select class="form-control" [(ngModel)]="adm.FatherMaritalStatus">
+                                                    <option value="0">Select Marital Status</option>
+                                                    <option *ngFor="let m of marital" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Religion</label>
+                                                <select class="form-control" [(ngModel)]="adm.FatherReligion">
+                                                    <option value="0">Select Religion</option>
+                                                    <option *ngFor="let m of religions" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipFather">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Nationality</label>
+                                                <select class="form-control" [(ngModel)]="adm.FatherNationality">
+                                                    <option value="0">Select Nationality</option>
+                                                    <option *ngFor="let m of nationalities" [value]="m.value">{{m.text}} {{m.code}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Country</label>
+                                                <select class="form-control" [(ngModel)]="adm.FatherCountry" (change)="CountriesChange('dad')">
+                                                    <option value="0">Select Country</option>
+                                                    <option *ngFor="let m of countries" [value]="m.value">{{m.text}} {{m.code}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">State</label>
+                                                <select class="form-control" [(ngModel)]="adm.FatherState" (change)="StatesChange('dad')">
+                                                    <option value="0">Select State</option>
+                                                    <option *ngFor="let m of fStates" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">City</label>
+                                                <select class="form-control" [(ngModel)]="adm.FatherCity">
+                                                    <option value="0">Select City</option>
+                                                    <option *ngFor="let m of fCities" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipFather">
+                                            <div class="col-12 form-group">
+                                                <label class="form-label">Address</label>
+                                                <textarea class="form-control" [(ngModel)]="adm.FatherAddress"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipFather">
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Primary Email</label>
+                                                <input type="email" [(ngModel)]="adm.FatherEmail1" class="form-control">
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Primary Phone</label>
+                                                <div class="input-group">
+                                                    <select [(ngModel)]="adm.FatherPhoneCode1">
+                                                        <option *ngFor="let p of phoneCodes" [value]="p.value">{{p.text}} {{p.code}}</option>
+                                                    </select>
+                                                    <input type="text" class="form-control" [(ngModel)]="adm.FatherPhone1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipFather">
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Secondary Email</label>
+                                                <input type="email" [(ngModel)]="adm.FatherEmail2" class="form-control">
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Primary Phone</label>
+                                                <div class="input-group">
+                                                    <select [(ngModel)]="adm.FatherPhoneCode2">
+                                                        <option *ngFor="let p of phoneCodes" [value]="p.value">{{p.text}} {{p.code}}</option>
+                                                    </select>
+                                                    <input type="text" class="form-control" [(ngModel)]="adm.FatherPhone2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mother's Information -->
+                    <div id="page-05" class="tab-pane fade" [ngClass]="{'active show': activeTabIndex == 4}" role="tabpanel">
+                        <div class="pager-content">
+                            <span class="pager-title">Mother's Information</span>
+                            <div class="pager-container">
+                                <div class="full-pager">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-12 form-group">
+                                                <div class="form-check form-switch">
+                                                    <input type="checkbox" [(ngModel)]="adm.SkipMother" role="switch" class="form-check-input">
+                                                    <label class="form-check-label">Skip</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipMother">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Given Name</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.MotherGivenName" placeholder="Mother Given Name">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Middle Name</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.MotherMiddleName" placeholder="Mother Middle Name">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Lastname</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.MotherLastname" placeholder="Mother Lastame">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Maiden Name</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.MotherMaidenName" placeholder="Mother Maiden Name">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipMother">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Date of Birth</label>
+                                                <input type="date" class="form-control" [(ngModel)]="adm.MotherBirthDate" placeholder="Mother Date of Birth">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Gender</label>
+                                                <select class="form-control" [(ngModel)]="adm.MotherGender">
+                                                    <option value="0">Select Gender</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Marital Status</label>
+                                                <select class="form-control" [(ngModel)]="adm.MotherMaritalStatus">
+                                                    <option value="0">Select Marital Status</option>
+                                                    <option *ngFor="let m of marital" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Religion</label>
+                                                <select class="form-control" [(ngModel)]="adm.MotherReligion">
+                                                    <option value="0">Select Religion</option>
+                                                    <option *ngFor="let m of religions" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipMother">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Nationality</label>
+                                                <select class="form-control" [(ngModel)]="adm.MotherNationality">
+                                                    <option value="0">Select Nationality</option>
+                                                    <option *ngFor="let m of nationalities" [value]="m.value">{{m.text}} {{m.code}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Country</label>
+                                                <select class="form-control" [(ngModel)]="adm.MotherCountry" (change)="CountriesChange('mom')">
+                                                    <option value="0">Select Country</option>
+                                                    <option *ngFor="let m of countries" [value]="m.value">{{m.text}} {{m.code}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">State</label>
+                                                <select class="form-control" [(ngModel)]="adm.MotherState" (change)="StatesChange('mom')">
+                                                    <option value="0">Select State</option>
+                                                    <option *ngFor="let m of mStates" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">City</label>
+                                                <select class="form-control" [(ngModel)]="adm.MotherCity">
+                                                    <option value="0">Select City</option>
+                                                    <option *ngFor="let m of mCities" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipMother">
+                                            <div class="col-12 form-group">
+                                                <label class="form-label">Address</label>
+                                                <textarea class="form-control" [(ngModel)]="adm.MotherAddress"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipMother">
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Primary Email</label>
+                                                <input type="email" [(ngModel)]="adm.MotherEmail1" class="form-control">
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Primary Phone</label>
+                                                <div class="input-group">
+                                                    <select [(ngModel)]="adm.MotherPhoneCode1">
+                                                        <option *ngFor="let p of phoneCodes" [value]="p.value">{{p.text}} {{p.code}}</option>
+                                                    </select>
+                                                    <input type="text" class="form-control" [(ngModel)]="adm.MotherPhone1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipMother">
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Secondary Email</label>
+                                                <input type="email" [(ngModel)]="adm.MotherEmail2" class="form-control">
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Primary Phone</label>
+                                                <div class="input-group">
+                                                    <select [(ngModel)]="adm.MotherPhoneCode2">
+                                                        <option *ngFor="let p of phoneCodes" [value]="p.value">{{p.text}} {{p.code}}</option>
+                                                    </select>
+                                                    <input type="text" class="form-control" [(ngModel)]="adm.MotherPhone2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Guardian's Information -->
+                    <div id="page-06" class="tab-pane fade" [ngClass]="{'active show': activeTabIndex == 5}" role="tabpanel">
+                        <div class="pager-content">
+                            <span class="pager-title">Guardian's Information</span>
+                            <div class="pager-container">
+                                <div class="full-pager">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-12 form-group">
+                                                <div class="form-check form-switch">
+                                                    <input type="checkbox" [(ngModel)]="adm.SkipGuardian" role="switch" class="form-check-input">
+                                                    <label class="form-check-label">Skip</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipGuardian">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Given Name</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.GuardianGivenName" placeholder="Guardian Given Name">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Middle Name</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.GuardianMiddleName" placeholder="Guardian Middle Name">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Lastname</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.GuardianLastname" placeholder="Guardian Lastame">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Maiden Name</label>
+                                                <input type="text" class="form-control" [(ngModel)]="adm.GuardianLastname" placeholder="Guardian Maiden Name">
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipGuardian">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Date of Birth</label>
+                                                <input type="date" class="form-control" [(ngModel)]="adm.GuardianBirthDate" placeholder="Father Date of Birth">
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Gender</label>
+                                                <select class="form-control" [(ngModel)]="adm.GuardianGender">
+                                                    <option value="0">Select Gender</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Marital Status</label>
+                                                <select class="form-control" [(ngModel)]="adm.GuardianMaritalStatus">
+                                                    <option value="0">Select Marital Status</option>
+                                                    <option *ngFor="let m of marital" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Religion</label>
+                                                <select class="form-control" [(ngModel)]="adm.GuardianReligion">
+                                                    <option value="0">Select Religion</option>
+                                                    <option *ngFor="let m of religions" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipGuardian">
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Nationality</label>
+                                                <select class="form-control" [(ngModel)]="adm.GuardianNationality">
+                                                    <option value="0">Select Nationality</option>
+                                                    <option *ngFor="let m of nationalities" [value]="m.value">{{m.text}} {{m.code}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">Country</label>
+                                                <select class="form-control" [(ngModel)]="adm.GuardianCountry" (change)="CountriesChange('guard')">
+                                                    <option value="0">Select Country</option>
+                                                    <option *ngFor="let m of countries" [value]="m.value">{{m.text}} {{m.code}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">State</label>
+                                                <select class="form-control" [(ngModel)]="adm.GuardianState" (change)="StatesChange('guard')">
+                                                    <option value="0">Select State</option>
+                                                    <option *ngFor="let m of gStates" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 form-group">
+                                                <label class="form-label">City</label>
+                                                <select class="form-control" [(ngModel)]="adm.GuardianCity">
+                                                    <option value="0">Select City</option>
+                                                    <option *ngFor="let m of gCities" [value]="m.value">{{m.text}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipGuardian">
+                                            <div class="col-12 form-group">
+                                                <label class="form-label">Address</label>
+                                                <textarea class="form-control" [(ngModel)]="adm.GuardianAddress"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipGuardian">
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Primary Email</label>
+                                                <input type="email" [(ngModel)]="adm.GuardianEmail1" class="form-control">
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Primary Phone</label>
+                                                <div class="input-group">
+                                                    <select [(ngModel)]="adm.GuardianPhoneCode1">
+                                                        <option *ngFor="let p of phoneCodes" [value]="p.value">{{p.text}} {{p.code}}</option>
+                                                    </select>
+                                                    <input type="text" class="form-control" [(ngModel)]="adm.GuardianPhone1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" [hidden]="adm.SkipGuardian">
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Secondary Email</label>
+                                                <input type="email" [(ngModel)]="adm.GuardianEmail2" class="form-control">
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12 form-group">
+                                                <label class="form-label">Primary Phone</label>
+                                                <div class="input-group">
+                                                    <select [(ngModel)]="adm.GuardianPhoneCode2">
+                                                        <option *ngFor="let p of phoneCodes" [value]="p.value">{{p.text}} {{p.code}}</option>
+                                                    </select>
+                                                    <input type="text" class="form-control" [(ngModel)]="adm.GuardianPhone2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Supporting Documents -->
+                    <div id="page-07" class="tab-pane fade" [ngClass]="{'active show': activeTabIndex == 6}" role="tabpanel">
+                        <div class="pager-content">
+                            <span class="pager-title">Upload Supporting Documents</span>
+                            <div class="page-container">
+                                <div class="drag-n-drop">
+
+                                    <!-- Transcript of Records -->
+                                    <div class="dnd-wrapper">
+                                        <span class="categories">Applicant's Transcript of Records</span>
+                                        <div class="dnd-container">
+                                            <div class="drop-zone mt-2" appDnd (fileDropped)="onFileDropped('tor', $event)">
+                                                <input type="file" #torFiles id="torFiles" multiple (change)="fileBrowseHandler('tor', $event)" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="63" height="64" viewBox="0 0 63 64">
+                                                    <g fill="#3B454F" fill-rule="nonzero">
+                                                        <path
+                                                            d="M42.656 15.135a1.953 1.953 0 0 1-1.391-.578L31.5 4.795l-9.765 9.762a1.97 1.97 0 1 1-2.785-2.785L30.106.616a1.97 1.97 0 0 1 2.785 0l11.157 11.156a1.97 1.97 0 0 1-1.392 3.363z" />
+                                                        <path
+                                                            d="M31.5 36.791a1.97 1.97 0 0 1-1.969-1.969V2.01a1.97 1.97 0 0 1 3.938 0v32.812a1.97 1.97 0 0 1-1.969 1.969z" />
+                                                        <path
+                                                            d="M55.781 63.041H7.22A7.225 7.225 0 0 1 0 55.822V41.385a4.599 4.599 0 0 1 4.594-4.594h7.234a4.567 4.567 0 0 1 4.402 3.276l2.814 9.382a.658.658 0 0 0 .628.467h23.656a.658.658 0 0 0 .628-.467l2.814-9.385a4.572 4.572 0 0 1 4.402-3.273h7.234A4.599 4.599 0 0 1 63 41.385v14.437a7.225 7.225 0 0 1-7.219 7.219zM4.594 40.729a.656.656 0 0 0-.657.656v14.437a3.286 3.286 0 0 0 3.282 3.282H55.78a3.286 3.286 0 0 0 3.282-3.282V41.385a.656.656 0 0 0-.657-.656h-7.234a.65.65 0 0 0-.628.467L47.73 50.58a4.628 4.628 0 0 1-4.402 3.274H19.672a4.567 4.567 0 0 1-4.402-3.276l-2.814-9.382a.65.65 0 0 0-.628-.467H4.594z" />
+                                                    </g>
+                                                </svg>
+                                                <span>Drag and drop file(s) here</span>
+                                                <span class="mb-2">or</span>
+                                                <label for="">Browse File(s)</label>
+                                            </div>
+                                            <div class="file-list">
+                                               <div class="single-file" *ngFor="let t of TORFiles;let i = index">
+                                                    <div class="file-icon">
+                                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                            x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
+                                                            <polygon style="fill:#EDEADA;" points="51.5,14 37.5,0 6.5,0 6.5,58 51.5,58 " />
+                                                            <g>
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M16.5,23h25c0.552,0,1-0.447,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.447-1,1S15.948,23,16.5,23z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M16.5,15h10c0.552,0,1-0.447,1-1s-0.448-1-1-1h-10c-0.552,0-1,0.447-1,1S15.948,15,16.5,15z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,29h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,29,41.5,29z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,37h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,37,41.5,37z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,45h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,45,41.5,45z" />
+                                                            </g>
+                                                            <polygon style="fill:#CEC9AE;" points="37.5,0 37.5,14 51.5,14 " />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="info">
+                                                        <span class="name">{{t?.name}}</span>
+                                                        <span class="size">{{ formatBytes(t?.size)}}</span>
+                                                        <app-upload-progress [progress]="t?.progress"></app-upload-progress>
+                                                    </div>
+                                                    <div class="delete" (click)="deleteFile('tor',i)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
+                                                            <path fill="#B1B1B1" fill-rule="nonzero"
+                                                                d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                                                        </svg>
+                                                    </div>
+                                               </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Certificat of Qualifications  -->
+                                    <div class="dnd-wrapper">
+                                        <span class="categories">Certificate of Qualifications</span>
+                                        <div class="dnd-container">
+                                            <div class="drop-zone mt-2" appDnd (fileDropped)="onFileDropped('coe', $event)">
+                                                <input type="file" #coeFiles id="coefile" multiple (change)="fileBrowseHandler('coe', $event)" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="63" height="64" viewBox="0 0 63 64">
+                                                    <g fill="#3B454F" fill-rule="nonzero">
+                                                        <path
+                                                            d="M42.656 15.135a1.953 1.953 0 0 1-1.391-.578L31.5 4.795l-9.765 9.762a1.97 1.97 0 1 1-2.785-2.785L30.106.616a1.97 1.97 0 0 1 2.785 0l11.157 11.156a1.97 1.97 0 0 1-1.392 3.363z" />
+                                                        <path
+                                                            d="M31.5 36.791a1.97 1.97 0 0 1-1.969-1.969V2.01a1.97 1.97 0 0 1 3.938 0v32.812a1.97 1.97 0 0 1-1.969 1.969z" />
+                                                        <path
+                                                            d="M55.781 63.041H7.22A7.225 7.225 0 0 1 0 55.822V41.385a4.599 4.599 0 0 1 4.594-4.594h7.234a4.567 4.567 0 0 1 4.402 3.276l2.814 9.382a.658.658 0 0 0 .628.467h23.656a.658.658 0 0 0 .628-.467l2.814-9.385a4.572 4.572 0 0 1 4.402-3.273h7.234A4.599 4.599 0 0 1 63 41.385v14.437a7.225 7.225 0 0 1-7.219 7.219zM4.594 40.729a.656.656 0 0 0-.657.656v14.437a3.286 3.286 0 0 0 3.282 3.282H55.78a3.286 3.286 0 0 0 3.282-3.282V41.385a.656.656 0 0 0-.657-.656h-7.234a.65.65 0 0 0-.628.467L47.73 50.58a4.628 4.628 0 0 1-4.402 3.274H19.672a4.567 4.567 0 0 1-4.402-3.276l-2.814-9.382a.65.65 0 0 0-.628-.467H4.594z" />
+                                                    </g>
+                                                </svg>
+                                                <span>Drag and drop file(s) here</span>
+                                                <span class="mb-2">or</span>
+                                                <label for="">Browse File(s)</label>
+                                            </div>
+                                            <div class="file-list">
+                                               <div class="single-file" *ngFor="let t of COEFiles;let i = index">
+                                                    <div class="file-icon">
+                                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                            x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
+                                                            <polygon style="fill:#EDEADA;" points="51.5,14 37.5,0 6.5,0 6.5,58 51.5,58 " />
+                                                            <g>
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M16.5,23h25c0.552,0,1-0.447,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.447-1,1S15.948,23,16.5,23z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M16.5,15h10c0.552,0,1-0.447,1-1s-0.448-1-1-1h-10c-0.552,0-1,0.447-1,1S15.948,15,16.5,15z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,29h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,29,41.5,29z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,37h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,37,41.5,37z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,45h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,45,41.5,45z" />
+                                                            </g>
+                                                            <polygon style="fill:#CEC9AE;" points="37.5,0 37.5,14 51.5,14 " />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="info">
+                                                        <span class="name">{{t?.name}}</span>
+                                                        <span class="size">{{ formatBytes(t?.size)}}</span>
+                                                        <app-upload-progress [progress]="t?.progress"></app-upload-progress>
+                                                    </div>
+                                                    <div class="delete" (click)="deleteFile('coe',i)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
+                                                            <path fill="#B1B1B1" fill-rule="nonzero"
+                                                                d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                                                        </svg>
+                                                    </div>
+                                               </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Government Issued Photo ID -->
+                                    <div class="dnd-wrapper">
+                                        <span class="categories">Government Issued Photo ID</span>
+                                        <div class="dnd-container">
+                                            <div class="drop-zone mt-2" appDnd (fileDropped)="onFileDropped('gov', $event)">
+                                                <input type="file" #coeFiles id="govfile" multiple (change)="fileBrowseHandler('gov', $event)" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="63" height="64" viewBox="0 0 63 64">
+                                                    <g fill="#3B454F" fill-rule="nonzero">
+                                                        <path
+                                                            d="M42.656 15.135a1.953 1.953 0 0 1-1.391-.578L31.5 4.795l-9.765 9.762a1.97 1.97 0 1 1-2.785-2.785L30.106.616a1.97 1.97 0 0 1 2.785 0l11.157 11.156a1.97 1.97 0 0 1-1.392 3.363z" />
+                                                        <path
+                                                            d="M31.5 36.791a1.97 1.97 0 0 1-1.969-1.969V2.01a1.97 1.97 0 0 1 3.938 0v32.812a1.97 1.97 0 0 1-1.969 1.969z" />
+                                                        <path
+                                                            d="M55.781 63.041H7.22A7.225 7.225 0 0 1 0 55.822V41.385a4.599 4.599 0 0 1 4.594-4.594h7.234a4.567 4.567 0 0 1 4.402 3.276l2.814 9.382a.658.658 0 0 0 .628.467h23.656a.658.658 0 0 0 .628-.467l2.814-9.385a4.572 4.572 0 0 1 4.402-3.273h7.234A4.599 4.599 0 0 1 63 41.385v14.437a7.225 7.225 0 0 1-7.219 7.219zM4.594 40.729a.656.656 0 0 0-.657.656v14.437a3.286 3.286 0 0 0 3.282 3.282H55.78a3.286 3.286 0 0 0 3.282-3.282V41.385a.656.656 0 0 0-.657-.656h-7.234a.65.65 0 0 0-.628.467L47.73 50.58a4.628 4.628 0 0 1-4.402 3.274H19.672a4.567 4.567 0 0 1-4.402-3.276l-2.814-9.382a.65.65 0 0 0-.628-.467H4.594z" />
+                                                    </g>
+                                                </svg>
+                                                <span>Drag and drop file(s) here</span>
+                                                <span class="mb-2">or</span>
+                                                <label for="">Browse File(s)</label>
+                                            </div>
+                                            <div class="file-list">
+                                               <div class="single-file" *ngFor="let t of GovIDFiles;let i = index">
+                                                    <div class="file-icon">
+                                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                            x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
+                                                            <polygon style="fill:#EDEADA;" points="51.5,14 37.5,0 6.5,0 6.5,58 51.5,58 " />
+                                                            <g>
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M16.5,23h25c0.552,0,1-0.447,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.447-1,1S15.948,23,16.5,23z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M16.5,15h10c0.552,0,1-0.447,1-1s-0.448-1-1-1h-10c-0.552,0-1,0.447-1,1S15.948,15,16.5,15z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,29h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,29,41.5,29z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,37h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,37,41.5,37z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,45h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,45,41.5,45z" />
+                                                            </g>
+                                                            <polygon style="fill:#CEC9AE;" points="37.5,0 37.5,14 51.5,14 " />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="info">
+                                                        <span class="name">{{t?.name}}</span>
+                                                        <span class="size">{{ formatBytes(t?.size)}}</span>
+                                                        <app-upload-progress [progress]="t?.progress"></app-upload-progress>
+                                                    </div>
+                                                    <div class="delete" (click)="deleteFile('gov',i)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
+                                                            <path fill="#B1B1B1" fill-rule="nonzero"
+                                                                d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                                                        </svg>
+                                                    </div>
+                                               </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Richmindale Assessment Certificate -->
+                                    <div class="dnd-wrapper">
+                                        <span class="categories">Richmindale Assessment Certificate</span>
+                                        <div class="dnd-container">
+                                            <div class="drop-zone mt-2" appDnd (fileDropped)="onFileDropped('rac', $event)">
+                                                <input type="file" #coeFiles id="racfile" multiple (change)="fileBrowseHandler('rac', $event)" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="63" height="64" viewBox="0 0 63 64">
+                                                    <g fill="#3B454F" fill-rule="nonzero">
+                                                        <path
+                                                            d="M42.656 15.135a1.953 1.953 0 0 1-1.391-.578L31.5 4.795l-9.765 9.762a1.97 1.97 0 1 1-2.785-2.785L30.106.616a1.97 1.97 0 0 1 2.785 0l11.157 11.156a1.97 1.97 0 0 1-1.392 3.363z" />
+                                                        <path
+                                                            d="M31.5 36.791a1.97 1.97 0 0 1-1.969-1.969V2.01a1.97 1.97 0 0 1 3.938 0v32.812a1.97 1.97 0 0 1-1.969 1.969z" />
+                                                        <path
+                                                            d="M55.781 63.041H7.22A7.225 7.225 0 0 1 0 55.822V41.385a4.599 4.599 0 0 1 4.594-4.594h7.234a4.567 4.567 0 0 1 4.402 3.276l2.814 9.382a.658.658 0 0 0 .628.467h23.656a.658.658 0 0 0 .628-.467l2.814-9.385a4.572 4.572 0 0 1 4.402-3.273h7.234A4.599 4.599 0 0 1 63 41.385v14.437a7.225 7.225 0 0 1-7.219 7.219zM4.594 40.729a.656.656 0 0 0-.657.656v14.437a3.286 3.286 0 0 0 3.282 3.282H55.78a3.286 3.286 0 0 0 3.282-3.282V41.385a.656.656 0 0 0-.657-.656h-7.234a.65.65 0 0 0-.628.467L47.73 50.58a4.628 4.628 0 0 1-4.402 3.274H19.672a4.567 4.567 0 0 1-4.402-3.276l-2.814-9.382a.65.65 0 0 0-.628-.467H4.594z" />
+                                                    </g>
+                                                </svg>
+                                                <span>Drag and drop file(s) here</span>
+                                                <span class="mb-2">or</span>
+                                                <label for="">Browse File(s)</label>
+                                            </div>
+                                            <div class="file-list">
+                                               <div class="single-file" *ngFor="let t of RACFiles;let i = index">
+                                                    <div class="file-icon">
+                                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                            x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
+                                                            <polygon style="fill:#EDEADA;" points="51.5,14 37.5,0 6.5,0 6.5,58 51.5,58 " />
+                                                            <g>
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M16.5,23h25c0.552,0,1-0.447,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.447-1,1S15.948,23,16.5,23z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M16.5,15h10c0.552,0,1-0.447,1-1s-0.448-1-1-1h-10c-0.552,0-1,0.447-1,1S15.948,15,16.5,15z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,29h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,29,41.5,29z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,37h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,37,41.5,37z" />
+                                                                <path style="fill:#CEC9AE;"
+                                                                    d="M41.5,45h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,45,41.5,45z" />
+                                                            </g>
+                                                            <polygon style="fill:#CEC9AE;" points="37.5,0 37.5,14 51.5,14 " />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="info">
+                                                        <span class="name">{{t?.name}}</span>
+                                                        <span class="size">{{ formatBytes(t?.size)}}</span>
+                                                        <app-upload-progress [progress]="t?.progress"></app-upload-progress>
+                                                    </div>
+                                                    <div class="delete" (click)="deleteFile('rac',i)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
+                                                            <path fill="#B1B1B1" fill-rule="nonzero"
+                                                                d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                                                        </svg>
+                                                    </div>
+                                               </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wizard-action mt-4">
+                <div class="left-action">
+                    <button class="btn btn-primary" [hidden]="activeTabIndex == 0" (click)="MovePrev()"><i class="fa fa-chevron-left me-2"></i>Previous</button>
+                </div>
+                <div class="right-action">
+                    <button class="btn btn-primary" [hidden]="activeTabIndex !== 6" (click)="PayNow()" >Proceed to Payment</button>
+                    <button class="btn btn-primary" [hidden]="activeTabIndex !== 6" (click)="SubmitApplication()">Submit and Pay Later</button>
+                    <button class="btn btn-primary" [hidden]="activeTabIndex > 5" (click)="MoveNext()">Proceed<i class="fa fa-chevron-right ms-2"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

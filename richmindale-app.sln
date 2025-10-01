@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "richmindale-app.Server", "richmindale-app.Server\richmindale-app.Server.csproj", "{0C622A9F-9C17-4ACF-8CF8-328562B575F8}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "richmindale-app.client", "richmindale-app.client\richmindale-app.client.esproj", "{2DED0211-7103-46FD-90C8-1404B1247B52}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C622A9F-9C17-4ACF-8CF8-328562B575F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C622A9F-9C17-4ACF-8CF8-328562B575F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C622A9F-9C17-4ACF-8CF8-328562B575F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C622A9F-9C17-4ACF-8CF8-328562B575F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DED0211-7103-46FD-90C8-1404B1247B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DED0211-7103-46FD-90C8-1404B1247B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DED0211-7103-46FD-90C8-1404B1247B52}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2DED0211-7103-46FD-90C8-1404B1247B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DED0211-7103-46FD-90C8-1404B1247B52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DED0211-7103-46FD-90C8-1404B1247B52}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FD6A352-680C-4387-898A-9F9FAF8D46A4}
+	EndGlobalSection
+EndGlobal

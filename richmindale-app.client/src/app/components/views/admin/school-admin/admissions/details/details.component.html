@@ -1,0 +1,369 @@
+<div class="page-title">
+    <div class="title-icon me-4">
+        <i class="fa fa-ticket me-2"></i>
+    </div>
+    <div class="title">
+        <h1>Admission Application Details </h1>
+        <span></span>
+    </div>
+
+</div>
+<div class="content-section">
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Application No.: {{dtl.ApplicationRefNo}}</span>
+           
+        </div>
+        <div class="card-body">
+            <div class="horizontal-container">
+                <div class="vertical-tab-pager">
+                    <qr-code [value]="dtl.ApplicationRefNo"></qr-code>
+                    <span>{{dtl.ApplicationRefNo}}</span>
+                    <hr>
+                    <ul class="nav justify-content-left" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#tab01">Program
+                                Details</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#tab02">Student
+                                Details</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#tab03">Previous
+                                School</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#tab04">Documents</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#tab05">Enrollment Agreement</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-container">
+                    <div class="tab-content">
+                        <!-- Program Details -->
+                        <div id="tab01" class="tab-pane fade show active" role="tabpanel">
+                            <span class="tab-title">Program Details</span>
+                            <hr>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Program Category</label>
+                                        <select class="form-control" [(ngModel)]="dtl.ProgramCategoryId"
+                                            (change)="CategoryChanged()">
+                                            <option *ngFor="let c of categories" [value]="c.value">{{c.text}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Program</label>
+                                        <select class="form-control" [(ngModel)]="dtl.ProgramId">
+                                            <option value="0">Select</option>
+                                            <option *ngFor="let p of programs" [value]="p.value">{{p.text}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Country</label>
+                                        <select class="form-control" [(ngModel)]="dtl.CountryId"
+                                            (change)="CountryChanged('program')">
+                                            <option *ngFor="let c of countries" [value]="c.value">{{c.code}} {{c.text}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Campus</label>
+                                        <select class="form-control" [(ngModel)]="dtl.LrnCampusId">
+                                            <option value="0"  selected >Select</option>
+                                            <option *ngFor="let c of campuses" [value]="c.value"
+                                                [selected]="dtl.LrnCampusId">{{c.text}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Term</label>
+                                        <select class="form-control" [(ngModel)]="dtl.TermId">
+                                            <option value="0" selected>Term</option>
+                                            <option *ngFor="let t of terms" [value]="t.value">{{t.text}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Learning Method</label>
+                                        <select class="form-control" [(ngModel)]="dtl.LearningMethodsId">
+                                            <option value="0" selected>Select</option>
+                                            <option *ngFor="let l of methods" [value]="l.value">{{l.text}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-3">
+                                    
+                                    <div class="col-sm-12 form-group" [ngClass]="{'col-lg-4': dtl.ApplyDiscount, 'col-lg-6': !dtl.ApplyDiscount}">
+                                        <label class="form-label">Credit Transfer </label>
+                                        <div class="form-check form-switch">
+                                            <input type="checkbox" [(ngModel)]="dtl.CreditTransfer" role="switch"
+                                                class="form-check-input">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 form-group" [ngClass]="{'col-lg-4': dtl.ApplyDiscount, 'col-lg-6': !dtl.ApplyDiscount}">
+                                        <label class="form-label">Apply Discount</label>
+                                        <div class="form-check form-switch">
+                                            <input type="checkbox" [(ngModel)]="dtl.ApplyDiscount" role="switch"
+                                                class="form-check-input">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 form-group" [hidden]="!dtl.ApplyDiscount">
+                                        <label class="form-label">Discount Code</label>
+                                        <input type="text" [(ngModel)]="dtl.DiscountCode" class="form-control">
+                                    </div>
+                                    
+                                   
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                        <!-- Student Details -->
+                        <div id="tab02" class="tab-pane fade" role="tabpanel">
+                            <span class="tab-title">Student Details</span>
+                            <hr>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Given Name</label>
+                                        <input type="text" [(ngModel)]="dtl.StudentGivenName" placeholder="Given Name"
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Middle Name</label>
+                                        <input type="text" [(ngModel)]="dtl.StudentMiddleName" placeholder="Middle Name"
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Lastname</label>
+                                        <input type="text" [(ngModel)]="dtl.StudentLastname" placeholder="Lastname"
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Maiden Name</label>
+                                        <input type="text" [(ngModel)]="dtl.StudentMaidenName" placeholder="Maiden Name"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-2 col-sm-12 form-group">
+                                        <label class="form-label">Date of Birth</label>
+                                        <input type="date" class="form-control" [(ngModel)]="dtl.StudentBirthDate"
+                                            placeholder="Date Of Birth">
+                                    </div>
+                                    <div class="col-lg-2 col-sm-12 form-group">
+                                        <label class="form-label">Gender</label>
+                                        <select class="form-control" [(ngModel)]="dtl.StudentGender">
+                                            <option value="1">Male</option>
+                                            <option value="2">Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-12 form-group">
+                                        <label class="form-label">Marital Status</label>
+                                        <select class="form-control" [(ngModel)]="dtl.StudentMaritalStatus">
+                                            <option *ngFor="let m of marital" [value]="m.value">{{m.text}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Nationality</label>
+                                        <select class="form-control" [(ngModel)]="dtl.StudentNationality">
+                                            <option *ngFor="let n of nationality" [value]="n.value">{{n.code}} {{n.text}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Religion</label>
+                                        <select class="form-control" [(ngModel)]="dtl.StudentReligion">
+                                            <option *ngFor="let n of religions" [value]="n.value">{{n.text}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Country</label>
+                                        <select class="form-control" [(ngModel)]="dtl.StudentCountry"
+                                            (change)="CountryChanged('student')">
+                                            <option *ngFor="let c of aCountries" [value]="c.value">{{c.code}} {{c.text}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">State</label>
+                                        <select class="form-control" [(ngModel)]="dtl.StudentState"
+                                            (change)="StateChanged('student')">
+                                            <option *ngFor="let c of sStates" [value]="c.value">{{c.text}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">City</label>
+                                        <select class="form-control" [(ngModel)]="dtl.StudentCity">
+                                            <option *ngFor="let c of sCities" [value]="c.value">{{c.text}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group">
+                                        <label class="form-label">Zip Code</label>
+                                        <input type="text" class="form-control" [(ngModel)]="dtl.StudentZipCode"
+                                            placeholder="Zip Code">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 form-group">
+                                        <label class="form-label">Address</label>
+                                        <textarea rows="2" class="form-control"
+                                            [(ngModel)]="dtl.StudentAddress"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Primary Email</label>
+                                        <input type="email" [(ngModel)]="dtl.StudentEmail1" class="form-control"
+                                            placeholder="Email Addess">
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Primary Phone</label>
+                                        <div class="input-group">
+                                            <select [(ngModel)]="dtl.StudentPhoneCode1">
+                                                <option *ngFor="let c of phoneCodes" [value]="c.value">{{c.code}} {{c.text}}
+                                                </option>
+                                            </select>
+                                            <input type="text" class="form-control" [(ngModel)]="dtl.StudentPhone1" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Secondary Email</label>
+                                        <input type="email" [(ngModel)]="dtl.StudentEmail2" class="form-control"
+                                            placeholder="Email Addess">
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Secondary Phone</label>
+                                        <div class="input-group">
+                                            <select [(ngModel)]="dtl.StudentPhoneCode2">
+                                                <option *ngFor="let c of phoneCodes" [value]="c.value">{{c.code}} {{c.text}}
+                                                </option>
+                                            </select>
+                                            <input type="text" class="form-control" [(ngModel)]="dtl.StudentPhone2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Previous School-->
+                        <div id="tab03" class="tab-pane fade" role="tabpanel">
+                            <span class="tab-title">Previous School</span>
+                            <hr>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 form-group">
+                                        <label class="form-label">School Name</label>
+                                        <input type="text" [(ngModel)]="dtl.SchoolName" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-3 col-sm-12 form-group" [ngClass]="{'col-lg-6': dtl.SchoolProgram != 25}" >
+                                        <label class="form-label">Qualifications</label>
+                                        <select class="form-control" [(ngModel)]="dtl.Qualifications">
+                                            <option *ngFor="let q of qualifications" [value]="q.value">{{q.text}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 form-group" [ngClass]="{'col-lg-6': dtl.SchoolProgram != 25}" >
+                                        <label class="form-label">Programs</label>
+                                        <select class="form-control" [(ngModel)]="dtl.SchoolProgram">
+                                            <option *ngFor="let p of prevPrograms" [value]="p.value">{{p.text}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 form-group" [hidden]="dtl.SchoolProgram != 25">
+                                        <label class="form-label">Other Program</label>
+                                        <input type="text" class="form-control" [(ngModel)]="dtl.SchoolOtherProgram" placeholder="Other Programs">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" [(ngModel)]="dtl.SchoolEmail">
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Country</label>
+                                         <select class="form-control" [(ngModel)]="dtl.SchoolCountry">
+                                            <option *ngFor="let c of aCountries" [value]="c.value">{{c.code}} {{c.text}}</option>
+                                         </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 form-group">
+                                        <label class="form-label">Address</label>
+                                        <textarea rows="3" class="form-control" [(ngModel)]="dtl.SchoolAddress"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Contact Person</label>
+                                        <input type="text" [(ngModel)]="dtl.SchoolContact" class="form-control" placeholder="Contact Person">
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Contact Person Designation</label>
+                                        <input type="text" [(ngModel)]="dtl.SchoolContactDesignation" class="form-control" placeholder="Contact Designation">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Contact Person Email</label>
+                                        <input type="text" [(ngModel)]="dtl.SchoolContactEmail" class="form-control" placeholder="Contact Person Email">
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 form-group">
+                                        <label class="form-label">Contact Number</label>
+                                        <input type="text" [(ngModel)]="dtl.SchoolContactNumber" class="form-control" placeholder="Contact Number">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Supporting Documents -->
+                         <div id="tab04" class="tab-pane fade" role="tabpanel">
+                            <span class="tab-title">Supporting Documents</span>
+                            <hr>
+                            <div class="container-fluid">
+                                <div class="row mt-3">
+                                    <div class="col-12 form-group">
+                                        <table class="table table-hover table-striped table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Document Type</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+
+                        <!-- Enrollment Agreement -->
+                         <div id="tab05" class="tab-pane fade" role="tabpanel">
+                            <span class="tab-title">Enrollment Agreement</span>
+                            
+                            <hr>
+                            <ng-template #agreementContainer></ng-template>
+                            
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

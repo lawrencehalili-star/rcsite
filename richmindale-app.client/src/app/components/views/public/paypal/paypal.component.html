@@ -1,0 +1,19 @@
+<div class="payment-wrapper">
+    <h2>Online Payment Form</h2>
+    <div class="form-container">
+        <div class="paypal-form">
+            <label class="form-label mt-3">Email</label>
+            <input type="email" [(ngModel)]="email" class="form-control text-center" placeholder="Email Address">
+            <label class="form-label mt-3">Fullname</label>
+            <input type="email" [(ngModel)]="name" class="form-control text-center" placeholder="Fullname">
+            <label class="form-label mt-3">Payment for</label>
+            <input type="text" [(ngModel)]="transaction" class="form-control text-center" placeholder="Payment for">
+            <label class="form-label mt-3">Amount in USD</label>
+            <input type="text" [(ngModel)]="admissionFee" (blur)="onAmountChange()"
+                class="form-control text-center mb-4" placeholder="0.00">
+        </div>
+        <div class="paypal">
+            <ngx-paypal [config]="paypalConfig" [hidden]="!admissionFee || (!email && !name)"></ngx-paypal>
+        </div>
+    </div>
+</div>

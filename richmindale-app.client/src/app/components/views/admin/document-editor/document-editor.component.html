@@ -1,0 +1,57 @@
+
+<div class="page-title">
+    <div class="title-icon me-4">
+        <i class="fa-solid fa-certificate me-2"></i>
+    </div>
+    <div class="title">
+        <h1>Document Requests</h1>
+        <span>List of Document Requests</span>
+    </div>
+</div>
+<div class="content-section">
+    <div class="card">
+        <div class="card-header">
+            <div class="filter-header">
+                <div class="search-filter">
+                    <label class="form-label mt-2">Search :</label>
+                    <input type="text" [(ngModel)]="filter.Search" (input)="SearchChanged()" >
+                </div>
+                <div class="page-filter">
+                    <label class="form-label mt-2 me-2">Size :</label>
+                    <select [(ngModel)]="filter.PageSize" (change)="PageSizeChanged()">
+                        <option value="10" selected>10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <label class="form-label mt-2 me-2 ms-4">Sort by :</label>
+                    <select [(ngModel)]="filter.SortName" (change)="SortNameChanged()">
+                       
+                    </select>
+                    <select class="ms-2" [(ngModel)]="filter.SortDirection" (change)="SortDirectionChanged()">
+                        <option value="ASC" selected>Ascending</option>
+                        <option value="DESC">Descending</option>
+                    </select>
+                    <button class="btn btn-primary ms-2" (click)="NavigateEdit('00000000-0000-0000-0000-000000000000')">Create New Document</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-placeholder">
+                <table class="table table-hover tabler-borderless table-stripe table-reponsive">
+                    <thead>
+                        <tr>
+                            <th>Document Name</th>
+                            <th>Type</th>
+                            <th>Version</th>
+                            <th>Created By</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</div>

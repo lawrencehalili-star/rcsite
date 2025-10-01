@@ -1,0 +1,366 @@
+<div class="public-wrapper">
+  <div class="nav-body">
+    <div class="page-container">
+      <!-- nav bar for 1130px bellow -->
+      <div class="grid-2">
+        <ul class="nav-body-content" [class.hidden]="isMenuOpen">
+          <li>
+            <a href="admissions/index.htm">Admissions</a>
+          </li>
+          <li class="nav-body-toggle-p">
+            <a href="academics/index.htm">Academics</a>
+          </li>
+          <li class="nav-body-toggle">
+            <a href="admissions/catalog.htm">Catalog</a>
+          </li>
+          <li>
+            <a href="services/index.htm">Services</a>
+          </li>
+          <li>
+            <a href="payment">Payments</a>
+          </li>
+          <li class="nav-body-toggle">
+            <a href="contact.htm">Contact Us</a>
+          </li>
+          <li class="nav-body-toggle-p">
+            <a href="faq.htm">FAQ</a>
+          </li>
+        </ul>
+        <div *ngIf="!isMenuOpen">
+          <a (click)="toggleMenu()">
+            <i class="fa-solid fa-ellipsis-vertical" title="Menu"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- dropdown menu -->
+
+      <div class="nav-container-dd" [class.active]="isMenuOpen" id="menu">
+      
+        <div class="page-container">
+          <div class="item-icon-2a right">
+            <i
+              class="fa fa-window-close cursor-hand"
+              title="Close Menu"
+              (click)="toggleMenu()"
+            ></i>
+          </div>
+
+          <div class="nav-dd">
+            <div class="nav-dd-col">
+              <div class="nav-dd-item"><a routerLink="/">Home</a></div>
+              <div class="nav-dd-item">
+                <a routerLink="/admissions">Admissions</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="rims/enrollment">Enrollment</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="/academics">Academics</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="/admissions/catalog">Catalog</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="/media">Media &amp; Events</a>
+              </div>
+              <div class="nav-dd-item"><a routerLink="/about">About Us</a></div>
+              <div class="nav-dd-item">
+                <a routerLink="/contact">Contact Us</a>
+              </div>
+              <div class="nav-dd-item"><a routerLink="/faq">FAQ</a></div>
+            </div>
+
+            <div class="nav-dd-col">
+              <div class="nav-dd-item">
+                <a routerLink="/rims/login">Student Login</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="/announcement">Announcements</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="/library">Library</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="/payment">Payments</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="/services">Services</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="/research">Research</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="/policies">Policies</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="/media">Alumni Events</a>
+              </div>
+              <div class="nav-dd-item">
+                <a routerLink="/jobsearch">Job Search</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of dropdown menu -->
+    </div>
+  </div>
+  <div class="header-wrapper">
+    <!-- start header -->
+    <div class="header-container">
+      <div class="page-container">
+        <div class="main-header">
+          <div class="org">
+            <div class="logo-container">
+              <a href="index.htm"
+                ><img
+                  src="img/richmindale100px.webp"
+                  alt="richmindale logo"
+                  class="logo"
+              /></a>
+            </div>
+            <div class="org-name">Richmindale College</div>
+          </div>
+
+          <div class="top-nav">
+            <a href="rims/login">
+              <div><i class="fa fa-user"></i></div>
+              <div>Student Login</div>
+            </a>
+            <a href="announcement.htm">
+              <div><i class="fa fa-bullhorn"></i></div>
+              <div>Announcements</div>
+            </a>
+
+            <a href="payment">
+              <div><i class="fa fa-credit-card"></i></div>
+              <div>Payments</div>
+            </a>
+            <a href="/enrollment">
+              <div><i class="fa fa-check-square"></i></div>
+              <div>Verifyy</div>
+            </a>
+          </div>
+
+          <div class="top-nav-menu-icon right">
+            <a href="rims/login"
+              ><i class="fa fa-user" title="User Login"></i
+            ></a>
+            <a href="announcement.htm" class="nav-body-toggle-p"
+              ><i class="fa fa-bullhorn" title="Announcements"></i
+            ></a>
+            <a href="payment" class="nav-body-toggle-p"
+              ><i class="fa fa-credit-card" title="Payments"></i
+            ></a>
+            <a href="/enrollment" class="nav-body-toggle-p"
+              ><i class="fa fa-check-square" title="Verify"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of 1st header -->
+
+    <!-- start of 2nd header -->
+    <div class="nav-container">
+      <div class="page-container">
+        <ul class="nav">
+          <li><a href="index.htm">Home</a></li>
+          <li><a href="admissions/index.htm">Admissions</a></li>
+          <li><a href="academics/index.htm">Academics</a></li>
+          <li><a href="admissions/catalog.htm">Catalog</a></li>
+          <li><a href="policies/index.htm">Policies</a></li>
+          <li><a href="services/index.htm">Services</a></li>
+          <li><a href="media/index.htm">Media &amp; Events</a></li>
+          <li><a href="contact">Contact Us</a></li>
+          <li><a href="alumni/index.htm">Alumni</a></li>
+          <li><a href="jobsearch.htm">Job Search</a></li>
+          <li><a href="faq.htm">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- footer -->
+  <div class="footer">
+    <div class="page-container">
+      <div class="footer-container">
+        <div class="grid-2 gap-30x30">
+          <div class="footer-section">
+            <div class="footer-title">
+              <a href="index.htm">RICHMINDALE COLLEGE LLC</a>
+            </div>
+            <div class="footer-line"><a href="contact">Contact Us</a></div>
+            <div class="footer-line">
+              <div class="grid-bullet-2">
+                <div style="margin-left: 2px">
+                  <span class="fas fa-map-marker-alt"></span>
+                </div>
+                <div>
+                  &nbsp; 185 N. Apache Trail, Suite 1, Apache Junction<br />
+                  &nbsp; Arizona 85120, United States of America
+                </div>
+              </div>
+            </div>
+            <div class="footer-line">
+              <a href="mailto:info@richmindale.com">
+                <span class="grid-bullet-2">
+                  <div><span class="fa fa-envelope"></span></div>
+                  <div class="left">&nbsp; info&#64;richmindale.com</div>
+                </span>
+              </a>
+            </div>
+            <div class="footer-line">
+              <div class="grid-bullet-2">
+                <div><span class="fas fa-phone"></span></div>
+                <div>&nbsp; Phone: +1 (928) 499-3936 / +1 (602) 881-4176</div>
+              </div>
+            </div>
+            <div class="footer-line">&nbsp;</div>
+            <div class="footer-line">Richmindale&reg;</div>
+            <div class="footer-line">Home of the rich minds.</div>
+            <div class="footer-line">
+              Richmindale College LLC. All rights reserved.
+            </div>
+          </div>
+
+          <div class="soc-med">
+            <a
+              href="https://www.facebook.com/richmindale.us"
+              title="www.facebook.com/richmindale.us"
+              ><span class="fab fa-facebook"></span
+            ></a>
+            <!-- a href="https://www.youtube.com/richmindale.us" title="www.youtube.com/richmindale.us"><span class="fa fa-youtube-square"></span></a -->
+          </div>
+        </div>
+
+        <div class="grid-2 gap-30x30">
+          <div class="footer-section">
+            <div class="footer-title">QUICK ACCESS LINKS</div>
+            <div class="footer-line">
+              <a href="academics/programs/index.htm">View Degree Programs</a>
+            </div>
+            <div class="footer-line">
+              <a href="academics/courses/index.htm">View Courses</a>
+            </div>
+            <div class="footer-line">
+              <a href="admissions/catalog.htm">View Catalog</a>
+            </div>
+            <div class="footer-line">
+              <a href="rims/admissions">Apply for Admission</a>
+            </div>
+            <div class="footer-line">
+              <a href="/enrollment">Enroll in Courses</a>
+            </div>
+            <div class="footer-line">
+              <a href="https://moodle.richmindale.com"
+                >Participate in Classes</a
+              >
+            </div>
+            <div class="footer-line">
+              <a href="policies/registrar/cancellation.htm"
+                >Cancel &amp; Refund</a
+              >
+            </div>
+          </div>
+          <div class="footer-section">
+            <div class="footer-title">COMMON SERVICES</div>
+            <div class="footer-line">
+              <a href="students/orientation.htm">View Orientation Materials</a>
+            </div>
+            <div class="footer-line">
+              <a href="rims/services/graduation">Apply for Graduation</a>
+            </div>
+            <div class="footer-line">
+              <a href="rims/services/transcript">Request for Transcripts</a>
+            </div>
+            <div class="footer-line">
+              <a href="rims/services/documents">Request for Documents</a>
+            </div>
+            <div class="footer-line">
+              <a href="rims/services/bankpayment">Request for Bank Details</a>
+            </div>
+            <div class="footer-line">
+              <a href="rims/login">Transfer Credits</a>
+            </div>
+            <div class="footer-line">
+              <a href="rims/grievance">Raise Complaints/Grievance</a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <div class="footer-title">EXPLORE RICHMINDALE</div>
+            <div class="footer-line"><a href="index.htm">Home</a></div>
+            <div class="footer-line">
+              <a href="admissions/index.htm">Admissions</a>
+            </div>
+            <div class="footer-line">
+              <a href="/enrollment">Enrollment</a>
+            </div>
+            <div class="footer-line">
+              <a href="academics/index.htm">Academics</a>
+            </div>
+            <div class="footer-line">
+              <a href="admissions/catalog.htm">Catalog</a>
+            </div>
+            <div class="footer-line">
+              <a href="media/index.htm">Media &amp; Events</a>
+            </div>
+            <div class="footer-line"><a href="about.htm">About Us</a></div>
+            <div class="footer-line"><a href="contact">Contact Us</a></div>
+            <div class="footer-line"><a href="faq.htm">FAQ</a></div>
+          </div>
+
+          <div class="footer-section">
+            <div class="footer-title">JOIN RICHMINDALE</div>
+            <div class="footer-line">
+              <a href="announcement.htm">Announcements</a>
+            </div>
+            <div class="footer-line">
+              <a href="rims/login">Student Login</a>
+            </div>
+            <div class="footer-line">
+              <a href="library/index.htm">Library</a>
+            </div>
+            <div class="footer-line"><a href="payment">Payments</a></div>
+            <div class="footer-line">
+              <a href="services/index.htm">Services</a>
+            </div>
+            <div class="footer-line">
+              <a href="research/index.htm">Research</a>
+            </div>
+            <div class="footer-line">
+              <a href="policies/index.htm">Policies</a>
+            </div>
+            <div class="footer-line">
+              <a href="alumni/index.htm">Alumni Events</a>
+            </div>
+            <div class="footer-line">
+              <a href="jobsearch.htm">Job Search</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fixed footer -->
+    <div class="footer-container-fixed">
+      <div class="page-container">
+        <div class="footer-wrapper">
+          <div class="footer-nav nowrap">
+            <a href="terms.htm" class="nowrap">Terms of Use</a>
+            <span class="sep">|</span>
+            <a href="privacy.htm" class="nowrap">Privacy Policy</a>
+          </div>
+          <div class="footer-copyright">
+            Copyright 2025 Richmindale College LLC
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

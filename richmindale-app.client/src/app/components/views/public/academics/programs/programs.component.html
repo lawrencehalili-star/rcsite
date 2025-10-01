@@ -1,0 +1,29 @@
+<div class="academics-wrapper">
+    <div class="page-banners">
+        <div class="page-title-container">
+            <h1 class="page-title">Academic Programs</h1>
+        </div>
+        
+    </div>
+    <div class="sitemap-placeholder">
+        <a href="/" class="me-2">Home</a><i class="fa-solid fa-chevron-right me-2"></i><a href="/academics" class="me-2">Academics</a><i class="fa-solid fa-chevron-right me-2"></i><a href="/academics/programs">Programs</a>
+    </div>
+
+    <div class="page-content-container">
+        <div class="card-2x card-programs mb-3" *ngFor="let p of programs" (click)="ViewProgramDetails(p.ProgramId)">
+            <div class="icons">
+                <input type="hidden" [(ngModel)]="p.ProgramId">
+                <img src="img/courses.gif" alt="">
+            </div>
+            <div class="details">
+                <span>{{p.ProgramCode}}, rev. {{p.Revision}}.00</span>
+                <span><strong>{{p.ProgramTitle}}</strong></span>
+                <span>Estimated Total Cost ${{p.EstimatedCost}}.00</span>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+</div>

@@ -1,0 +1,37 @@
+<div class="login-wrapper student">
+    
+    <div class="login-container">
+        <h1>Student Portal Login</h1>
+        <div class="form-container">
+            <label class="form-label" [hidden]="isOTP">Student Number *</label>
+            <div class="input-group" [hidden]="isOTP">
+                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                <input type="text" [(ngModel)]="username" class="form-control" placeholder="Student Number">
+            </div>
+            <div class="action-container mt-3 mb-3" [hidden]="isOTP">
+                <button type="button" class="btn btn-primary" [disabled]="!username" (click)="VerifyEmail($event)">Login</button>
+                <button type="button" class="btn btn-primary" [disabled]="!username"  (click)="CancelLogin()">Cancel</button>
+            </div>
+            <div  class="spacer mt-3 mb-3" [hidden]="isOTP">
+                <span >or</span>
+            </div>
+            <div class="action-container mt-3 " [hidden]="isOTP">
+                <a href="https://moodle.richmindale.com" class="btn btn-primary form-control">Login to LMS</a>
+            </div>
+            <p [hidden]="!isOTP">An OTP key was sent to your registered Email Address<br/>
+               to access Student Portal.</p>
+            <label class="form-label"[hidden]="!isOTP">Enter OTP *</label>
+            <div class="input-group"[hidden]="!isOTP">
+                <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                <input type="password" [(ngModel)]="passkey" class="form-control" placeholder="Passcode">
+            </div>
+            <div class="action-container mt-3"[hidden]="!isOTP">
+                <button type="button" class="btn btn-primary form-control" [disabled]="!passkey" (click)="ValidatePasskey()">Validate OTP</button>
+            </div>
+            
+        </div>
+        <div class="login-description">
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="page-title">
+    <div class="title-icon me-4">
+        <i class="fa-solid fa-user-injured me-2"></i>
+    </div>
+    <div class="title">
+        <h1>Leave of Absence</h1>
+        <span>Student's List of Absences</span>
+    </div>
+    
+</div>
+<div class="content-section">
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">List of Absences</span>
+            <div class="card-action">
+                <button class="btn btn-primary" (click)="ShowModal(modalLOA, 0)">Create LOA Request</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-placeholder">
+                <table class="table table-hover table-stripe table-borderless table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+               
+           
+        </div>
+    </div>
+</div>
+
+<ng-template #modalLOA>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">LOA Request Form</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+           <div class="row">
+                <div class="col-lg-6 col-sm-12 form-group">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="col-lg-6 col-sm-12 form-group">
+                    <label class="form-label">End Date</label>
+                    <input type="date" class="form-control">
+                </div>
+           </div>
+           <div class="row mt-3">
+                <div class="col-12 form-group">
+                    <label class="form-label">Reason/Details:</label>
+                    <textarea class="form-control" placeholder="Reason / Details"></textarea>
+                </div>
+           </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary"  (click)="SubmitRequest()">Submit</button>
+        <button class="btn btn-danger" (click)="modalRef?.hide()">Cancel</button>
+    </div>
+</ng-template>

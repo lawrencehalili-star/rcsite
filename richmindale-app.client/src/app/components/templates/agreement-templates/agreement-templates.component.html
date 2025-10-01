@@ -1,0 +1,1337 @@
+<div class="print-container">
+    <button class="btn btn-primary" (click)="Print()"><i class="fa fa-print me-2"></i>PRINT</button>
+</div>
+
+<div id="agreement" class="printable-agreement" ngxPrintItemMarker directPrint=”true”>
+    <div class="card">
+        <div class="card-header">
+            <div class="agreement-header">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td rowspan="4" width="70%">
+                                <div class="org-container">
+                                    <div class="logo-container">
+                                        <img src="img/richmindale100px.webp" alt="Richmindale Official Logo">
+                                    </div>
+                                    <div class="org-details">
+                                        <span class="org-name">Richmindale College</span>
+                                        <span class="address mt-2">185 N. Apache Trail, Suite 1, Apache Junction,
+                                            Arizona
+                                            85120, USA</span>
+                                        <span class="address mt-2">www.richmindale.com | info&#64;richmindale.com</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td width="15%">Document Number</td>
+                            <td width="15%" class="tbl-value">ADM-5020-{{dtl.ProgramCode}}</td>
+                        </tr>
+                        <tr>
+                            <td>Revision Number</td>
+                            <td class="tbl-value">1024</td>
+                        </tr>
+                        <tr>
+                            <td>Revision Date</td>
+                            <td class="tbl-value">01-Oct-2024</td>
+                        </tr>
+                        <tr>
+                            <td>Next Review Date</td>
+                            <td class="tbl-value">01-Aug-2025</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="document-title">
+                                {{ dtl.ProgramCode }} Student Enrollment Agreement
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="agreement-container">
+                <!-- From Page 01 -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="4" class="text-left">For official use only</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="td-field">Admission Reference ID</td>
+                            <td><strong>{{dtl.ApplicationRefNo}}</strong></td>
+                            <td class="td-field" rowspan="2">Student Id</td>
+                            <td rowspan="2">{{dtl.StudentCode}}</td>
+                        </tr>
+                        <tr>
+                            <td class="td-field">Admission Date</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td class="td-field">Admission Representative</td>
+                            <td></td>
+                            <td class="td-field">Academic Adviser</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="td-field">General Notes</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" rowspan="4">
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <span class="subtitles mt-3">IMPORTANT NOTICE!</span>
+                <p class="mt-2">
+                    Before signing this enrollment agreement, review our catalog and make sure that you agree to the
+                    policies, terms, and conditions in the catalog. If you have questions, do not hesitate to contact us
+                    on
+                    the following:
+                </p>
+                <p class="mt-2 text-center indented">
+                    Website: <a href="www.richmindale.com/contact">www.richmindale.com/contact</a> ; Email:
+                    info&#64;richmindale.com ; Phone: +1 (928) 499-3936; +1 (602) 881-4176
+                </p>
+                <p class="mt-2">
+                    Ensure that all pages of this agreement are signed. The student and/or student parent or guardian
+                    can
+                    use ink or digital signature to sign all pages of this document. Once signed, submit this agreement
+                    to
+                    Richmindale College through email at <a
+                        href="mailto:admissions@richmindale.com">admissions&#64;richmindale.com</a> using the student’s
+                    email address that is registered in this agreement.
+                </p>
+
+                <span class="titles mt-3">TABLE OF CONTENTS</span>
+                <div class="table-contents">
+                    <div class="page-contents mt-2">
+                        <span class="page-name">I. STUDENT INFORMATION</span>
+                        <div class="spacer"></div>
+                        <span class="page-no">2</span>
+                    </div>
+                    <div class="page-contents">
+                        <span class="page-name">II. PROGRAM INFORMATION</span>
+                        <div class="spacer"></div>
+                        <span class="page-no">2</span>
+                    </div>
+                    <div class="page-contents">
+                        <span class="page-name">III. COURSES</span>
+                        <div class="spacer"></div>
+                        <span class="page-no">2</span>
+                    </div>
+                    <div class="page-contents">
+                        <span class="page-name">IV. TUITION AND FEES</span>
+                        <div class="spacer"></div>
+                        <span class="page-no">4</span>
+                    </div>
+                    <div class="page-contents">
+                        <span class="page-name">V. PAYMENT AND FINANCING OPTIONS</span>
+                        <div class="spacer"></div>
+                        <span class="page-no">5</span>
+                    </div>
+                    <div class="page-contents">
+                        <span class="page-name">VI. NOTICE: HOLDER IN DUE COURSE</span>
+                        <div class="spacer"></div>
+                        <span class="page-no">7</span>
+                    </div>
+                    <div class="page-contents">
+                        <span class="page-name">VII. CANCELLATION, WITHDRAWALS AND REFUND POLICY</span>
+                        <div class="spacer"></div>
+                        <span class="page-no">7</span>
+                    </div>
+                    <div class="page-contents">
+                        <span class="page-name">VIII. GOVERNING LAW; FORUM</span>
+                        <div class="spacer"></div>
+                        <span class="page-no">13</span>
+                    </div>
+                    <div class="page-contents">
+                        <span class="page-name">IX. DISCLAIMER</span>
+                        <div class="spacer"></div>
+                        <span class="page-no">13</span>
+                    </div>
+                    <div class="page-contents">
+                        <span class="page-name">X. STUDENT ACKNOWLEDGEMENT</span>
+                        <div class="spacer"></div>
+                        <span class="page-no">14</span>
+                    </div>
+                    <div class="page-contents">
+                        <span class="page-name">XI. ACCEPTANCE</span>
+                        <div class="spacer"></div>
+                        <span class="page-no">15</span>
+                    </div>
+                </div>
+                <div class="footer-spacer"></div>
+               
+
+                <!-- From Page 02 -->
+                <div class="header-spacer"></div>
+                <span class="titles mt-5">I. STUDENT INFORMATION</span>
+                <table class="table table-bordered mt-2">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">1. Student Last Name</span>
+                                    <span class="info-value mt-2">{{dtl.StudentLastname}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">2. Student Given Name</span>
+                                    <span class="info-value mt-2">{{dtl.StudentGivenName}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">3. Student Middle Name</span>
+                                    <span class="info-value mt-2">{{dtl.StudentMiddleName}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">
+                                <div class="infos">
+                                    <span class="info-fld">4. Address Details</span>
+                                    <span class="info-value mt-2">{{dtl.StudentAddress}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">5. Address City</span>
+                                    <span class="info-value mt-2">{{dtl.StudentCityName}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">6. Address State, ZIP Code</span>
+                                    <span class="info-value mt-2">{{dtl.StudentStateName}},
+                                        {{dtl.StudentZipCode}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">7. Address Country</span>
+                                    <span class="info-value mt-2">{{dtl.StudentCountryName}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">8. Country of Nationality</span>
+                                    <span class="info-value mt-2">{{dtl.StudentNationalityName}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">9.Email Address</span>
+                                    <span class="info-value mt-2">{{dtl.StudentEmail1}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">10. Phone Number (Primary)</span>
+                                    <span class="info-value mt-2">0{{dtl.StudentPhone1}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">11. Phone Number (Secondary)</span>
+                                    <span class="info-value mt-2">{{dtl.StudentPhone2}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">12. Birth Date (Month dd, yyyy)</span>
+                                    <span class="info-value mt-2">{{dtl.StudentBirthDateLong}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">13. Gender</span>
+                                    <span class="info-value mt-2">{{dtl.StudentGenderName}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">14. Religion (For demographics only)</span>
+                                    <span class="info-value mt-2">{{dtl.StudentReligionName}}</span>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <span class="titles mt-3">II. PROGRAM INFORMATION</span>
+                <table class="table table-bordered mt-3">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <div class="infos">
+                                    <span class="info-fld">15. Program Title</span>
+                                    <span class="info-value mt-2">{{dtl.ProgramTitle}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">16. Program Code</span>
+                                    <span class="info-value mt-2">{{dtl.ProgramCode}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="infos">
+                                    <span class="info-fld">17. Program Track and Specialization (If applicable)</span>
+                                    <span class="info-value mt-2"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">18. Estimated Total Cost</span>
+                                    <span class="info-value mt-2"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">19. Discount Description (If applicable)</span>
+                                    <span class="info-value mt-2">{{dtl.DiscountTypeName}}</span>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div class="infos">
+                                    <span class="info-fld">20. Student Admission/Program Notes (If applicable)</span>
+                                    <span class="info-value mt-2"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">21. Program Clock Hours</span>
+                                    <span class="info-value mt-2">N/A</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">22. Program Credit Hours</span>
+                                    <span class="info-value mt-2">120</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="infos">
+                                    <span class="info-fld">23. Commencement Date</span>
+                                    <span class="info-value mt-2"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <div class="footer-spacer"></div> -->
+               
+                
+                
+                <!-- From Page 03 -->
+                <!-- <div class="header-spacer"></div>  -->
+                <span class="titles mt-3">III. COURSES</span>
+                <p class="mt-2">
+                    The following courses with a total of 120 credit hours are required for the awarding of the
+                    <strong>{{dtl.ProgramTitle}} ({{dtl.ProgramCode}})</strong> degree. The courses below are arranged
+                    based on a logical sequence of learning contents. Students
+                    may change the sequence of courses as long as the course requisites are followed.
+                </p>
+                <div class="footer-spacer"></div>
+                <div class="header-spacer"></div>
+                <table id="tbl-courses" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Course Title</th>
+                            <th>Pre-requisite</th>
+                            <th>Credit</th>
+                        </tr>
+                    </thead>
+                    <tbody class="course-body" *ngFor="let c of courses; let i = index">
+                            <tr *ngIf="!courses[i-1] || c.Semester != courses[i-1].Semester" >
+                                <td colspan="4" class="td-field"><strong>Semester {{c.Semester}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="td-field">{{c.CourseCode}}</td>
+                                <td>{{c.CourseTitle}}</td>
+                                <td>{{c.PreRequisites}}</td>
+                                <td><strong>{{c.Credits}}.00</strong></td>
+                            </tr>
+                            <tr *ngIf="i > courses.length">
+                                <td class="td-field"></td>
+                                <td class="td-field" colspan="2"><strong>Total Credits for Program Completion</strong></td>
+                                <td class="td-field text-right"><strong>{{program.TotalCredits}}.00</strong></td>
+                            </tr>
+                       
+                    </tbody>
+                    <!-- <tfoot>
+                        <tr>
+                            <td class="td-field"></td>
+                            <td class="td-field" colspan="2"><strong>Total Credits for Program Completion</strong></td>
+                            <td class="td-field text-right"><strong>{{program.TotalCredits}}.00</strong></td>
+                        </tr>
+                    </tfoot> -->
+                </table>
+                <div class="footer-spacer"></div>
+              
+                <!-- From Page 04 -->
+                <div class="header-spacer"></div>
+                <span class="titles mt-3">IV. TUITION AND FEES</span>
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>Estimated Costs to Complete the Program</th>
+                            <th>Original Amount</th>
+                            <th>Adjusted Amount</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Tuition, for all credit units</td>
+                            <td>$ {{program.TuitionPerUnit * program.TotalCredits}}.00</td>
+                            <td>$ 3, 000.00</td>
+                            <td>{{program.TotalCredits}} credit units at $25 per unit</td>
+                        </tr>
+                        <tr>
+                            <td>Total Miscellaneous Fee, for all credit units </td>
+                            <td>{{program.MiscellaneousPerUnit * program.TotalCredits}}.00</td>
+                            <td>240</td>
+                            <td>{{program.TotalCredits}} credit units at $2 per unit</td>
+                        </tr>
+                        <tr>
+                            <td>Admission Fee</td>
+                            <td>{{program.AdmissionApplicationFee}}.00</td>
+                            <td>{{program.AdmissionApplicationFee}}.00</td>
+                            <td>1 Program</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td class="td-field"><strong>Estimated Total Program Cost</strong></td>
+                            <td class="td-field"><strong>${{program.EstimatedCost}}.00</strong></td>
+                            <td class="td-field"><strong>$3, 340.00</strong></td>
+                            <td class="td-field"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <span class="titles indented mt-3">(a) Tuition Period Covered by this Agreement</span>
+                <p class="indented mt-2">
+                    The tuition period covered by this agreement is 6 years from the Commencement Date in this
+                    agreement.
+                </p>
+                <span class="titles indented mt-3">(b) Basis of Calculation</span>
+                <p class="indented mt-2">
+                    The estimated cost to complete the program is based on the Tuition and Fees in the following table.
+                    The
+                    Registration Fee is a one-time fee for each program and is charged to the student during admission.
+                </p>
+                <table class="table table-bordered indented mt-3">
+                    <thead>
+                        <tr>
+                            <th>Fee Description</th>
+                            <th>Original Amount</th>
+                            <th>Adjusted Amount</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Admission Fee</td>
+                            <td>$ 100</td>
+                            <td>$ 100</td>
+                            <td>Each application per program</td>
+                        </tr>
+                        <tr>
+                            <td>Course Tuition</td>
+                            <td>$ 100</td>
+                            <td>$ 25</td>
+                            <td>Each credit unit</td>
+                        </tr>
+                        <tr>
+                            <td>Course Miscellaneous Fee</td>
+                            <td>$ 10</td>
+                            <td>$ 2</td>
+                            <td>Each credit unit</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span class="titles indented mt-3">(c) Tuition and Fees NOT Included in the Estimated Total Program
+                    Cost</span>
+                <p class="indented mt-2">
+                    Books and other study materials for course completion, library services, computer hardware, and
+                    software
+                    licenses and subscription (if applicable) are not provided within the tuition and fees and are not
+                    included in the
+                    calculation of the estimated total program cost. Students are required to purchase them
+                    separately.<br /><br />
+                    Furthermore, the following fees are not included in the estimated total program cost.
+                </p>
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>Additional Fees</th>
+                            <th>Amount</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Application for transfer credit evaluation fee </td>
+                            <td>$ 75</td>
+                            <td>Each application</td>
+                        </tr>
+                        <tr>
+                            <td>Software Licenses and Subscriptions</td>
+                            <td>$ 100</td>
+                            <td>Subscription per year</td>
+                        </tr>
+                        <tr>
+                            <td>Transcript/diploma copy request fee</td>
+                            <td>$ 10</td>
+                            <td>Each set; one original copy is free</td>
+                        </tr>
+                        <tr>
+                            <td>Expedited transcript/certificate service fee</td>
+                            <td>$ 10</td>
+                            <td>Each request</td>
+                        </tr>
+                        <tr>
+                            <td>Late payment/insufficient funds fee</td>
+                            <td>$ 20</td>
+                            <td>Each transaction</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="footer-spacer"></div>
+                
+
+                <!-- Page -->
+                <div class="header-spacer"></div>
+                <p class="indented mt-3">
+                    The first transcript and diploma copies are provided to each student for free and must be requested
+                    from the
+                    Richmindale College Registrar Office via its website on RIMS > Dashboard > Services > Request
+                    Transcript, or
+                    copy and paste the link <a href="https://www.richmindale.com/rims/services/transcript"
+                        target="_blank">www.richmindale.com/rims/services/transcript</a> in a web browser. Do NOT use
+                    the
+                    Parchment option to avoid being charged an additional fee
+                </p>
+                <span class="titles indented mt-3">(d) Tuition and Changes</span>
+                <p class="indented mt-2">
+                    Richmindale College guarantees the same tuition and fees for the enrolled student within the tuition
+                    period
+                    specified in item (a) of this section. After the tuition period, tuition and fees are subject to
+                    change at the discretion
+                    of Richmindale College. Any changes to the tuition and fees shall be communicated and agreed with
+                    the student. A
+                    new Enrollment Agreement with the agreed changes shall be carried out by both parties.
+                </p>
+                <span class="titles indented mt-3">(e) Discounts and Waived Fees</span>
+                <p class="indented mt-2">
+                    Student discounts and waived fees are deducted from the original fees as they apply.
+                </p>
+
+                <!-- From Page 05 -->
+                <span class="titles mt-3">V. PAYMENT AND FINANCING OPTIONS</span>
+                <p class="mt-2 ms-4">Richmindale College accepts any of the following methods of payment:</p>
+                <ul>
+                    <li><input type="checkbox" class="me-2">Cash</li>
+                    <li><input type="checkbox" class="me-2">Bank Transfers</li>
+                    <li><input type="checkbox" class="me-2">Credit Cards</li>
+                </ul>
+                <span class="titles indented mt-3">(a) Terms of Payment</span>
+                <p class="indented mt-2">
+                    Richmindale College offers an installment plan to schedule fees in monthly payments. The number of
+                    days used in
+                    the terms of payment is based on the Gregorian calendar.<br /><br />
+                    Students should pay the one-time admission fee of $100 upon admission application. If students apply
+                    for transfer
+                    of credits, they should also pay the credit transfer evaluation fee of $75, in addition to the
+                    admission fee, upon
+                    admission application.<br /><br />
+                    The total tuition and fees based on the number of credits enrolled in each semester are divided into
+                    3 payments.
+                    The first payment is due upon enrollment. The remaining 2 payments are scheduled monthly for 2
+                    months, starting
+                    from the month when the semester classes start. The due date of each remaining payment is set on the
+                    last working
+                    day of each month.<br /><br />
+                    For example, on July 1, Richmond applied for admission and got accepted on the same day. On August
+                    1, he enrolled
+                    in five 3-credit classes, a total of 15 credits for the Fall semester. The classes for the Fall
+                    semester are scheduled to
+                    start on September 8. The total amount of tuition and miscellaneous fees for the 15 credit units
+                    enrolled for the
+                    semester is $1,650. The total cost including the admission fee is $1,750 as shown in the table
+                    below.
+                </p>
+                <table class="table table-bordered mt-2">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Qty</th>
+                            <th>Units</th>
+                            <th>Total Units</th>
+                            <th>Unit Fee</th>
+                            <th>Line Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Admission Fee, one-time</td>
+                            <td>1</td>
+                            <td>-</td>
+                            <td>1</td>
+                            <td>$100</td>
+                            <td>$100</td>
+                        </tr>
+                        <tr>
+                            <td>Tuition</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>15</td>
+                            <td>100</td>
+                            <td>1,500</td>
+                        </tr>
+                        <tr>
+                            <td>Miscellaneous</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>15</td>
+                            <td>10</td>
+                            <td>150</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Total Fee for the Semester</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>$ 1,750</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="footer-spacer"></div>
+              
+
+                <!-- Page break -->
+                 <div class="header-spacer"></div>
+                <p class="indented mt-3">The payment schedule for the above semester fee example is as follows:</p>
+                <table class="table table-bordered mt-2">
+                    <thead>
+                        <tr>
+                            <th>Payment Term per Semester</th>
+                            <th>Amount</th>
+                            <th>Due Date per Semester</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Admission Fee, one-time</td>
+                            <td>$ 100</td>
+                            <td>Jul 1: Admission Application</td>
+                        </tr>
+                        <tr>
+                            <td>Payment 1 of 3</td>
+                            <td>$ 550</td>
+                            <td>Aug 1: Course Enrollment</td>
+                        </tr>
+                        <tr>
+                            <td>Payment 2 of 3</td>
+                            <td>$ 550</td>
+                            <td>Sept 30: End of the month when classes start</td>
+                        </tr>
+                        <tr>
+                            <td>Payment 3 of 3</td>
+                            <td>$ 550</td>
+                            <td>Oct 30: End of the month after Payment 2</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Total Fee for the Semester</td>
+                            <td>$ 1, 750</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <p class="indented mt-3">
+                    Students must settle all their outstanding balance to be able to enroll in courses for the next
+                    semester. Students
+                    must also pay for the first installment of each semester before the semester classes start.
+                    Richmindale reserves the
+                    right not to enroll students or not to allow students to attend classes due to missed payments based
+                    on the terms
+                    of payment specified in this agreement.
+                </p>
+                <span class="titles indented mt-3">(b) Federal Student Aid</span>
+                <p class="indented mt-2">
+                    Richmindale does not offer financial assistance. The school is not eligible for participation in the
+                    Federal Student
+                    Aid (FSA) programs and cannot process a request or assist with a deferment of a Title IV school
+                    loan.
+                </p>
+
+                <!-- Page 06 -->
+                <span class="titles mt-3">VI. NOTICE: HOLDER IN DUE COURSE</span>
+                <p class="mt-2 ms-4">
+                    ANY HOLDER OF THIS CONSUMER CREDIT CONTRACT IS SUBJECT TO ALL CLAIMS AND DEFENSES WHICH THE
+                    DEBTOR COULD ASSERT AGAINST THE SELLER OF GOODS OR SERVICES OBTAINED [PURSUANT HERETO OR] WITH
+                    THE PROCEEDS HEREOF. RECOVERY HEREUNDER BY THE DEBTOR SHALL NOT EXCEED AMOUNTS PAID BY THE
+                    DEBTOR HEREUNDER.
+                    (A.R.S. §47-3302; FTC Trade Regulation Rule, 16 C.F.R. §433)
+                </p>
+                <span class="titles mt-3">VII. CANCELLATION, WITHDRAWAL AND REFUND POLICY</span>
+                <p class="mt-2 ms-4">
+                    If for any reason a student is denied admission or chooses to withdraw from a program or a course, Richmindale College
+                    has established this cancellation, withdrawal, and refund policy for the student’s protection. A student may terminate
+                    enrollment at any time by notifying the school in writing indicating the expected last date of attendance as the
+                    cancellation or withdrawal date. The written notification of cancellation should be addressed to the Chief Academic
+                    Officer of Richmindale College, and must be signed, dated, and sent via postal mail or student’s official email using the
+                    mailing information below.
+                </p>
+                <div class="indented-info ms-4 mt-3">
+                    <span class="field">Mail To Address:</span>
+                    <div class="value">
+                        <p>
+                           Richmindale College
+                           185 N. Apache Trail, Suite 1
+                           Apache Junction, AZ 85120
+                           United States of America
+                        </p>
+                    </div>
+                </div>
+                <div class="indented-info ms-4 mt-2">
+                    <span class="field">Email To:</span>
+                    <div class="value">
+                        <p>
+                            <a href="mailto:cancel@richmindale.com">cancel&#64;richmindale.com</a>
+                        </p>
+                    </div>
+                </div>
+                <p class="mt-2 ms-4">
+                    Notification letters sent through postal mail must be mailed on or before the effective cancellation or withdrawal date
+                    mentioned in the letter. Richmindale College will use the actual mailing date as the cancellation or withdrawal date if
+                    the letter is mailed after the specified effective cancellation or withdrawal date.<br/>
+                    Any money due to a student must be refunded within 30 days of a cancellation request, regardless of whether materials
+                    have been returned.
+                </p>
+                <div class="footer-spacer"></div>
+
+                <!-- Page Break -->
+                 <div class="header-spacer"></div>
+                <span class="titles indented mt-3">(a) Non-Acceptance</span>
+                <p class="indented mt-2">
+                    An applicant denied by the school is entitled to a refund of all monies paid.
+                </p>
+                <span class="titles indented mt-3">(b) Five-Day Cancellation</span>
+                <p class="indented mt-2">
+                    A student has five (5) calendar days (excluding holidays) after signing an enrollment agreement to cancel
+                    enrollment and receive a full refund of all monies paid to Richmindale College. The refund does not include items
+                    purchased from third-party entities, such as textbooks and software licenses and subscriptions. Richmindale
+                    College provides the refund amount to the student or to the person who paid the student’s tuition and fees no later
+                    than 30 calendar days after receiving the written notice of cancellation, regardless of whether materials have been
+                    returned.
+                </p>
+                <span class="titles indented mt-3">(c) Cancellation More Than Five Days, But Prior to the Commencement of Classes</span>
+                <p class="indented mt-2">
+                    A student requesting cancellation more than five calendar days after signing an enrollment agreement, but prior
+                    to beginning a course or program, is entitled to a refund of all monies paid minus: an application/transfer credit
+                    evaluation fee of up to $75; a one-time admission fee per program of no more than 20 percent of the tuition and
+                    not to exceed more than $200; and other fees purchased from third-party entities, such as textbooks, software, and
+                    library service fees, if provided by a third-party service (e.g., LIRN, Westlaw, ProQuest, EBSCO). Richmindale
+                    College provides the refund amount no later than 30 calendar days from the cancellation or withdrawal date.
+                </p>
+                <span class="titles indented mt-3">(d) Cancellation and Refund After the Commencement of Classes</span>
+                <p class="indented mt-2">
+                    Richmindale College uses a refund policy based on time period of semester credit hours. A student requesting
+                    cancellation after the commencement of classes is entitled to a refund based on the Table of Charges and Refunds.
+                    Richmindale College retains the fees described in the Non-Refundable Fees After Commencement of Classes.
+                    Richmindale College provides the refund no later than 30 calendar days from the cancellation or withdrawal date.
+                </p>
+                <ol>
+                    <li>
+                        <p>Cancellation For Not Returning from Authorized Leave</p>
+                        <p>
+                        A student who is on authorized Leave of Absence and failed to return on the scheduled date without notice
+                        or without valid reason is withdrawn, and the cancellation or withdrawal date is the date the student was
+                        scheduled to return from the leave and failed to do so.<br/>
+                        Students who are withdrawn for not returning from authorized leave may be entitled to a refund based on
+                        the <strong>Table of Charges and Refunds</strong>. Richmindale College retains the fees described in the <strong>Non-Refundable
+                        Fees After Commencement of Classes</strong>. Richmindale College provides the refund amount no later than 30
+                        calendar days from the cancellation or withdrawal date.
+                        </p>
+                    </li>
+                    <li>
+                        <p>Cancellation Due to Excessive Absences</p>
+                        <p>
+                        A student is withdrawn from Richmindale College if the student has not attended any class for 30
+                        consecutive scheduled class days. The cancellation or withdrawal date is the last day of the 30 consecutive
+                        days.<br/>
+                        Students who are withdrawn due to Excessive Absences may be entitled to a refund based on the <strong>Table of
+                        Charges and Refunds</strong>. Richmindale College retains the fees described in the <strong>Non-Refundable Fees After
+                        Commencement of Classes</strong>. Richmindale College provides the refund amount no later than 30 calendar days
+                        from the cancellation or withdrawal date.
+                        </p>
+                    </li>
+                    <div class="footer-spacer"></div>
+
+                    <!-- Page Break -->
+                    <div class="header-spacer"></div>
+                    <li>
+                        <p>Cancellation For Not Submitting Official Transcripts</p>
+                        <p>
+                            Richmindale College may approve and accept admission applicants to a degree program using their
+                            unofficial transcripts in evaluating their eligibility. Once accepted, the newly admitted students are allowed
+                            to enroll in courses in one enrollment period not to exceed 12 semester credit hours. Richmindale College
+                            must receive their official transcripts within this one enrollment period, or they are withdrawn from the
+                            program.<br/><br/>
+                            Students who are withdrawn from the program for not submitting official transcripts cannot earn credits for
+                            the courses that they successfully completed for the semester. They may re-apply for admission when their
+                            official transcripts are ready, however, they must go through the same admission application process,
+                            including the payment of fees.<br/><br/>
+                            Students who are withdrawn for not submitting their official transcripts within one enrollment period may
+                            be entitled to a refund based on the Table of Charges and Refunds. Richmindale College retains the fees
+                            described in the Non-Refundable Fees After Commencement of Classes. Richmindale College provides the
+                            refund amount no later than 30 calendar days from the cancellation or withdrawal date.
+                        </p>
+                    </li>
+                    <li>
+                        <p>Cancellation For Failure to Complete a Program Within the Tuition Period Covered</p>
+                        <p>
+                            The tuition period covered by this Enrollment Agreement between Richmindale College and the student is 6
+                            years. Students are withdrawn if they fail, or are about to fail, to complete the required courses of a program
+                            within the specified tuition period covered by the enrollment agreement. The cancellation or withdrawal
+                            date is the first day of the semester classes when they are identified that they will fail or have failed to
+                            complete their program within the tuition period coverage. Students are not allowed to enroll in any
+                            semester when they have been identified to fail in completing their program tuition period coverage. There
+                            is no applicable refund for this cancellation or withdrawal. Students may re-apply for admission by going
+                            through the same admission application process, including the payment fees.
+                        </p>
+                    </li>
+                    <li>
+                        <p>Non-Refundable Fees After Commencement of Classes</p>
+                        <p>
+                            When a student cancels or withdraws enrollment after the commencement of classes, Richmindale College
+                            retains the application fee and a one-time registration fee of no more than 20 percent of the tuition (not to
+                            exceed $200), and an application/transfer credit evaluation fee of up to $75, if applicable.<br/><br/>
+                            Richmindale College does not provide refunds for items that are purchased by students from third-party
+                            vendors, such as textbooks, software licenses and subscriptions, and library service fees.<br/><br/>
+                            Note that all cancellation or withdrawal refunds after the commencement of classes apply only to the current
+                            semester. Any payments made for the attempted courses in the previous semesters are not refundable.
+                        </p>
+                    </li>
+                    <li>
+                        <p>Table of Charges and Refunds</p>
+                        <p>
+                            When a student cancels after completing at least one lesson assignment but less than 50 percent of the
+                            graded assignments, Richmindale College may retain the credit transfer evaluation fee (if applicable) and/or
+                            admission fee of no more than 20 percent of the tuition (not to exceed $200) and library service fees, plus a
+                            percentage of tuition paid by the student in accordance with the following schedule:
+                        </p>
+
+                        <div class="footer-spacer"></div>
+
+                        <!-- Page Break -->
+                        <div class="header-spacer"></div>
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <strong>Percent (%) of the credit hours attempted*</strong><br/>
+                                        <i>
+                                            (Credit hours counting starts from the date when
+                                            the classes started and includes holidays)
+                                        </i>
+                                    </th>
+                                    <th>
+                                        <strong>
+                                            Percentage of tuition and
+                                            miscellaneous fee returned to the
+                                            student minus the admission fee
+                                            and/or credit transfer evaluation fee
+                                        </strong>
+                                        <i>
+                                            (based on the total cost of enrolled
+                                            credits for the current semester)
+                                        </i>
+                                    </th>
+                                    <th>
+                                        <strong>
+                                            Percentage of tuition and
+                                            miscellaneous fee retained
+                                            by Richmindale College
+                                        </strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Less than or equal to 10%</td>
+                                    <td>90%</td>
+                                    <td>10%</td>
+                                </tr>
+                                <tr>
+                                    <td>More than 10% and less than or equal to 20%</td>
+                                    <td>80%</td>
+                                    <td>20%</td>
+                                </tr>
+                                <tr>
+                                    <td>More than 20% and less than or equal to 30%</td>
+                                    <td>70%</td>
+                                    <td>30%</td>
+                                </tr>
+                                <tr>
+                                    <td>More than 30% and less than or equal to 40%</td>
+                                    <td>60%</td>
+                                    <td>40%</td>
+                                </tr>
+                                <tr>
+                                    <td>More than 40% and less than or equal to 50%</td>
+                                    <td>50%</td>
+                                    <td>50%</td>
+                                </tr>
+                                <tr>
+                                    <td>More than 50%</td>
+                                    <td>0%</td>
+                                    <td>100%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </li>
+                </ol>
+                <p class="indented mt-3">
+                    * The percentage of the credit hours attempted is determined by dividing the total number of credit hours elapsed
+                    from the semester class start date to the student’s last day of attendance, by the total number of semester credit
+                    hours for the course, and multiply by 100.
+                    For students enrolled in two or more courses that award semester credit hours, Richmindale College treats each
+                    course separately for the purposes of calculating the appropriate amount of tuition refund owed to the student.
+                </p>
+                <span class="titles indented mt-3">(e) Student Entitlement to Receive All Materials Paid</span>
+                <p class="indented mt-2">
+                    Upon cancellation, a student whose costs of education are paid in full, but who is not eligible for a refund, is entitled
+                    to receive all materials, including kits and equipment.
+                </p>
+                <span class="titles indented mt-3">(f) Refunds of Books, Supplies and Other Third-Party Items</span>
+                <p class="indented mt-2">
+                    Books, materials, software licenses and subscriptions, and other supplies required for course completion that are
+                    not provided by Richmindale College are not under its responsibility. Students are responsible for buying these
+                    items separately from third-party vendors. Richmindale College may help students acquire these items, but it is
+                    not responsible for and does not provide refunds related to these items. Refunds and related fees of these items
+                    are subject to the outside third-party vendor policies and terms with the student.
+                </p>
+                <span class="titles indented mt-3">(g) Refund Examples</span>
+                <p class="indented mt-2">
+                    Richmond applied for admission and transfer of credits to a degree program at Richmindale College, and paid
+                    $100 for the admission/registration fee and another $75 for the transfer of credit evaluation fee.<br/><br/>
+                </p>
+
+                    <div class="footer-spacer"></div>
+
+                    <!-- Page Break -->
+                    <div class="header-spacer"></div>
+
+
+                <p class="indented mt-2">    
+                    On July 1, Richmond and Richmindale College signed an enrollment agreement. On the same day, Richmond
+                    enrolled in five 3-credit classes, a total of 15 credits, for a semester with classes that start on September 1. The
+                    semester tuition is $1500, calculated as $100 multiplied by 15 credits. The semester miscellaneous fee is $150,
+                    calculated as $10 multiplied by 15 credits. The total cost for the semester is $1650, excluding the
+                    admission/registration fee and the transfer of credit evaluation fee. Based on the terms of payment, the total cost
+                    for the semester is divided into 3 payments. Each monthly payment is equal to $550, calculated as $1650 divided
+                    by 3. Richmond paid the first monthly installment (payment 1 of 3) of $550. One of the courses requires a software
+                    license. Richmond purchased the software license worth $100[1] from a third-party vendor. Richmond paid a total
+                    of $725 as initial payment to Richmindale College for his admission application ($100), transfer of credit evaluation
+                    ($75), and first installment of his enrolled courses ($550). Richmond also spent $100, separately, on the required
+                    software license subscription for one year from a third-party vendor.
+
+                </p>
+                <span class="titles indented mt-4">Refund Example 1: Five-Day Cancellation</span>
+                <p class="indented mt-2">
+                    Richmond decided to cancel/withdraw and wrote a cancellation notification letter with effective withdrawal date
+                    of July 5, signed and dated the letter, and mailed it to a Richmindale College office on July 5. The mail took 7
+                    calendar days to reach Richmindale’s office. Richmindale College received the mail on July 12. Since Richmond’s
+                    withdrawal date is July 5, which is within five calendar days after signing the enrollment agreement, and he sent
+                    the mail on or before the withdrawal date, Richmindale College must refund Richmond all monies paid
+                    amounting to $725[1] within 30 calendar days (by August 4). The refund amount includes the
+                    admission/registration fee, transfer of credit evaluation fee, and first monthly installment; but does not include
+                    the one-year software license of $100 which Richmond bought from a third-party vendor.<br/><br/>
+                    If Richmond mailed the notification letter after the effective withdrawal date of July 5, let’s say July 7, Richmindale
+                    College would have used the mailing date of July 7 as the effective withdrawal date, which does not fall under the
+                    Five-Day Cancellation policy anymore. In this case, the Cancellation More Than Five Days, But Prior to the
+                    Commencement of Classes refund policy applies.
+                </p>
+                <span class="titles indented mt-4">Refund Example 2: Cancellation More than Five Days, But Prior to the Commencement of Classes</span>
+                <p class="indented mt-2">
+                    Richmond decided to cancel/withdraw and sent a notification letter to cancel&#64;richmindale.com via his official
+                    email. The effective cancellation or withdrawal date in the notification letter is July 7, which falls under cancellation
+                    of more than five days from signing of enrollment agreement, but prior to the commencement of classes scheduled
+                    on September 1, assuming there are no official holidays from July 1.<br/><br/>
+                    Based on this refund policy, Richmond is entitled to a refund of all monies paid minus the transfer credit evaluation
+                    fee of $75 and the one-time admission fee of $100. Richmindale College does not refund the software license that
+                    was bought by Richmond from a third-party vendor. Richmindale College must refund Richmond the amount based
+                    on the following calculation:
+                </p>
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total initial payment</td>
+                            <td>$ 725</td>
+                            <td>Excluding $100 for software license.</td>
+                        </tr>
+                        <tr>
+                            <td>LESS: Admission Fee</td>
+                            <td>- 100</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>LESS: Credit Transfer Fee</td>
+                            <td>- 75</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <strong>NET REFUND AMOUNT</strong><br/>
+                                <i>Payable within 30 calendar days.</i>
+                            </td>
+                            <td><strong>$ 550</strong></td>
+                            <td>Amount to be returned to the student.</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="footer-spacer"></div>
+
+                <!-- Page Break -->
+                <div class="header-spacer"></div>
+
+
+                <span class="titles indented mt-4">Refund Example 3: Refund After the Commencement of Classes</span>
+                <p class="indented mt-2">
+                    Richmond enrolled in classes for the semester that started on September 1. After few days of classes, Richmond
+                    decided to cancel/withdraw and sent a notification letter to <a href="mailto:cancel@richmindale.com">cancel&#64;richmindale.com</a> via his official email. The
+                    effective cancellation or withdrawal date in the notification letter is September 14, which is week 2 of classes from
+                    September 1. Richmond is entitled to a refund based on the following calculation:
+                </p>
+
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Total Tuition and Miscellaneous
+                                Fee for the 15 credits enrolled in
+                                the current semester of 15 weeks.
+                            </td>
+                            <td>$ 1,650</td>
+                            <td>
+                                Tuition = $100 x 15 credits = $1500.
+                                Miscellaneous Fee = $10 x 15 credits = $150.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Percentage of Tuition and
+                                Miscellaneous Fee to be Returned
+                                to the Student on Week 2.
+                                <i>
+                                    See Table of Charges and Refunds for reference.
+                                </i>
+                            </td>
+                            <td>
+                                80%
+                            </td>
+                            <td>
+                                Total credits = 15 credits x 15 semester weeks = 225% credit hours attempted:
+                                15 credit hours x 2 semester weeks ÷ 225 total credits
+                                = 0.1333 x 100 = 13.33%
+                                More than 10% and less than or equal to 20% = 80%
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Total Refund Amount</td>
+                            <td>$ 1,320</td>
+                            <td>Refund Amount = $1650 x 80% = $1320.</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <td colspan="3">Student Total Paid Amount for the enrolled courses in the current semester.</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Initial Payment</td>
+                            <td>725</td>
+                            <td>Admission, credit transfer, and first monthly payment.</td>
+                        </tr>
+                        <tr>
+                            <td>LESS: Admission Fee</td>
+                            <td>- 100</td>
+                            <td rowspan="2">
+                                See Non-Refundable Fees After Commencement of Classes for
+                                reference.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>LESS: Transfer of Credit Fee</td>
+                            <td>- 75</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Total Paid Amount</td>
+                            <td>$ 550</td>
+                            <td>Excluding the software license purchased by the student from a
+                                third-party vendor</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <table class="table table-bordered table-repsonsive">
+                    <thead>
+                        <tr>
+                            <th colspan="3">Student Total Unpaid Amount for the enrolled courses in the current semester.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Total Tuition and Miscellaneous
+                                Fee for the 15 credits enrolled in
+                                the current semester of 15 weeks
+                            </td>
+                            <td>
+                                1,650
+                            </td>
+                            <td>
+                                Tuition = $100 x 15 credits = $1500.
+Miscellaneous Fee = $10 x 15 credits = $150.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total Paid Amount</td>
+                            <td>- 550</td>
+                            <td></td>
+                        </tr>  
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Total Unpaid Amount</td>
+                            <td>$ 1,100</td>
+                            <td>
+                                Amount not paid yet based on the total tuition and
+                                miscellaneous fee for the current semester.
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th colspan="3">Get Net Refund Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Refund Amount</td>
+                            <td>1,320</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>LESS: Total Unpaid Amount</td>
+                            <td>- 1,100</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>NET REFUND AMOUNT</strong><br/><i>Payable within 30 calendar days.</i></td>
+                            <td>$ 220</td>
+                            <td>Amount to be returned to the student based on 80% refund on
+                                week 2.</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="footer-spacer"></div>
+
+                <!-- Page Break -->
+                <div class="header-spacer"></div>
+
+
+                <p class="indented">
+                    In all cases, the software license or subscription purchased by Richmond from a third-party vendor was not
+                    included in the refund. Richmindale College is not responsible for third-party purchases.
+                </p>
+                <span class="titles mt-3">VIII. GOVERNING LAW; FORUM</span>
+                <p class="indented mt-2">
+                    The courts of Arizona, United States of America shall have exclusive jurisdiction to hear all disputes arising out of this
+                    agreement.
+                </p>
+
+                <span class="titles mt-3">IX. DISCLAIMER</span>
+                <p class="indented mt-2">(a) The school does not guarantee job placement to graduates upon completion of the training or upon graduation.</p>
+                <p class="indented mt-2">(b) Richmindale College does not accept any responsibility for any statement of policy or procedure that does not
+                    appear in the attached school catalog.</p>
+                <p class="indented mt-2">(c) Richmindale College does not accept any responsibility and liability for any items purchased by applicants or
+                    students from outside supplier/vendor, including any referral provided by Richmindale College employees and
+                    affiliates to applicants or students, except if the items purchased are sold by Richmindale College as evident by an
+                    invoice and/or receipt provided by Richmindale College to the buyer.</p>
+                <p class="indented mt-2">
+                    (d) Richmindale College admits students regardless of race, color, national origin, disability, sex, creed, religion, or age.
+                </p>
+            
+                <div class="footer-spacer"></div>
+
+                <!-- Page Break -->
+                <div class="header-spacer"></div>
+
+
+                <span class="titles mt-3">X. STUDENT ACKNOWLEDGEMENT</span>
+                <p class="indented mt-2">I, the student signing this agreement, acknowledge that:<br/><br/></p>
+                <p class="indented mt-2">(a) I have read and understood all aspects of this enrollment agreement.</p>
+                <p class="indented mt-2">(b) The school catalog dated “10/24” is incorporated as a part of this enrollment agreement.</p>
+                <p class="indented mt-2">(c) I have received a copy of the school catalog.</p>
+                <p class="indented mt-2">(d) The school may terminate my enrollment if I fail to comply with attendance, academic and financial requirements,
+                    or if I disrupt the normal activities of the school. While enrolled in the school, I understand that I must maintain
+                    Satisfactory Academic Progress as described in the attached school catalog and that my financial obligation to the
+                    school must be paid in full before a certificate may be awarded.</p>
+                <p class="indented mt-2">(e) The information concerning other institutions that may accept the school’s credits toward their programs can be
+                    obtained from such institutions. It should not be assumed that any programs described in the school catalog could
+                    be transferred to another institution. The school does not guarantee the transferability of credits to a college,
+                    university, or institution. Any decision on the comparability, appropriateness, and applicability of credits, and
+                    whether they should be accepted is the decision of the receiving institution.</p>
+                <p class="indented mt-2">(f) The school reserves the right to reschedule the program start date when the number of students enrolled is less
+                    than five.</p>
+                <p class="indented mt-2">
+                    (g) I consent to the reasonable use of my information and training and educational achievements, including images or
+                    recordings howsoever made.
+                </p>
+                <p class="indented mt-2 mb-4">
+                    (h) This document does not constitute a binding agreement until accepted in writing by all parties.
+                </p>
+
+                <div class="signatures mt-4">
+                    <div class="signatories">
+                        <input type="text" class="form-control">
+                        <label>Signature of Student</label>
+                    </div>
+                    <div class="dates">
+                        <input type="text" class="form-control">
+                        <label>Date</label>
+                    </div>
+                </div>
+
+                <div class="signatures mt-4">
+                    <div class="signatories">
+                        <input type="text" class="form-control">
+                        <label>Signature of Parent or Guardian (for undergraduate/dependent student)</label>
+                    </div>
+                    <div class="dates">
+                        <input type="text" class="form-control">
+                        <label>Date</label>
+                    </div>
+                </div>
+
+                <div class="footer-spacer"></div>
+
+                <!-- Page Break -->
+                <div class="header-spacer"></div>
+
+                
+                <span class="titles mt-3">XI. ACCEPTANCE</span>
+                <p class="indented mt-2">
+                    I, the undersigned, have read and understood this agreement and acknowledge receipt of a copy. It is further understood
+                    and agreed that this agreement supersedes all prior or contemporaneous verbal or written agreements and may not be
+                    modified without the written agreement of the student and the school official. I also understand that if I default upon this
+                    agreement, I will be responsible for payment of any collection fees or attorney fees incurred by Richmindale College.<br/><br/>
+                    My signature below signifies that I have read and understood all aspects of this agreement and do recognize my legal
+                    responsibilities to this agreement.
+                </p>
+                <span class="subtitles mt-4">IMPORTANT NOTICE!</span>
+                <p class="mt-2">
+                    This document contains multiple pages and a catalog dated 10/24 as an attachment. Do NOT sign this document unless
+                    you have read, understood and agreed to the terms and conditions detailed in all pages of this document, and the policies,
+                    rules and regulations of the school that are detailed in the attached catalog.
+                </p>
+                <div class="signatures mt-4">
+                    <div class="signatories">
+                        <input type="text" class="form-control">
+                        <label>Signature of Student</label>
+                    </div>
+                    <div class="dates">
+                        <input type="text" class="form-control">
+                        <label>Date</label>
+                    </div>
+                </div>
+                <div class="signatures mt-4">
+                    <div class="signatories">
+                        <input type="text" class="form-control">
+                        <label>Signature of Parent or Guardian (for undergraduate/dependent student)</label>
+                    </div>
+                    <div class="dates">
+                        <input type="text" class="form-control">
+                        <label>Date</label>
+                    </div>
+                </div>
+                <div class="signatures mt-4">
+                    <div class="signatories">
+                        <input type="text" class="form-control">
+                        <label>Name and Signature of Richmindale College Representative</label>
+                    </div>
+                    <div class="dates">
+                        <input type="text" class="form-control">
+                        <label>Date</label>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card-footer">
+            <div class="agreement-footer">
+
+            </div>
+        </div>
+    </div>
+</div>

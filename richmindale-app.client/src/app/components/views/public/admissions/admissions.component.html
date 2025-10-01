@@ -1,0 +1,177 @@
+<div class="admission-wrapper">
+  <div class="page-banners">
+    <div class="page-title-container">
+      <h1 class="page-title">Admission</h1>
+    </div>
+  </div>
+
+  <div class="sitemap-placeholder">
+    <a href="/" class="me-2">Home</a>
+    <i class="fa-solid fa-chevron-right me-2"></i>
+    <a href="/rims/admissions">Admissions</a>
+  </div>
+
+  <div class="admission-content">
+    <div class="form-container">
+      <span class="form-title">Admission Application</span>
+      <hr />
+
+      <!-- 1st Step -->
+      <div class="step-option mt-3" [hidden]="codeSent">
+        <label class="form-label" for="program">Program</label>
+        <div class="input-group">
+          <select
+            class="form-control"
+            id="program"
+            name="program"
+            [(ngModel)]="app.ProgramId"
+          >
+            <option [ngValue]="0">Select Program</option>
+            <option *ngFor="let p of programs" [ngValue]="p.value">
+              {{ p.text }}
+            </option>
+          </select>
+        </div>
+
+        <label class="form-label" for="email">Email</label>
+        <div class="input-group">
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="form-control"
+            [(ngModel)]="app.EmailAddress"
+            placeholder="Email Address"
+            (keydown.enter)="VerifyEmail($event)"
+          />
+        </div>
+
+        <div class="action-container">
+          <button
+            type="button"
+            class="btn btn-primary form-control"
+            [disabled]="!app.EmailAddress || !app.ProgramId"
+            (keydown.enter)="VerifyEmail($event)"
+            (click)="VerifyEmail($event)"
+          >
+            Proceed
+          </button>
+        </div>
+
+        <div class="input-group mt-4">
+          <a href="/academics/courses/index.htm" class="me-4">Search Course</a>
+          <a href="/admissions/catalog.htm">View Catalog</a>
+        </div>
+      </div>
+
+      <!-- 4th Step -->
+      <div class="step-option mt-3" [hidden]="!isViewed">
+        <input type="hidden" [(ngModel)]="app.Id" />
+
+        <div class="form-check form-switch">
+          <input
+            type="checkbox"
+            id="terms"
+            name="terms"
+            [(ngModel)]="isAgreed"
+            [checked]="isAgreed"
+            (change)="AgreedChanged()"
+            role="checkbox"
+            [attr.aria-checked]="isAgreed"
+            class="form-check-input"
+          />
+          <label class="form-check-label" for="terms">
+            I agree to Terms and Conditions stated on the Catalog.
+          </label>
+        </div>
+
+        <div class="action-container mt-3">
+          <button
+            type="button"
+            class="btn btn-primary form-control"
+            [disabled]="!app.ProgramId"
+            (keydown.enter)="ProceedToModify()"
+            (click)="ProceedToModify()"
+          >
+            Proceed
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="left-container" [hidden]="codeSent">
+      <span class="form-title">Enrollment Agreement</span>
+      <hr />
+
+      <table class="table table-hover table-striped table-responsive">
+        <thead>
+          <tr>
+            <th colspan="2">Bachelors Agreements</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BBA rev 1</td>
+            <td><a href="/agreement/bba">Bachelor of Business Administration</a></td>
+          </tr>
+          <tr>
+            <td>BBIT rev 1</td>
+            <td><a href="/agreement/bbit">Bachelor of Business Information Technology</a></td>
+          </tr>
+          <tr>
+            <td>BSCS rev 1</td>
+            <td><a href="/agreement/bscs">Bachelor of Science in Computer Science</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-hover table-striped table-responsive">
+        <thead>
+          <tr>
+            <th colspan="2">Masters Agreements</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MBA rev 1</td>
+            <td><a href="/agreement/mba">Master of Business Administration</a></td>
+          </tr>
+          <tr>
+            <td>MEM rev 1</td>
+            <td><a href="/agreement/mem">Master of Education in Educational Management</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="full-width-container mt-3" [hidden]="codeSent">
+      <span class="form-title">Admission Procedures &amp; Requirements</span>
+      <hr />
+      <span class="form-subtitle mt-3 mb-4">General Admission Requirements</span>
+      <div class="article-container mt-3">
+        <div class="articles">
+          <span class="title"><strong>Bachelors Degree Program</strong></span>
+          <hr />
+          <p>
+            Applicants for the bachelor&apos;s degree programs of Richmindale College must submit a completed application and evidence of high school completion documents or equivalent, such as official transcripts of high school graduation or a recognized equivalency, such as a General Education Development (GED) certificate, or completion of a high school education in a homeschool setting approved under state law.<br /><br />
+            Applicants seeking admission to Richmindale must be no less than 16 years of age. For enrolling students under the compulsory school age, Richmindale College shall obtain permission from responsible parties to assure that the pursuit of the educational offerings is not detrimental to any compulsory schooling.
+          </p>
+        </div>
+        <div class="articles">
+          <span class="title">Master&apos;s Degree Program</span>
+          <hr />
+          <p>
+            Applicants for the master’s degree programs must submit a completed application and evidence of a completed bachelor&apos;s degree earned from an appropriately accredited institution.
+          </p>
+        </div>
+        <div class="articles">
+          <span class="title">International Students</span>
+          <hr />
+          <p>
+            Transcripts not in English must be evaluated by an appropriate third party and translated into English, accompanied by a certified translation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

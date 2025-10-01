@@ -1,0 +1,175 @@
+<div class="academics-wrapper">
+    <div class="page-banners">
+        <div class="page-title-container">
+            <h1 class="page-title">Academics</h1>
+        </div>
+        
+    </div>
+    <div class="sitemap-placeholder">
+        <a href="/" class="me-2">Home</a><i class="fa-solid fa-chevron-right me-2"></i><a href="/academics">Academics</a>
+    </div>
+
+    <div class="page-content-container">
+        <div class="left-container mb-3">
+            <span class="form-title">Degrees &amp; Courses</span>
+            <hr>
+            <label class="form-label">Search Course:</label>
+            <div class="input-group">
+                <input type="search" [(ngModel)]="search" class="form-control">
+                <button class="btn btn-primary" (click)="SearchCourse()"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+        
+        <div class="left-container mb-3">
+            <span class="form-title">Programs</span>
+            <hr>
+            <table class="table table-hover table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th colspan="2">Degree Programs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of programs">
+                        <td>{{p.ProgramCode}}, rev. {{p.Revision}}.00</td>
+                        <td><a href="/academics/programs/{{p.ProgramId}}">{{p.ProgramTitle}}</a> </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div class="full-width-container">
+            <span class="form-title">Academic Policies &amp; Procedures</span>
+            <hr>
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th>Document No.</th>
+                        <th>Document Title</th>
+                        <th>Rev. No</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ACA-1020</td>
+                        <td><a href="/policies/academics/creditHours.htm"><strong>Credit Hours</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1021</td>
+                        <td><a href="/policies/academics/termCalendar.htm"><strong>School Term &amp; Academic Calendar Policy</strong></a></td>
+                        <td class="text-end">1024</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1022</td>
+                        <td><a href="/policies/academics/courseEnrollment.htm"><strong>Course Enrollment &amp; Status Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1023</td>
+                        <td><a href="/policies/academics/courseLoad.htm"><strong>Course Load Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1024</td>
+                        <td><a href="/policies/academics/courseAddDrop.htm"><strong>Course Add/Drop Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1025</td>
+                        <td><a href="/policies/academics/courseRepeat.htm"><strong>Course Repeat Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1026</td>
+                        <td><a href="/policies/academics/courseDelivery.htm"><strong>Program &amp; Course Delivery Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1027</td>
+                        <td><a href="/policies/academics/academicStatus.htm"><strong>Academic Status Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1028</td>
+                        <td><a href="/policies/academics/adminWithdrawal.htm"><strong>Administrative Withdrawal Policy</strong></a></td>
+                        <td class="text-end">1024</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1029</td>
+                        <td><a href="/policies/academics/grading.htm"><strong>Grading Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1030</td>
+                        <td><a href="/policies/academics/honors.htm"><strong>Honors Recognition Policy</strong></a></td>
+                        <td class="text-end">1024</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1031</td>
+                        <td><a href="/policies/academics/attendance.htm"><strong>Attendance Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1032</td>
+                        <td><a href="/policies/academics/leave.htm"><strong>Leave of Absence Policy</strong></a></td>
+                        <td class="text-end">1024</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1033</td>
+                        <td><a href="/policies/academics/idverification.htm"><strong>Student Identity Verifiication Policy</strong></a></td>
+                        <td class="text-end">1024</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1034</td>
+                        <td><a href="/policies/academics/academicHonesty.htm"><strong>Academic Honesty Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1034</td>
+                        <td><a href="/policies/academics/academicHonesty2.htm"><strong>Academic Honesty Procedure</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1035</td>
+                        <td><a href="/policies/academics/copyright.htm"><strong>Copyright Policy</strong></a></td>
+                        <td class="text-end">1024</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1036</td>
+                        <td><a href="/policies/academics/sap.htm"><strong>Satisfactory Academic Progress Policy</strong></a></td>
+                        <td class="text-end">1024</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1037</td>
+                        <td><a href="/policies/academics/harassment.htm"><strong>Harassment Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1038</td>
+                        <td><a href="/policies/academics/nondiscrimination.htm"><strong>Nondiscrimination Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1039</td>
+                        <td><a href="/policies/academics/conduct.htm"><strong>Conduct Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1040</td>
+                        <td><a href="/policies/academics/grievance.htm"><strong>Grievance Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                    <tr>
+                        <td>ACA-1041</td>
+                        <td><a href="/policies/academics/training.htm"><strong>Clinical Training, Practicum, Externships or Special Features Policy</strong></a></td>
+                        <td class="text-end">0</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>

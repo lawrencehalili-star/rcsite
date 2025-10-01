@@ -1,0 +1,39 @@
+<div class="courses-wrapper">
+    <div class="page-banners">
+        <div class="page-title-container">
+            <h1 class="page-title">Academic Courses</h1>
+        </div>
+        
+    </div>
+    <div class="sitemap-placeholder">
+        <a href="/" class="me-2">Home</a><i class="fa-solid fa-chevron-right me-2"></i><a href="/academics">Academics</a><i class="fa-solid fa-chevron-right me-2"></i><a href="/academics/courses">Courses</a>
+    </div>
+    <div class="full-page">
+        <label class="form-label">Search Course:</label>
+        <input type="search" [(ngModel)]="search" (keyup)="LoadCourses()" (blur)="LoadCourses()" class="form-control">
+        <hr/>
+        <div class="courses-container">
+            <div class="card mb-3 me-3" *ngFor="let c of courses">
+                <div class="card-header">
+                    <div class="course">
+                        <span class="code">{{c.CourseCode }}, {{c.RevNo }}</span> 
+                        <span class="title"><strong>{{c.CourseTitle}}</strong></span>
+                    </div>
+                    <span class="credits">Credits: <strong>{{ c.Credits }}.00</strong></span>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">{{c.CourseDescription}}</p>
+                    <div class="details-container">
+                        <span>Programs: <strong>{{c.Programs}}</strong></span>
+                        <span>Pre-Requisites: <strong>{{c.PreRequisites}}</strong></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span>Tuition Fee: <strong>$ {{c.Tuition}}.00</strong></span>
+                        <span>Miscellaneous Fees: <strong>$ {{c.Miscellaneous}}.00</strong></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

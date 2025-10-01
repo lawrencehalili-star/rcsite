@@ -1,0 +1,122 @@
+<div class="page-title">
+    <div class="title-icon me-4">
+        <i class="fa fa-ticket me-2"></i>
+    </div>
+    <div class="title">
+        <h1>Admission Requests</h1>
+        <span>Admission Request List</span>
+    </div>
+    
+</div>
+<div class="content-section">
+    <div class="card">
+        <div class="card-header">
+            <div class="filter-header">
+                <div class="search-filter">
+                    <label class="form-label mt-2">Search :</label>
+                    <input type="text" [(ngModel)]="filter.Search" (input)="SearchChanged()" >
+                </div>
+                <div class="page-filter">
+                    <label class="form-label mt-2 me-2">Size :</label>
+                    <select [(ngModel)]="filter.PageSize" (change)="PageSizeChanged()" >
+                        <option value="10" selected>10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <label class="form-label mt-2 me-2 ms-4">Sort by :</label>
+                    <select [(ngModel)]="filter.SortName" (change)="SortNameChanged()" >
+                       <option value="a.ApplicationDate">Application Date</option>
+                       <option value="a.StudentGivenName">GivenName</option>
+                       <option value="a.StudentLastname">Lastname</option>
+                       <option value="a.ProgramTitle">Program</option>
+                    </select>
+                    <select class="ms-2" [(ngModel)]="filter.SortDirection" (change)="SortDirectionChanged()">
+                        <option value="ASC" selected>A-Z</option>
+                        <option value="DESC">Z-A</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-placeholder">
+                <table class="table table-hover table-striped table-responsive">
+                   <thead>
+                    <tr>
+                        <th>Application No.</th>
+                        <th>Date Requested</th>
+                        <th>Email Address</th>
+                        <th>Program</th>
+                        <th>Country</th>
+                        <th>Campus</th>
+                        <th>Method</th>
+                        <th>Student</th>
+                        <th>Remarks</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                   </thead>
+                   <tbody>
+                    <tr *ngFor="let a of admissions">
+                        <td><a (click)="ViewDetails(a.Id)">{{a.ApplicationRefNo}}</a></td>
+                        <td>{{a.ApplicationDate}}</td>
+                        <td>{{a.EmailAddress }}</td>
+                        <td>{{a.ProgramTitle }}</td>
+                        <td>{{a.CountryName}}</td>
+                        <td>{{a.CampusName}}</td>
+                        <td>{{a.LearningMethodName}}</td>
+                        <td>{{a.StudentGivenName}} {{a.StudentLastname}}</td>
+                        <td>{{a.Remarks}}</td>
+                        <td>
+                            <select [(ngModel)]="a.Status" (change)="StatusChange(modalStatus, a.ApplicationRefNo, a.Id, a.Status)">
+                                <option *ngFor="let s of stats" [value]="s.value">{{s.text}}</option>
+                            </select>
+                        </td>
+                        <td class="action">
+                            <span (click)="ViewDetails(a.Id)"><i class="fa fa-edit"></i></span>
+                        </td>
+                    </tr>
+                   </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="pagination-footer">
+                <div class="row-info"></div>
+                <div class="pagination">
+                    <button class="page-btn prev-page">Prev</button>
+                    <button class="page-btn start-page">Start</button>
+                    <button class="page-btn prev-page">Last</button>
+                    <button class="page-btn start-page">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modalStatus>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Application No.: <b>{{update.ApplicationRefNo}}</b></h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label class="form-label">Remarks/Reason:</label>
+                    <textarea rows="4" class="form-control" [(ngModel)]="update.Reason"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" (click)="UpdateStatus()">Submit</button>
+        <button class="btn btn-danger" (click)="modalRef?.hide()">Cancel</button>
+    </div>
+</ng-template>
+
+
+

@@ -1,0 +1,6 @@
+@richmindale_app.Server_HostAddress = http://localhost:5110
+
+GET {{richmindale_app.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
