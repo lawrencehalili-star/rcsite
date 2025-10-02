@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  API_URL: 'https://localhost:7041/api/',
+  API_URL: 'https://localhost:5110/api/',
   ROOT_URL: 'https://localhost:4200/',
   // API_URL: "https://www.richmindale.com/api/",
   // ROOT_URL: "https://www.richmindale.com/",

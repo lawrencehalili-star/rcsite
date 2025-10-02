@@ -2,6 +2,7 @@
 using Dapper;
 using richmindale_app.Server.DapperContext;
 using richmindale_app.Server.Helpers;
+
 using richmindale_app.Server.Models.ViewModels;
 
 namespace richmindale_app.Server.Repositories
@@ -9,10 +10,13 @@ namespace richmindale_app.Server.Repositories
     public class AuthenticationRepository : IAuthentication
     {
         private readonly DapperDbContext db;
+        private readonly IEmailSender emailSender;
 
-        public AuthenticationRepository(DapperDbContext _db)
+        // public AuthenticationRepository(DapperDbContext _db)
+        public AuthenticationRepository(DapperDbContext _db, IEmailSender _emailSender)
         {
             db = _db;
+            emailSender = _emailSender;
         }
 
         public async Task<UserInfoViewModel> AuthenticateAdmin(string? username, string? password)
@@ -50,13 +54,20 @@ namespace richmindale_app.Server.Repositories
             param.Add("Username", username, DbType.String);
             var email = await conn.QueryFirstOrDefaultAsync<string>(sql, param);
 
+            //check if email is null or empty
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new Exception("Student not found with the provided student number.");
+            }
+
             var passkey = CodeGenerator.Passkey(8);
             var subject = "Richmindale - Login Code";
             var body = "Dear Student, <br/><br/>" +
                        "Your passkey for login is: " + passkey;
 
-            EmailSender mail = new EmailSender();
-            mail.SendMail(email, subject, body);
+            // EmailSender mail = new EmailSender();
+            // mail.SendMail(email, subject, body);
+            emailSender.SendMail(email, subject, body);
 
             sql = $@"INSERT INTO SysPasskey (Id, Email, StudentNumber, Passkey, GeneratedDate) VALUES (@Id, @Email, @StudentNumber, @Passkey, @generatedDate)";
             var iParam = new DynamicParameters();
@@ -103,18 +114,20 @@ namespace richmindale_app.Server.Repositories
             var param = new DynamicParameters();
             param.Add("UserId", id, DbType.Guid);
             using var conn = db.CreateConnection();
-            return await conn.ExecuteScalarAsync<UserInfoViewModel>(sql, param);
+            // return await conn.ExecuteScalarAsync<UserInfoViewModel>(sql, param);
+            return await conn.QueryFirstOrDefaultAsync<UserInfoViewModel>(sql, param);
         }
         public async Task<IEnumerable<UserMenuViewModel>> LoadUserMenus(Guid id)
         {
-            var sql = $@"SELECT Id,  FROM AccessMatrix WHERE UserId=@UserId";
+            var sql = $@"SELECT Id, MenuName, MenuUrl, IconClass FROM AccessMatrix WHERE UserId=@UserId";
+            // var sql = $@"SELECT Id,  FROM AccessMatrix WHERE UserId=@UserId";
             var param = new DynamicParameters();
             param.Add("UserId", id, DbType.Guid);
 
             using var conn = db.CreateConnection();
             return await conn.QueryAsync<UserMenuViewModel>(sql, param);
         }
-
+        
         
    
     }

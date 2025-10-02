@@ -13,10 +13,12 @@ namespace richmindale_app.Server.Repositories
     {
 
         private readonly ExpenseTrackerDbContext db;
+        private readonly IEmailSender emailSender;
 
-        public ExpenseTrackerRepository(ExpenseTrackerDbContext _db)
+        public ExpenseTrackerRepository(ExpenseTrackerDbContext _db, IEmailSender _emailSender)
         {
             db = _db;
+            emailSender = _emailSender;
         }
 
         public async Task<AuthenticationViewModel> AuthenticateUser(string? username, string? password)
@@ -441,14 +443,14 @@ namespace richmindale_app.Server.Repositories
                     Guid id = Guid.Empty;
                     var sql = $@"SELECT Id FROM Users WHERE Username='" + username + "' AND EmailAddress='" + email + "'";
                     id = await conn.QueryFirstOrDefaultAsync<Guid>(sql);
-                    EmailSender mail = new EmailSender();
+                    
                     string body = $@"Dear User,<br/><br/>
                                     You have requested to reset your password using Expense Tracker Application.<br/><br/>
                                     To reset your account password please use below link:<br/>
                                     <a href='https://tracker.richmindale.net/#/reset/" + id + ">Password Reset</a><br/><br/>" +
                                     "If you did not requested to reset your password, please ignore this message.<br/><br/>" +
                                     "Webmaster"; 
-                    mail.SendMail(email, "Password Reset", body);
+                    emailSender.SendMail(email, "Password Reset", body);
                     return "success";
                 }
                 else

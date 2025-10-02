@@ -18,7 +18,7 @@ namespace richmindale_app.Server.Helpers
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress(_emailSettings.From, _emailSettings.DisplayName);
             mail.To.Add(new MailAddress(sendTo));
-            mail.Subject = subject;  // THIS WAS MISSING!
+            mail.Subject = subject;  
             mail.Body = body;
             mail.IsBodyHtml = true;
 

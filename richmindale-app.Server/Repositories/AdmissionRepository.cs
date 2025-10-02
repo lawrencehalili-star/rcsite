@@ -13,10 +13,13 @@ namespace richmindale_app.Server.Repositories
     {
 
         private readonly DapperDbContext db;
+        private readonly IEmailSender emailSender;
 
-        public AdmissionRepository(DapperDbContext _db)
+        public AdmissionRepository(DapperDbContext _db, IEmailSender _emailSender)
+
         {
             this.db = _db;
+            this.emailSender = _emailSender;
         }
         public async Task<string> VerifyEmail(string EmailAddress)
         {
@@ -102,18 +105,22 @@ namespace richmindale_app.Server.Repositories
             catch (Exception ex)
             {
                 throw new Exception(ex.Message.ToString());
+
             }
 
 
         }
         public async Task<AdmissionViewModel> LoadAdmissionSummaryDetails(Guid id)
         {
-            using var conn = db.CreateConnection();
-            var sql = $@"EXEC sp_AdmissionSummaryDetails @Id";
-            var param = new DynamicParameters();
-            param.Add("Id", id, DbType.Guid);
-            return await conn.QueryFirstOrDefaultAsync<AdmissionViewModel>(sql, param);
+            {
+                using var conn = db.CreateConnection();
+                var sql = $@"EXEC sp_AdmissionSummaryDetails @Id";
+                var param = new DynamicParameters();
+                param.Add("Id", id, DbType.Guid);
+                return await conn.QueryFirstOrDefaultAsync<AdmissionViewModel>(sql, param);
+            }
         }
+
         public async Task<int> UpdateAdmissionApplication(AdmissionViewModel model)
         {
             var param = new DynamicParameters();
@@ -138,8 +145,13 @@ namespace richmindale_app.Server.Repositories
                             ", DiscountCode=@DiscountCode";
                 param.Add("ApplyDiscount", model.ApplyDiscount, DbType.Boolean);
                 param.Add("DiscountCode", model.DiscountCode, DbType.String);
-
             }
+
+            // sql = sql + " WHERE Id=@Id";  // or whatever your primary key column is
+            // param.Add("Id", model.Id, DbType.Guid);
+
+
+
             // Student Info
             sql = sql + ", StudentGivenName=@StudentGivenName" +
                         ", StudentLastname=@StudentLastname" +
@@ -359,7 +371,7 @@ namespace richmindale_app.Server.Repositories
                 var sql = $@"UPDATE LrnAdmissionApplications SET ";
                 var param = new DynamicParameters();
 
-                switch(model.TabIndex)
+                switch (model.TabIndex)
                 {
                     // Admission Details
                     case 0:
@@ -449,7 +461,7 @@ namespace richmindale_app.Server.Repositories
 
                     // Father's Info
                     case 3:
-                        if(model.SkipFather)
+                        if (model.SkipFather)
                         {
                             sql = sql + "SkipFather=1 ";
                         }
@@ -497,115 +509,115 @@ namespace richmindale_app.Server.Repositories
                         }
                         break;
 
-                        // Mother's Info
+                    // Mother's Info
                     case 4:
-                            if(model.SkipMother)
-                            {
-                                sql = sql + "SkipMother=1 ";
-                            }
-                            else
-                            {
-                                sql = sql + "SkipMother=0" +
-                                        ", MotherGivenName=@MotherGivenName" +
-                                        ", MotherLastname=@MotherLastname" +
-                                        ", MotherMiddleName=@MotherMiddleName" +
-                                        ", MotherMaidenName=@MotherMaidenName" +
-                                        ", MotherBirthDate=@MotherBirthDate" +
-                                        ", MotherGender=@MotherGender" +
-                                        ", MotherMaritalStatus=@MotherMaritalStatus" +
-                                        ", MotherReligion=@MotherReligion" +
-                                        ", MotherNationality=@MotherNationality" +
-                                        ", MotherCountry=@MotherCountry" +
-                                        ", MotherState=@MotherState" +
-                                        ", MotherCity=@MotherCity" +
-                                        ", MotherZipCode=@MotherZipCode" +
-                                        ", MotherAddress=@MotherAddress" +
-                                        ", MotherEmail1=@MotherEmail1" +
-                                        ", MotherEmail2=@MotherEmail2" +
-                                        ", MotherPhoneCode1=@MotherPhoneCode1" +
-                                        ", MotherPhone1=@MotherPhone1" +
-                                        ", MotherPhoneCode2=@MotherPhoneCode2" +
-                                        ", MotherPhone2=@MotherPhone2 ";
-                                param.Add("MotherGivenName", model.MotherGivenName, DbType.String);
-                                param.Add("MotherLastname", model.MotherLastname, DbType.String);
-                                param.Add("MotherMiddleName", model.MotherMiddleName, DbType.String);
-                                param.Add("MotherMaidenName", model.MotherMaidenName, DbType.String);
-                                param.Add("MotherBirthDate", model.MotherBirthDate, DbType.DateTime);
-                                param.Add("MotherGender", model.MotherGender, DbType.Int32);
-                                param.Add("MotherMaritalStatus", model.MotherMaritalStatus, DbType.Int32);
-                                param.Add("MotherReligion", model.MotherReligion, DbType.Int32);
-                                param.Add("MotherNationality", model.MotherNationality, DbType.Int32);
-                                param.Add("MotherCountry", model.MotherCountry, DbType.Int32);
-                                param.Add("MotherState", model.MotherState, DbType.Int32);
-                                param.Add("MotherCity", model.MotherCity, DbType.Int32);
-                                param.Add("MotherZipCode", model.MotherZipCode, DbType.String);
-                                param.Add("MotherAddress", model.MotherAddress, DbType.String);
-                                param.Add("MotherEmail1", model.MotherEmail1, DbType.String);
-                                param.Add("MotherEmail2", model.MotherEmail2, DbType.String);
-                                param.Add("MotherPhoneCode1", model.MotherPhone1, DbType.String);
-                                param.Add("MotherPhone1", model.MotherPhone1, DbType.String);
-                                param.Add("MotherPhoneCode2", model.MotherPhoneCode2, DbType.String);
-                                param.Add("MotherPhone2", model.MotherPhone2, DbType.String);
-                            }
-                            break;
-                        
-                        // Guardian's Info
+                        if (model.SkipMother)
+                        {
+                            sql = sql + "SkipMother=1 ";
+                        }
+                        else
+                        {
+                            sql = sql + "SkipMother=0" +
+                                    ", MotherGivenName=@MotherGivenName" +
+                                    ", MotherLastname=@MotherLastname" +
+                                    ", MotherMiddleName=@MotherMiddleName" +
+                                    ", MotherMaidenName=@MotherMaidenName" +
+                                    ", MotherBirthDate=@MotherBirthDate" +
+                                    ", MotherGender=@MotherGender" +
+                                    ", MotherMaritalStatus=@MotherMaritalStatus" +
+                                    ", MotherReligion=@MotherReligion" +
+                                    ", MotherNationality=@MotherNationality" +
+                                    ", MotherCountry=@MotherCountry" +
+                                    ", MotherState=@MotherState" +
+                                    ", MotherCity=@MotherCity" +
+                                    ", MotherZipCode=@MotherZipCode" +
+                                    ", MotherAddress=@MotherAddress" +
+                                    ", MotherEmail1=@MotherEmail1" +
+                                    ", MotherEmail2=@MotherEmail2" +
+                                    ", MotherPhoneCode1=@MotherPhoneCode1" +
+                                    ", MotherPhone1=@MotherPhone1" +
+                                    ", MotherPhoneCode2=@MotherPhoneCode2" +
+                                    ", MotherPhone2=@MotherPhone2 ";
+                            param.Add("MotherGivenName", model.MotherGivenName, DbType.String);
+                            param.Add("MotherLastname", model.MotherLastname, DbType.String);
+                            param.Add("MotherMiddleName", model.MotherMiddleName, DbType.String);
+                            param.Add("MotherMaidenName", model.MotherMaidenName, DbType.String);
+                            param.Add("MotherBirthDate", model.MotherBirthDate, DbType.DateTime);
+                            param.Add("MotherGender", model.MotherGender, DbType.Int32);
+                            param.Add("MotherMaritalStatus", model.MotherMaritalStatus, DbType.Int32);
+                            param.Add("MotherReligion", model.MotherReligion, DbType.Int32);
+                            param.Add("MotherNationality", model.MotherNationality, DbType.Int32);
+                            param.Add("MotherCountry", model.MotherCountry, DbType.Int32);
+                            param.Add("MotherState", model.MotherState, DbType.Int32);
+                            param.Add("MotherCity", model.MotherCity, DbType.Int32);
+                            param.Add("MotherZipCode", model.MotherZipCode, DbType.String);
+                            param.Add("MotherAddress", model.MotherAddress, DbType.String);
+                            param.Add("MotherEmail1", model.MotherEmail1, DbType.String);
+                            param.Add("MotherEmail2", model.MotherEmail2, DbType.String);
+                            param.Add("MotherPhoneCode1", model.MotherPhone1, DbType.String);
+                            param.Add("MotherPhone1", model.MotherPhone1, DbType.String);
+                            param.Add("MotherPhoneCode2", model.MotherPhoneCode2, DbType.String);
+                            param.Add("MotherPhone2", model.MotherPhone2, DbType.String);
+                        }
+                        break;
+
+                    // Guardian's Info
                     case 5:
-                            sql = sql + "SkipGuardian=0" +
-                                        ", GuardianTypeId=@GuardianTypeId" +
-                                        ", RelationshipId=@RelationshipId" + 
-                                        ", GuardianGivenName=@GuardianGivenName" +
-                                        ", GuardianLastname=@GuardianLastname" +
-                                        ", GuardianMiddleName=@GuardianMiddleName" +
-                                        ", GuardianMaidenName=@GuardianMaidenName" +
-                                        ", GuardianBirthDate=@GuardianBirthDate" +
-                                        ", GuardianGender=@GuardianGender" +
-                                        ", GuardianMaritalStatus=@GuardianMaritalStatus" +
-                                        ", GuardianReligion=@GuardianReligion" +
-                                        ", GuardianNationality=@GuardianNationality" +
-                                        ", GuardianCountry=@GuardianCountry" +
-                                        ", GuardianState=@GuardianState" +
-                                        ", GuardianCity=@GuardianCity" +
-                                        ", GuardianZipCode=@GuardianZipCode" +
-                                        ", GuardianAddress=@GuardianAddress" +
-                                        ", GuardianEmail1=@GuardianEmail1" +
-                                        ", GuardianEmail2=@GuardianEmail2" +
-                                        ", GuardianPhoneCode1=@GuardianPhoneCode1" +
-                                        ", GuardianPhone1=@GuardianPhone1" +
-                                        ", GuardianPhoneCode2=@GuardianPhoneCode2" +
-                                        ", GuardianPhone2=@GuardianPhone2 ";
-                                param.Add("GuardianTypeId", model.GuardianTypeId, DbType.Int32);
-                                param.Add("RelationshipId", model.RelationshipId, DbType.Int32);
-                                param.Add("GuardianGivenName", model.GuardianGivenName, DbType.String);
-                                param.Add("GuardianLastname", model.GuardianLastname, DbType.String);
-                                param.Add("GuardianMiddleName", model.GuardianMiddleName, DbType.String);
-                                param.Add("GuardianMaidenName", model.GuardianMaidenName, DbType.String);
-                                param.Add("GuardianBirthDate", model.GuardianBirthDate, DbType.DateTime);
-                                param.Add("GuardianGender", model.GuardianGender, DbType.Int32);
-                                param.Add("GuardianMaritalStatus", model.GuardianMaritalStatus, DbType.Int32);
-                                param.Add("GuardianReligion", model.GuardianReligion, DbType.Int32);
-                                param.Add("GuardianNationality", model.GuardianNationality, DbType.Int32);
-                                param.Add("GuardianCountry", model.GuardianCountry, DbType.Int32);
-                                param.Add("GuardianState", model.GuardianState, DbType.Int32);
-                                param.Add("GuardianCity", model.GuardianCity, DbType.Int32);
-                                param.Add("GuardianZipCode", model.GuardianZipCode, DbType.String);
-                                param.Add("GuardianAddress", model.GuardianAddress, DbType.String);
-                                param.Add("GuardianEmail1", model.GuardianEmail1, DbType.String);
-                                param.Add("GuardianEmail2", model.GuardianEmail2, DbType.String);
-                                param.Add("GuardianPhoneCode1", model.GuardianPhoneCode1, DbType.String);
-                                param.Add("GuardianPhone1", model.GuardianPhone1, DbType.String);
-                                param.Add("GuardianPhoneCode2", model.GuardianPhoneCode2, DbType.String);
-                                param.Add("GuardianPhone2", model.GuardianPhone2, DbType.String);
-                            break;
+                        sql = sql + "SkipGuardian=0" +
+                                    ", GuardianTypeId=@GuardianTypeId" +
+                                    ", RelationshipId=@RelationshipId" +
+                                    ", GuardianGivenName=@GuardianGivenName" +
+                                    ", GuardianLastname=@GuardianLastname" +
+                                    ", GuardianMiddleName=@GuardianMiddleName" +
+                                    ", GuardianMaidenName=@GuardianMaidenName" +
+                                    ", GuardianBirthDate=@GuardianBirthDate" +
+                                    ", GuardianGender=@GuardianGender" +
+                                    ", GuardianMaritalStatus=@GuardianMaritalStatus" +
+                                    ", GuardianReligion=@GuardianReligion" +
+                                    ", GuardianNationality=@GuardianNationality" +
+                                    ", GuardianCountry=@GuardianCountry" +
+                                    ", GuardianState=@GuardianState" +
+                                    ", GuardianCity=@GuardianCity" +
+                                    ", GuardianZipCode=@GuardianZipCode" +
+                                    ", GuardianAddress=@GuardianAddress" +
+                                    ", GuardianEmail1=@GuardianEmail1" +
+                                    ", GuardianEmail2=@GuardianEmail2" +
+                                    ", GuardianPhoneCode1=@GuardianPhoneCode1" +
+                                    ", GuardianPhone1=@GuardianPhone1" +
+                                    ", GuardianPhoneCode2=@GuardianPhoneCode2" +
+                                    ", GuardianPhone2=@GuardianPhone2 ";
+                        param.Add("GuardianTypeId", model.GuardianTypeId, DbType.Int32);
+                        param.Add("RelationshipId", model.RelationshipId, DbType.Int32);
+                        param.Add("GuardianGivenName", model.GuardianGivenName, DbType.String);
+                        param.Add("GuardianLastname", model.GuardianLastname, DbType.String);
+                        param.Add("GuardianMiddleName", model.GuardianMiddleName, DbType.String);
+                        param.Add("GuardianMaidenName", model.GuardianMaidenName, DbType.String);
+                        param.Add("GuardianBirthDate", model.GuardianBirthDate, DbType.DateTime);
+                        param.Add("GuardianGender", model.GuardianGender, DbType.Int32);
+                        param.Add("GuardianMaritalStatus", model.GuardianMaritalStatus, DbType.Int32);
+                        param.Add("GuardianReligion", model.GuardianReligion, DbType.Int32);
+                        param.Add("GuardianNationality", model.GuardianNationality, DbType.Int32);
+                        param.Add("GuardianCountry", model.GuardianCountry, DbType.Int32);
+                        param.Add("GuardianState", model.GuardianState, DbType.Int32);
+                        param.Add("GuardianCity", model.GuardianCity, DbType.Int32);
+                        param.Add("GuardianZipCode", model.GuardianZipCode, DbType.String);
+                        param.Add("GuardianAddress", model.GuardianAddress, DbType.String);
+                        param.Add("GuardianEmail1", model.GuardianEmail1, DbType.String);
+                        param.Add("GuardianEmail2", model.GuardianEmail2, DbType.String);
+                        param.Add("GuardianPhoneCode1", model.GuardianPhoneCode1, DbType.String);
+                        param.Add("GuardianPhone1", model.GuardianPhone1, DbType.String);
+                        param.Add("GuardianPhoneCode2", model.GuardianPhoneCode2, DbType.String);
+                        param.Add("GuardianPhone2", model.GuardianPhone2, DbType.String);
+                        break;
                 }
-                
+
                 sql = sql + ", Status=32 WHERE Id=@Id";  // 999 - Draft
                 param.Add("Id", model.Id, DbType.Guid);
 
                 using var conn = db.CreateConnection();
                 return await conn.ExecuteAsync(sql, param);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message.ToString());
             }
@@ -614,8 +626,9 @@ namespace richmindale_app.Server.Repositories
         public async Task<int> SubmitAdmissionApplication(AdmissionViewModel model)
         {
             // Registrar Email
-            EmailSender mail = new EmailSender();
-            var subject = "Admission Application Receipt - " + model.StudentLastname + ", " + model.StudentGivenName + (model.StudentMiddleName != string.Empty ? " " + model.StudentMiddleName.Substring(0, 1) : "; ");
+
+            // var subject = "Admission Application Receipt - " + model.StudentLastname + ", " + model.StudentGivenName + (model.StudentMiddleName != string.Empty ? " " + model.StudentMiddleName.Substring(0, 1) : "; ");
+            var subject = "Admission Application Receipt - " + model.StudentLastname + ", " + model.StudentGivenName + (!string.IsNullOrEmpty(model.StudentMiddleName) ? " " + model.StudentMiddleName.Substring(0, 1) + "." : "") + ";";
             var body = "Dear Registrar,<br/><br/>" +
                           "A new <strong>Admission Application</strong> has been submitted using Richmindale Website with the following details:<br/>" +
                           "Application Ref. Number: " + model.ApplicationRefNo + "<br/>" +
@@ -629,8 +642,28 @@ namespace richmindale_app.Server.Repositories
                           "<a href='https://www.richmindale.com/admin/admissions/details/" + model.Id + "' target='_blank'>" + model.ApplicationRefNo + "</a>.<br/><br/>" +
                           "Richmindale Webmaster";
 
-            mail.SendMail("admissions@richmindale.com", subject, body);
-            mail.SendMail("creenx.rodriguez@gmail.com", subject, body);
+            // emailSender.SendMail("shimilalalala@gmail.com", subject, body);
+            // emailSender.SendMail("admissions@richmindale.com", subject, body);
+                            emailSender.SendMail("quoudoisseppanni-5052@yopmail.com", subject, body);
+
+
+            //send mail to student if email address is not null or empty
+            if (!string.IsNullOrEmpty(model.EmailAddress))
+            {
+                subject = "Admission Application Receipt - " + model.ApplicationRefNo;
+                body = "Dear " + model.StudentGivenName + " " + model.StudentLastname + ",<br/><br/>" +
+                       "This email confirms that you have successfully submitted your application for admission at <strong>Richmindale</strong> for " + model.TermName + ".<br/><br/>" +
+                       "We'll review your application to make sure you have provided all of the information we asked for, uploaded all required documents, and paid the admission fees.<br/<br/>" +
+                       "We'll send you a notification email of the admission application status to your registered email. Approval of the admission application takes a maximum of 10 business days from the " +
+                       "date when all admission requirements are received.<br/><br/>" +
+                       "Please note that we'll return your application to you if it is incomplete.<br/><br/><br/>" +
+                       "Thank you,<br/><br/><br/>" +
+                       "Richmindale<br/><br/><br/>" +
+                       "This is an auto-generated mail message please do not reply.";
+
+                emailSender.SendMail(model.EmailAddress, subject, body);
+            }
+
 
             subject = "Admission Application Receipt - " + model.ApplicationRefNo;
             body = "Dear " + model.StudentGivenName + " " + model.StudentLastname + ",<br/><br/>" +
@@ -643,8 +676,8 @@ namespace richmindale_app.Server.Repositories
                    "Richmindale<br/><br/><br/>" +
                    "This is an auto-generated mail message please do not reply.";
 
-            
-            mail.SendMail(model.EmailAddress, subject, body);
+
+            emailSender.SendMail(model.EmailAddress, subject, body);
 
             using var conn = db.CreateConnection();
             var param = new DynamicParameters();
@@ -656,8 +689,9 @@ namespace richmindale_app.Server.Repositories
         public async Task<int> SubmitGradeLevelAdmissionApplication(AdmissionViewModel model)
         {
             // Registrar Email
-            EmailSender mail = new EmailSender();
-            var subject = "Admission Application Receipt - " + model.StudentLastname + ", " + model.StudentGivenName + (model.StudentMiddleName != string.Empty ? " " + model.StudentMiddleName.Substring(0, 1) : "; ");
+
+            // var subject = "Admission Application Receipt - " + model.StudentLastname + ", " + model.StudentGivenName + (model.StudentMiddleName != string.Empty ? " " + model.StudentMiddleName.Substring(0, 1) : "; ");
+            var subject = "Admission Application Receipt - " + model.StudentLastname + ", " + model.StudentGivenName + (!string.IsNullOrEmpty(model.StudentMiddleName) ? " " + model.StudentMiddleName.Substring(0, 1) + "." : "") + ";";
             var body = "Dear Registrar,<br/><br/>" +
                           "A new <strong>Admission Application</strong> has been submitted using Richmindale Website with the following details:<br/>" +
                           "Application Ref. Number: " + model.ApplicationRefNo + "<br/>" +
@@ -671,9 +705,11 @@ namespace richmindale_app.Server.Repositories
                           "To review and process the admission application, please click below link<br/>" +
                           "<a href='https://www.richmindale.me/admin/admissions/details/" + model.Id + "' target='_blank'>" + model.ApplicationRefNo + "</a>.<br/><br/>" +
                           "Richmindale Webmaster";
+        
+                          
 
-            mail.SendMail("info@richmindale.me", subject, body);
-            mail.SendMail("creenx.rodriguez@gmail.com", subject, body);
+            // emailSender.SendMail("info@richmindale.me", subject, body);
+            emailSender.SendMail("quoudoisseppanni-5052@yopmail.com", subject, body);
 
             subject = "Admission Application Receipt - " + model.ApplicationRefNo;
             body = "Dear " + model.StudentGivenName + " " + model.StudentLastname + ",<br/><br/>" +
@@ -686,8 +722,8 @@ namespace richmindale_app.Server.Repositories
                    "Richmindale<br/><br/><br/>" +
                    "This is an auto-generated mail message please do not reply.";
 
-            
-            mail.SendMail(model.EmailAddress, subject, body);
+
+            emailSender.SendMail(model.EmailAddress, subject, body);
 
             using var conn = db.CreateConnection();
             var param = new DynamicParameters();
@@ -713,7 +749,7 @@ namespace richmindale_app.Server.Repositories
 
             if (model.Status != "error")
             {
-                EmailSender mail = new EmailSender();
+               
                 var subject = "Online Payment Receipt: " + model.PaymentRefNo;
                 var body = "Dear " + model.StudentName + ",<br/><br/>" +
                         "We are pleased to acknowledge the receipt of your admission fee payment for Admission No.  " + model.ApplicationRefNo + " using our online payment " +
@@ -723,9 +759,10 @@ namespace richmindale_app.Server.Repositories
                         "Warm regards,<br/><br/>" +
                         "Richmindale<br/><br/><br/>" +
                         "This is an auto-generated mail message please do not reply.";
-                mail.SendMail(model.EmailAddress, subject, body);
 
-                EmailSender mail2 = new EmailSender();
+                emailSender.SendMail(model.EmailAddress, subject, body);
+
+            
                 body = "Dear Accounting,<br/><br/>" +
                         "An online payment has been made with the following details:<br/>" +
                         "Payment Ref. No.: " + model.PaymentRefNo + "<br/>" +
@@ -735,7 +772,9 @@ namespace richmindale_app.Server.Repositories
                         "Program Deatails: " + model.Program + "<br/><br/>" +
                         "Richmindale Webmaster";
 
-                mail2.SendMail("finance@richmindale.com", subject, body);
+                // emailSender.SendMail("finance@richmindale.com", subject, body);
+                emailSender.SendMail("quoudoisseppanni-5052@yopmail.com", subject, body);
+
 
                 var sql = $@"INSERT INTO FnPaypalPayments (Id, TransactionDate, TransactionNumber, EmailAddress, Fullname, PaymentFor, Amount, Currency, TransactionMessage, Status) " +
                             "SELECT NEWID(), GETDATE(), @TransactionNumber, @EmailAddress, @Fullname, @PaymentFor, @Amount, @Currency, @TransactionMessage, @Status";
@@ -793,13 +832,13 @@ namespace richmindale_app.Server.Repositories
         }
         public async Task<IEnumerable<AgreementCoursesViewModel>> LoadAgreementCourses(int id)
         {
-            var sql =$@"EXEC sp_LoadAgreementCourses @ProgramId";
+            var sql = $@"EXEC sp_LoadAgreementCourses @ProgramId";
             var param = new DynamicParameters();
             param.Add("ProgramId", id, DbType.Int32);
-            
+
             using var conn = db.CreateConnection();
             return await conn.QueryAsync<AgreementCoursesViewModel>(sql, param);
-            
+
         }
 
         // Updates for Grade Level Admission Process
@@ -821,9 +860,9 @@ namespace richmindale_app.Server.Repositories
         {
             int id = 0;
             using var conn = db.CreateConnection();
-            var sql  = string.Empty;
+            var sql = string.Empty;
             var param = new DynamicParameters();
-            if(model.Id == 0)
+            if (model.Id == 0)
             {
                 sql = $@"INSERT INTO LrnAdmissionStudents
                              (AdmissionId, ProgramId, CampusId, LearningMethodId, SchoolYear) VALUES
@@ -883,11 +922,11 @@ namespace richmindale_app.Server.Repositories
                 param.Add("StudentAddress", model.StudentAddress, DbType.String);
                 param.Add("StudentEmail1", model.StudentEmail1, DbType.String);
                 param.Add("StudentEmail2", model.StudentEmail2, DbType.String);
-                param.Add("StudentPhoneCode1", model.StudentPhoneCode1,DbType.String);
+                param.Add("StudentPhoneCode1", model.StudentPhoneCode1, DbType.String);
                 param.Add("StudentPhone1", model.StudentPhone1, DbType.String);
                 param.Add("StudentPhoneCode2", model.StudentPhoneCode2, DbType.String);
                 param.Add("StudentPhone2", model.StudentPhone2, DbType.String);
-                
+
                 // Previous School
                 sql = sql + $@", SchoolName=@SchoolName
                                , PreviousLrn=@PreviousLrn
@@ -916,7 +955,7 @@ namespace richmindale_app.Server.Repositories
 
                 // Father Details
                 sql = sql + $@", SkipFather=" + model.SkipFather + " ";
-                if(!model.SkipFather)
+                if (!model.SkipFather)
                 {
                     sql = sql + $@", FatherGivenName=@FatherGivenName
                                    , FatherMiddleName=@FatherMiddleName
@@ -959,9 +998,9 @@ namespace richmindale_app.Server.Repositories
 
                 // Mother Details
                 sql = sql + $@", SkipMother=" + model.SkipMother + " ";
-                if(!model.SkipMother)
+                if (!model.SkipMother)
                 {
-                    sql =sql + $@", MotherGivenName=@MotherGivenName
+                    sql = sql + $@", MotherGivenName=@MotherGivenName
                                   , MotherMiddleName=@MotherMiddleName
                                   , MotherLastname=@MotherLastname
                                   , MotherMaidenName=@MotherMaidenName
@@ -1000,7 +1039,7 @@ namespace richmindale_app.Server.Repositories
                     param.Add("MotherPhoneCode2", model.MotherPhoneCode2, DbType.String);
                     param.Add("MotherPhone2", model.MotherPhone2, DbType.String);
                 }
-                
+
                 // Guardian Details
                 sql = sql + $@", GuardiantypeId=@GuardianTypeId
                                , RelationshipId=@RelationshipId
@@ -1025,28 +1064,28 @@ namespace richmindale_app.Server.Repositories
                                , GuardianPhoneCode2=@GuardianPhoneCode2
                                , GuardianPhone2=@GuardianPhone2
                                ";
-                    param.Add("GuardianTypeId", model.GuardianTypeId, DbType.Int32);
-                    param.Add("RelationshipId", model.RelationshipId, DbType.Int32);
-                    param.Add("GuardianGivenName", model.GuardianGivenName, DbType.String);
-                    param.Add("GuardianMiddleName", model.GuardianMiddleName, DbType.String);
-                    param.Add("GuardianLastname", model.GuardianLastname, DbType.String);
-                    param.Add("GuardianMaidenName", model.GuardianMaidenName, DbType.String);
-                    param.Add("GuardianBirthdate", model.GuardianBirthDate, DbType.String);
-                    param.Add("GuardianGender", model.GuardianGender, DbType.String);
-                    param.Add("GuardianMaritalStatus", model.GuardianMaritalStatus, DbType.Int32);
-                    param.Add("GuardianReligion", model.GuardianReligion, DbType.Int32);
-                    param.Add("GuardianNationality", model.GuardianNationality, DbType.Int32);
-                    param.Add("GuardianCountry", model.GuardianCountry, DbType.Int32);
-                    param.Add("GuardianState", model.GuardianState, DbType.Int32);
-                    param.Add("GuardianCity", model.GuardianCity, DbType.Int32);
-                    param.Add("GuardianZipCode", model.GuardianZipCode, DbType.String);
-                    param.Add("GuardianAddress", model.GuardianAddress, DbType.String);
-                    param.Add("GuardianEmail1", model.GuardianEmail1, DbType.String);
-                    param.Add("GuardianEmail2", model.GuardianEmail2, DbType.String);
-                    param.Add("GuardianPhoneCode1", model.GuardianPhoneCode1, DbType.String);
-                    param.Add("GuardianPhone1", model.GuardianPhone1, DbType.String);
-                    param.Add("GuardianPhoneCode2", model.GuardianPhoneCode2, DbType.String);
-                    param.Add("GuardianPhone2", model.GuardianPhone2, DbType.String);
+                param.Add("GuardianTypeId", model.GuardianTypeId, DbType.Int32);
+                param.Add("RelationshipId", model.RelationshipId, DbType.Int32);
+                param.Add("GuardianGivenName", model.GuardianGivenName, DbType.String);
+                param.Add("GuardianMiddleName", model.GuardianMiddleName, DbType.String);
+                param.Add("GuardianLastname", model.GuardianLastname, DbType.String);
+                param.Add("GuardianMaidenName", model.GuardianMaidenName, DbType.String);
+                param.Add("GuardianBirthdate", model.GuardianBirthDate, DbType.String);
+                param.Add("GuardianGender", model.GuardianGender, DbType.String);
+                param.Add("GuardianMaritalStatus", model.GuardianMaritalStatus, DbType.Int32);
+                param.Add("GuardianReligion", model.GuardianReligion, DbType.Int32);
+                param.Add("GuardianNationality", model.GuardianNationality, DbType.Int32);
+                param.Add("GuardianCountry", model.GuardianCountry, DbType.Int32);
+                param.Add("GuardianState", model.GuardianState, DbType.Int32);
+                param.Add("GuardianCity", model.GuardianCity, DbType.Int32);
+                param.Add("GuardianZipCode", model.GuardianZipCode, DbType.String);
+                param.Add("GuardianAddress", model.GuardianAddress, DbType.String);
+                param.Add("GuardianEmail1", model.GuardianEmail1, DbType.String);
+                param.Add("GuardianEmail2", model.GuardianEmail2, DbType.String);
+                param.Add("GuardianPhoneCode1", model.GuardianPhoneCode1, DbType.String);
+                param.Add("GuardianPhone1", model.GuardianPhone1, DbType.String);
+                param.Add("GuardianPhoneCode2", model.GuardianPhoneCode2, DbType.String);
+                param.Add("GuardianPhone2", model.GuardianPhone2, DbType.String);
 
                 sql = sql + $@", Status = 32
                                WHERE Id=" + model.Id;
@@ -1054,12 +1093,12 @@ namespace richmindale_app.Server.Repositories
                 return await conn.ExecuteAsync(sql);
             }
 
-           
+
         }
 
         public async Task<int> UpdateAdmissionStudent(int id)
         {
-            var sql = $@"UPDATE LrnAdmissionStudents SET Status=8 WHERE Id="  + id;
+            var sql = $@"UPDATE LrnAdmissionStudents SET Status=8 WHERE Id=" + id;
             using var conn = db.CreateConnection();
             return await conn.ExecuteAsync(sql);
         }

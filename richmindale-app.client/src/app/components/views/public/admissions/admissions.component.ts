@@ -46,11 +46,12 @@ export class AdmissionsComponent implements OnInit, OnDestroy {
   }
 
   VerifyEmail(event: any): void {
-    event.target.disabled = false;
+    event.target.disabled = true; //changed from false to true
     this.service.verifyEmail(this.app.EmailAddress).subscribe(res => {
       console.log(res);
       if (res.status === 'success') {
         this.codeSent = true;
+        this.isViewed = true;
         this.msg = res.msg;
         this.toastr.success(res.msg);
       } else {

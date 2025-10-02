@@ -11,10 +11,14 @@ namespace richmindale_app.Server.Repositories
     {
 
         private readonly DapperDbContext db;
+        private readonly IEmailSender emailSender;
 
-        public PublicRepository(DapperDbContext _db)
+        public PublicRepository(DapperDbContext _db, IEmailSender _emailSender)
+
+
         {
             db = _db;
+            emailSender = _emailSender;
         }
 
         public async Task<string> VerifyEmail(string EmailAddress)
@@ -22,11 +26,11 @@ namespace richmindale_app.Server.Repositories
             try
             {
                 string passkey = CodeGenerator.Passkey(8);
-                EmailSender sender = new EmailSender();
+               
                 string Subject = "Verification Code - Richmindale";
                 string Body = "Dear Customer,<br/><br/>" +
                               "Your verification code is: " + passkey;
-                sender.SendMail(EmailAddress, Subject, Body);
+                emailSender.SendMail(EmailAddress, Subject, Body);
                 
                 using var conn = db.CreateConnection();
                 var sql = "INSERT INTO SysPassKey (Id, Email, Passkey, GeneratedDate) VALUES ( @Id, @EmailAddress, @Passkey, @GeneratedDate)";
@@ -78,7 +82,7 @@ namespace richmindale_app.Server.Repositories
             string code = CodeGenerator.GrievanceCode(cnt);
             
 
-            EmailSender sender = new EmailSender();
+            
             string subject = "Richmindale Grievance No.: " + code;
             string body = "Dear " + model.Complainant + ",<br/><br/>" +
                           "Your Grievance Report Number: " + code + " successfully for submitted to our office " +
@@ -86,7 +90,7 @@ namespace richmindale_app.Server.Repositories
                           "You will be notified by the School Admin for clarification and investigation regarding your report.<br/><br/>" +
                           "Sincerely,<br/><br/>" +
                           "Resolution Team";
-            sender.SendMail(model.EmailAddress, subject, body);
+            emailSender.SendMail(model.EmailAddress, subject, body);
 
             Guid id = Guid.NewGuid();
             string hide =  model.HideComplainant == true ? "The Complainant requested to hide his/her identity for privacy purposes.<br/>" : "";
@@ -96,7 +100,7 @@ namespace richmindale_app.Server.Repositories
                    "To update and create a resolution, please click below link:<br/>" +
                    "<a href='https://www.richmindale.me/admin/grievances/details/" + id.ToString() + "'>" + code + "</a>";      
                          
-            sender.SendMail("complaints@richmindale.com", subject, body);
+            emailSender.SendMail("complaints@richmindale.com", subject, body);
             
             
             sql = $@"INSERT INTO CrmGrievances (Id, GrievanceCode, CategoryId, EmailAddress, Complainant, Respondents, Message, DateCreated, Status ) VALUES

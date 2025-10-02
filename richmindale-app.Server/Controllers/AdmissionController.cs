@@ -89,7 +89,7 @@ namespace richmindale_app.Server.Controllers
         }
 
         [HttpGet]
-        [Route("LoadAdmissionSqummaryDetails")]
+        [Route("LoadAdmissionSummaryDetails")]
         public async Task<JsonResult> LoadAdmissionSummaryDetails(Guid id)
         {
             return new JsonResult(await service.LoadAdmissionSummaryDetails(id), new JsonSerializerOptions());

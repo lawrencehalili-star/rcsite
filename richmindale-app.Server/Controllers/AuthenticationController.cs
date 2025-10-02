@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using richmindale_app.Server.Repositories;
-
+using richmindale_app.Server.Helpers;
 namespace richmindale_app.Server.Controllers
 {
     [Route("api/[controller]")]
@@ -29,18 +29,46 @@ namespace richmindale_app.Server.Controllers
                 return new JsonResult(new {status = "error", msg = "An error occured while authenticating admin. ERROR: " + ex.Message.ToString()}, new JsonSerializerOptions());
             }
         }
-    
+
+        // [HttpPost]
+        // [Route("AuthenticateStudent")]
+        // public async Task<JsonResult> AuthenticateStudent(string? username)
+        // {
+        //     try
+        //     {
+        //        return new JsonResult(new {status = "success", passkey = await service.AuthenticateStudent(username), msg = "Passkey was sent to your registered email to access the portal."}, new JsonSerializerOptions());
+        //     }
+        //     catch(Exception ex)
+        //     {
+        //         return new JsonResult(new {status = "error", msg = "An error occured while authenticating student. ERROR: " + ex.Message.ToString()}, new JsonSerializerOptions());
+        //     }
+        // }
+
         [HttpPost]
         [Route("AuthenticateStudent")]
         public async Task<JsonResult> AuthenticateStudent(string? username)
         {
             try
             {
-               return new JsonResult(new {status = "success", passkey = await service.AuthenticateStudent(username), msg = "Passkey was sent to your registered email to access the portal."}, new JsonSerializerOptions());
+                // Add logging
+                Console.WriteLine($"Attempting to authenticate student: {username}");
+
+                if (string.IsNullOrEmpty(username))
+                {
+                    return new JsonResult(new { status = "error", msg = "Username is required" }, new JsonSerializerOptions());
+                }
+
+                var passkey = await service.AuthenticateStudent(username);
+
+                Console.WriteLine($"Passkey generated successfully");
+
+                return new JsonResult(new { status = "success", passkey = passkey, msg = "Passkey was sent to your registered email to access the portal." }, new JsonSerializerOptions());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return new JsonResult(new {status = "error", msg = "An error occured while authenticating student. ERROR: " + ex.Message.ToString()}, new JsonSerializerOptions());
+                // Log the full exception with stack trace
+                Console.WriteLine($"Full Error: {ex.ToString()}");
+                return new JsonResult(new { status = "error", msg = "An error occured while authenticating student. ERROR: " + ex.Message.ToString(), stackTrace = ex.StackTrace }, new JsonSerializerOptions());
             }
         }
 

@@ -93,19 +93,30 @@ namespace richmindale_app.Server.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("SendMultipleEmails")]
-        public async Task<JsonResult> SendMultipleEmails(string Sender, string[] SendTo, string Subject, string Body)
+        [Route("api/[controller]")]
+        [ApiController]
+        public class EmailController : ControllerBase
         {
-            try
+            private readonly IEmailSender emailSender;
+
+            public EmailController(IEmailSender _emailSender)
             {
-                EmailSender mail = new EmailSender();
-                mail.SendBulkMail(Sender, SendTo, Subject, Body);
-                return new JsonResult(new {status = "success", msg = "Mail successfully delivered."}, new JsonSerializerOptions());
+                emailSender = _emailSender;
             }
-            catch(Exception ex)
+
+            [HttpPost]
+            [Route("SendMultipleEmails")]
+            public JsonResult SendMultipleEmails(string[] SendTo, string Subject, string Body)
             {
-                return new JsonResult(new {status = "error", msg = "unable to send mail due to error. ERROR: " + ex.Message.ToString()}, new JsonSerializerOptions());
+                try
+                {
+                    emailSender.SendBulkMail(SendTo, Subject, Body);
+                    return new JsonResult(new { status = "success", msg = "Mail successfully delivered." }, new JsonSerializerOptions());
+                }
+                catch (Exception ex)
+                {
+                    return new JsonResult(new { status = "error", msg = "Unable to send mail. ERROR: " + ex.Message }, new JsonSerializerOptions());
+                }
             }
         }
 
