@@ -644,25 +644,7 @@ namespace richmindale_app.Server.Repositories
 
             // emailSender.SendMail("shimilalalala@gmail.com", subject, body);
             // emailSender.SendMail("admissions@richmindale.com", subject, body);
-                            emailSender.SendMail("quoudoisseppanni-5052@yopmail.com", subject, body);
-
-
-            //send mail to student if email address is not null or empty
-            if (!string.IsNullOrEmpty(model.EmailAddress))
-            {
-                subject = "Admission Application Receipt - " + model.ApplicationRefNo;
-                body = "Dear " + model.StudentGivenName + " " + model.StudentLastname + ",<br/><br/>" +
-                       "This email confirms that you have successfully submitted your application for admission at <strong>Richmindale</strong> for " + model.TermName + ".<br/><br/>" +
-                       "We'll review your application to make sure you have provided all of the information we asked for, uploaded all required documents, and paid the admission fees.<br/<br/>" +
-                       "We'll send you a notification email of the admission application status to your registered email. Approval of the admission application takes a maximum of 10 business days from the " +
-                       "date when all admission requirements are received.<br/><br/>" +
-                       "Please note that we'll return your application to you if it is incomplete.<br/><br/><br/>" +
-                       "Thank you,<br/><br/><br/>" +
-                       "Richmindale<br/><br/><br/>" +
-                       "This is an auto-generated mail message please do not reply.";
-
-                emailSender.SendMail(model.EmailAddress, subject, body);
-            }
+                            emailSender.SendMail("shimilalalala@gmail.com", subject, body);
 
 
             subject = "Admission Application Receipt - " + model.ApplicationRefNo;
@@ -709,7 +691,7 @@ namespace richmindale_app.Server.Repositories
                           
 
             // emailSender.SendMail("info@richmindale.me", subject, body);
-            emailSender.SendMail("quoudoisseppanni-5052@yopmail.com", subject, body);
+            emailSender.SendMail("shimilalalala@gmail.com", subject, body);
 
             subject = "Admission Application Receipt - " + model.ApplicationRefNo;
             body = "Dear " + model.StudentGivenName + " " + model.StudentLastname + ",<br/><br/>" +
@@ -773,7 +755,7 @@ namespace richmindale_app.Server.Repositories
                         "Richmindale Webmaster";
 
                 // emailSender.SendMail("finance@richmindale.com", subject, body);
-                emailSender.SendMail("quoudoisseppanni-5052@yopmail.com", subject, body);
+                emailSender.SendMail("shimilalalala@gmail.com", subject, body);
 
 
                 var sql = $@"INSERT INTO FnPaypalPayments (Id, TransactionDate, TransactionNumber, EmailAddress, Fullname, PaymentFor, Amount, Currency, TransactionMessage, Status) " +

@@ -10,10 +10,13 @@ namespace richmindale_app.Server.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthentication service;
+        private readonly IEmailSender emailSender;
+        // public AuthenticationController(IAuthentication _service)
+        public AuthenticationController(IAuthentication _service, IEmailSender _emailSender)
 
-        public AuthenticationController(IAuthentication _service)
         {
             service = _service;
+            emailSender = _emailSender;
         }
 
         [HttpPost]
